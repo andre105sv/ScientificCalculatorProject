@@ -7,7 +7,7 @@ package scientificcalculator;
 
 /**
  *
- * @author splas
+ * @author anton
  */
 public class ScientificCalculator {
 
@@ -18,6 +18,7 @@ public class ScientificCalculator {
         
        System.out.println("Sono Andrea");
        System.out.println("Sono Luca");
+       System.out.println("Sono Antonio");
         
     }
     
