@@ -16,11 +16,8 @@ public class ScientificCalculator {
      */
     public static void main(String[] args) {
         
-       System.out.println("Sono Andrea");
-       System.out.println("Sono Luca");
-       System.out.println("Sono Antonio");
-       System.out.println("Sono Filippo");
-       System.out.println("Modifica sul branch AndreaBranch");
+       System.out.println("Progetto: ScientificCalculator ");
+       System.out.println("Versione: 1.0");
         
     }
     
