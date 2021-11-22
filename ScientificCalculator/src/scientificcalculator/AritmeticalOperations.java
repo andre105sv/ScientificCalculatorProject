@@ -30,4 +30,30 @@ public class AritmeticalOperations {
         ComplexNumber c=new ComplexNumber((a.getRealPart()*b.getRealPart()+a.getImmPart()*b.getImmPart())/(Math.pow(b.getRealPart(),2)+Math.pow(b.getImmPart(),2)),(a.getImmPart()*b.getRealPart()-a.getRealPart()*b.getImmPart())/(Math.pow(b.getRealPart(),2)+Math.pow(b.getImmPart(),2)));
         return c;
     }
+    public static ComplexNumber ReversalSign(ComplexNumber a){
+        ComplexNumber b=new ComplexNumber(a.getRealPart()*(-1),a.getImmPart()*(-1));
+        return b;
+    }
+    public static String[] SquareRoot(ComplexNumber a){
+        double modulo = Math.sqrt(Math.pow(a.getRealPart(),2)+ Math.pow(a.getImmPart(),2));
+        String fase="";
+        if (a.getRealPart()==0&&a.getImmPart()>0)
+            fase = "pi/2";
+        if (a.getRealPart()==0&&a.getImmPart()<0)
+            fase = "-pi/2";
+        if (a.getRealPart()==0&&a.getImmPart()==0)
+            fase = "indefinito";
+        if (a.getRealPart()>0)
+            fase = Math.atan2(a.getImmPart(),a.getRealPart())+"";
+        if (a.getRealPart()<0&&(!(a.getImmPart()<0)))
+            fase = Math.atan2(a.getImmPart(),a.getRealPart())+"pi";
+        if (a.getRealPart()<0&&a.getImmPart()<0)
+            fase = Math.atan2(a.getImmPart(),a.getRealPart())+"-pi";
+        String rad1=Math.sqrt(modulo)+","+fase;
+        String rad2=Math.sqrt(modulo)+", ("+fase+"+2pi)/2";
+        String[] s=new String[]{rad1,rad2};
+        return s;
+        
+    }
+    
 }

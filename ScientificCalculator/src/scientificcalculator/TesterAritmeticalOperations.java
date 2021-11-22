@@ -30,5 +30,13 @@ public class TesterAritmeticalOperations {
         System.out.println(AritmeticalOperations.Division(c, b));
         System.out.println(AritmeticalOperations.Substraction(c, b));
         System.out.println(AritmeticalOperations.Multiplication(c, b));
-    }
+        System.out.println("Test inverisione segno di:"+a+b+c);
+        System.out.println(AritmeticalOperations.ReversalSign(a));
+        System.out.println(AritmeticalOperations.ReversalSign(b));
+        System.out.println(AritmeticalOperations.ReversalSign(c));
+        System.out.println("Test radice quadrata di:"+a+b+c);
+        System.out.println(AritmeticalOperations.SquareRoot(a)[0]+ "-" +AritmeticalOperations.SquareRoot(a)[1]);
+        System.out.println(AritmeticalOperations.SquareRoot(b)[0]+ "-" +AritmeticalOperations.SquareRoot(b)[1]);
+        System.out.println(AritmeticalOperations.SquareRoot(c)[0]+ "-" +AritmeticalOperations.SquareRoot(c)[1]);
+        }
 }
