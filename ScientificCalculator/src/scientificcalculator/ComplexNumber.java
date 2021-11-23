@@ -14,11 +14,8 @@ public class ComplexNumber{
     private double immPart;
 
     public ComplexNumber(String s){
-
         String tmp[] = s.split(" ");
-
         if(s.contains("j")){
-            //+ 42 - 35j oppure 42 - 35j oppure - 42 - 35j oppure + 43 oppure - 34 oppure 56
             if((tmp[0].equals("+")) || (tmp[0].equals("-"))){
                 this.realPart = Double.parseDouble(tmp[0] + tmp[1]);
                 this.immPart = Double.parseDouble(tmp[2] + tmp[3].replace("j", ""));
@@ -61,7 +58,10 @@ public class ComplexNumber{
         else{
             s = String.valueOf(this.realPart);
         }
-        if(this.immPart < 0){
+        if(this.immPart == 0){
+            return s;
+        }
+        else if(this.immPart < 0){
             return (s + " - " + Math.abs(this.immPart) + "j");
         }
         else{
