@@ -6,11 +6,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="563.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="scientificcalculator.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="563.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scientificcalculator.FXMLDocumentController">
     <children>
-        <Button fx:id="calcola" layoutX="249.0" layoutY="95.0" onAction="#handleButtonAction" text="Calcola" />
+        <Button fx:id="Inserisci" layoutX="249.0" layoutY="95.0" onAction="#Inserimento" text="Inserisci" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <TextField fx:id="input" layoutX="52.0" layoutY="95.0" />
-      <TextField fx:id="output" layoutX="347.0" layoutY="95.0" />
+      <TextField fx:id="output" layoutX="349.0" layoutY="184.0" />
+      <TextField fx:id="operazione" layoutX="52.0" layoutY="184.0" />
+      <Button fx:id="Calcola" layoutX="254.0" layoutY="184.0" mnemonicParsing="false" onAction="#Calcolo" text="Calcola" />
+      <Label layoutX="52.0" layoutY="78.0" text="Operando" />
+      <Label layoutX="52.0" layoutY="167.0" text="Operazione" />
+      <Label layoutX="52.0" layoutY="40.0" text="L'operando per essere inserito correttamente deve rispettare la sintassi: a + bj" />
+      <Label layoutX="349.0" layoutY="167.0" text="Risultato" />
     </children>
 </AnchorPane>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package scientificcalculator;
-
+import java.lang.Exception;
 /**
  *
  * @author filso
@@ -35,9 +35,10 @@ public class AritmeticalOperations{
         return b;
     }
     public static ComplexNumber[] squareRoot(ComplexNumber a){
+        if (a.getImmPart()==0.0)
+            return new ComplexNumber[]{new ComplexNumber(Math.sqrt(a.getRealPart()),0)};
         double modulo = Math.sqrt(Math.pow(a.getRealPart(), 2) + Math.pow(a.getImmPart(), 2));
         double radModulo = Math.sqrt(modulo);
-        
         double fase = 0.0;
         if (a.getRealPart() == 0 && a.getImmPart() > 0)
             fase = 3.14/2;

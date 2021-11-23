@@ -6,17 +6,19 @@
 
 package scientificcalculator;
 import java.util.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 /**
  *
  * @author anton
  */
 public class StackPrincipale {
-    private List<ComplexNumber> stack;
+    private ObservableList<ComplexNumber> stack;
     private int size;
     
 //Crea l'oggetto StackPrincipale inizializzando i suoi attributi. Lo stack è implementato con una LinkedList
     public StackPrincipale(){
-        this.stack = new LinkedList<>();
+        this.stack = FXCollections.observableArrayList();
         this.size = this.stack.size();
     }
 
