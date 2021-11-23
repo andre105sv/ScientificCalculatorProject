@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
  * @author anton
  */
 public class StackPrincipaleTest {
+     StackPrincipale instance;
     
     public StackPrincipaleTest() {
     }
@@ -31,6 +32,7 @@ public class StackPrincipaleTest {
     
     @Before
     public void setUp() {
+        instance = new StackPrincipale();   
     }
     
     @After
@@ -44,7 +46,7 @@ public class StackPrincipaleTest {
     public void testInsertNumber() {
         System.out.println("insertNumber");
         ComplexNumber number = new ComplexNumber(4,5);
-        StackPrincipale instance = new StackPrincipale();
+        //StackPrincipale instance = new StackPrincipale();
         int prevSize = instance.getSize();
         instance.insertNumber(number);
         assertEquals(prevSize+1,instance.getSize());
@@ -58,7 +60,7 @@ public class StackPrincipaleTest {
     @Test
     public void testGetSize() {
         System.out.println("getSize");
-        StackPrincipale instance = new StackPrincipale();
+        //StackPrincipale instance = new StackPrincipale();
         int expResult = 1;
         instance.insertNumber(new ComplexNumber(5,5));
         int result = instance.getSize();
@@ -71,7 +73,7 @@ public class StackPrincipaleTest {
     @Test
     public void testRemoveLastNumber() {
         System.out.println("removeLastNumber");
-        StackPrincipale instance = new StackPrincipale();
+        //StackPrincipale instance = new StackPrincipale();
         ComplexNumber expResult = new ComplexNumber(5,5);
         instance.insertNumber(expResult);
         ComplexNumber result = instance.removeLastNumber();
