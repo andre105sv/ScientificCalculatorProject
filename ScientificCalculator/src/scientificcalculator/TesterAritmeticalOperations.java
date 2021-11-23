@@ -16,27 +16,27 @@ public class TesterAritmeticalOperations {
         ComplexNumber c=new ComplexNumber("j7");
         
         System.out.println("Test con:"+ a + b);
-        System.out.println(AritmeticalOperations.Addition(a, b));
-        System.out.println(AritmeticalOperations.Division(a, b));
-        System.out.println(AritmeticalOperations.Substraction(a, b));
-        System.out.println(AritmeticalOperations.Multiplication(a, b));
+        System.out.println(AritmeticalOperations.addition(a, b));
+        System.out.println(AritmeticalOperations.division(a, b));
+        System.out.println(AritmeticalOperations.substraction(a, b));
+        System.out.println(AritmeticalOperations.multiplication(a, b));
         System.out.println("Test con:"+ a + c);
-        System.out.println(AritmeticalOperations.Addition(a, c));
-        System.out.println(AritmeticalOperations.Division(a, c));
-        System.out.println(AritmeticalOperations.Substraction(a, c));
-        System.out.println(AritmeticalOperations.Multiplication(a,c));
+        System.out.println(AritmeticalOperations.addition(a, c));
+        System.out.println(AritmeticalOperations.division(a, c));
+        System.out.println(AritmeticalOperations.substraction(a, c));
+        System.out.println(AritmeticalOperations.multiplication(a,c));
         System.out.println("Test con:"+ c + b);
-        System.out.println(AritmeticalOperations.Addition(c, b));
-        System.out.println(AritmeticalOperations.Division(c, b));
-        System.out.println(AritmeticalOperations.Substraction(c, b));
-        System.out.println(AritmeticalOperations.Multiplication(c, b));
+        System.out.println(AritmeticalOperations.addition(c, b));
+        System.out.println(AritmeticalOperations.division(c, b));
+        System.out.println(AritmeticalOperations.substraction(c, b));
+        System.out.println(AritmeticalOperations.multiplication(c, b));
         System.out.println("Test inverisione segno di:"+a+b+c);
-        System.out.println(AritmeticalOperations.ReversalSign(a));
-        System.out.println(AritmeticalOperations.ReversalSign(b));
-        System.out.println(AritmeticalOperations.ReversalSign(c));
+        System.out.println(AritmeticalOperations.reversalSign(a));
+        System.out.println(AritmeticalOperations.reversalSign(b));
+        System.out.println(AritmeticalOperations.reversalSign(c));
         System.out.println("Test radice quadrata di:"+a+b+c);
-        System.out.println(AritmeticalOperations.SquareRoot(a)[0]+ "-" +AritmeticalOperations.SquareRoot(a)[1]);
-        System.out.println(AritmeticalOperations.SquareRoot(b)[0]+ "-" +AritmeticalOperations.SquareRoot(b)[1]);
-        System.out.println(AritmeticalOperations.SquareRoot(c)[0]+ "-" +AritmeticalOperations.SquareRoot(c)[1]);
+        System.out.println(AritmeticalOperations.squareRoot(a)[0]+ "-" +AritmeticalOperations.squareRoot(a)[1]);
+        System.out.println(AritmeticalOperations.squareRoot(b)[0]+ "-" +AritmeticalOperations.squareRoot(b)[1]);
+        System.out.println(AritmeticalOperations.squareRoot(c)[0]+ "-" +AritmeticalOperations.squareRoot(c)[1]);
         }
 }
