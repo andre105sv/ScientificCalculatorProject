@@ -25,7 +25,6 @@ public class ScientificCalculator {
        System.out.println("Progetto: ScientificCalculator ");
        System.out.println("Versione: 1.0");
        
-        
     }
     
 }

@@ -14,17 +14,17 @@ public class ComplexNumber {
     private double immPart;
 
     public ComplexNumber(String s) {
-        if (s.contains("\\+")){
-            String tmp[] = s.split("\\+");
+        if (s.contains("//+")){
+            String tmp[] = s.split("//+");
             this.realPart = Double.parseDouble(tmp[0]);
-            this.immPart = Double.parseDouble(tmp[1]);
+            this.immPart = Double.parseDouble(tmp[1].replace("j", ""));
         }
-        if (s.contains("j")&&(!(s.contains("\\+")))){
+        if (s.contains("j")&&(!(s.contains("//+")))){
             this.realPart=0;
             this.immPart=Double.parseDouble(s.replace("j",""));
             
         }
-        if (!(s.contains("j"))&&(!(s.contains("\\+")))){
+        if (!(s.contains("j"))&&(!(s.contains("//+")))){
             this.realPart=Double.parseDouble(s);
             this.immPart=0;
         }
@@ -47,7 +47,7 @@ public class ComplexNumber {
     @Override
     public String toString() {
         if (immPart<0)
-            return "("+realPart + "-" + immPart + "j)";
+            return "("+realPart + "-" + Math.abs(immPart) + "j)";
         else
             return "("+realPart + "+" + immPart + "j)";
     }
