@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author filso
  */
-public class ScentificCalculatorGui extends Application {
+public class ScientificCalculatorGui extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {

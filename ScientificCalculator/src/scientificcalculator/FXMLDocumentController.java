@@ -5,6 +5,7 @@
  */
 package scientificcalculator;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -14,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 
 /**
  * FXML Controller class
@@ -28,82 +32,40 @@ public class FXMLDocumentController implements Initializable {
     private TextField input;
     @FXML
     private TextField output;
-    @FXML
-    private TextField operazione;
+    
     private StackPrincipale stackPrincipale;
     @FXML
     private Button Inserisci;
-    @FXML
-    private Button Calcola;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         stackPrincipale = new StackPrincipale();
+        input.setOnKeyPressed((KeyEvent event) -> {
+            if (event.getCode().equals(KeyCode.ENTER))
+                Inserisci.fire();
+        });
+        
     }    
 
 
     @FXML
     private void Inserimento(ActionEvent event) {
-        ComplexNumber a = new ComplexNumber(input.getText());
-        stackPrincipale.insertNumber(a);
+        String text = input.getText();
+        ParserString parser = new ParserString();
+        String check = parser.parserString(text);
+        ComplexNumber z = new ComplexNumber(Double.NaN,Double.NaN);
+        if(check.equals("__COMPLEX__NUMBER__"))
+            z = parser.recognizeComplexNumber(text);
+        if(check.equals("__SINGLENUMBER__"))
+            z = parser.recognizeNumber(text);
+        System.out.println(text + check + z.toString());
+            
         input.clear();
     }
 
-    @FXML
     private void Calcolo(ActionEvent event) throws Exception {
-        ComplexNumber risultato;
-        ComplexNumber[] risultatiSqrt;
-        String s="";
-        
-        if(operazione.getText().equals("+")){
-            risultato = (AritmeticalOperations.addition(stackPrincipale.removeLastNumber(), stackPrincipale.removeLastNumber()));  
-            stackPrincipale.insertNumber(risultato);
-            output.setText(risultato.toString());
-        }
-        if(operazione.getText().equals("-")){
-            risultato = (AritmeticalOperations.substraction(stackPrincipale.removeLastNumber(), stackPrincipale.removeLastNumber()));
-            stackPrincipale.insertNumber(risultato);
-            output.setText(risultato.toString());
-        }
-        if(operazione.getText().equals("*")){
-            risultato = (AritmeticalOperations.multiplication(stackPrincipale.removeLastNumber(), stackPrincipale.removeLastNumber()));
-            stackPrincipale.insertNumber(risultato);
-            output.setText(risultato.toString());
-        }
-        if(operazione.getText().equals("/")){
-            ComplexNumber op1 = stackPrincipale.removeLastNumber();
-            ComplexNumber op2 = stackPrincipale.removeLastNumber();
-            System.out.println(op2.toString());
-            
-            if(op2.getRealPart()==0.0 && op2.getImmPart()==0.0){
-                output.setText("Divisione per 0 + 0j non valida");
-                stackPrincipale.insertNumber(op1);
-                stackPrincipale.insertNumber(op2);
-            }
-            else{
-                risultato = (AritmeticalOperations.division(op1,op2));
-                stackPrincipale.insertNumber(risultato);
-                output.setText(risultato.toString());    
-            }
-        }
-        if(operazione.getText().equals("-+")){
-            risultato = (AritmeticalOperations.reversalSign(stackPrincipale.removeLastNumber()));
-            stackPrincipale.insertNumber(risultato);
-            output.setText(risultato.toString());
-        }
-        if(operazione.getText().equals("sqrt")){
-            risultatiSqrt = (AritmeticalOperations.squareRoot(stackPrincipale.removeLastNumber()));
-            for(ComplexNumber ris : risultatiSqrt){
-                stackPrincipale.insertNumber(ris);
-                s = s + ris.toString()+ "---";
-            }    
-            output.setText(s);
-        }
-        
-        
-        operazione.clear();
         output.clear();
     }
     

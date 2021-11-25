@@ -20,6 +20,7 @@ public class StackPrincipale {
     public StackPrincipale(){
         this.stack = FXCollections.observableArrayList();
         this.size = this.stack.size();
+        
     }
 
 //Inserisce un elemento in coda alla LiskedList, in modo analogo a ciò che avverrebbe in uno stack    

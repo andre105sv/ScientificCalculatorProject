@@ -11,12 +11,9 @@
         <Button fx:id="Inserisci" layoutX="249.0" layoutY="95.0" onAction="#Inserimento" text="Inserisci" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <TextField fx:id="input" layoutX="52.0" layoutY="95.0" />
-      <TextField fx:id="output" layoutX="349.0" layoutY="184.0" />
-      <TextField fx:id="operazione" layoutX="52.0" layoutY="184.0" />
-      <Button fx:id="Calcola" layoutX="254.0" layoutY="184.0" mnemonicParsing="false" onAction="#Calcolo" text="Calcola" />
+      <TextField fx:id="output" layoutX="52.0" layoutY="184.0" />
       <Label layoutX="52.0" layoutY="78.0" text="Operando" />
-      <Label layoutX="52.0" layoutY="167.0" text="Operazione" />
       <Label layoutX="52.0" layoutY="40.0" text="L'operando per essere inserito correttamente deve rispettare la sintassi: a + bj" />
-      <Label layoutX="349.0" layoutY="167.0" text="Risultato" />
+      <Label layoutX="56.0" layoutY="167.0" text="Risultato" />
     </children>
 </AnchorPane>
