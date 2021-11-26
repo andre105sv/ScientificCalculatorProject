@@ -16,32 +16,20 @@ import static org.junit.Assert.*;
  *
  * @author filso
  */
-public class ParserStringTest {
-    private final String operation  = "__OPERATION__";
-    private final String complex_number = "__NUMBER__";
+public class CheckerStringTest {
+    private final String single_number = "__SINGLENUMBER__";
+    private final String complex_number = "__COMPLEX__NUMBER__";
     private final String invalid_insert = "__INVALID__";
     private final String continue_checking = "__CHECKING__";
-    private ParserString parser;
+    private CheckerString parser;
     
-    public ParserStringTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
-         parser = new ParserString();
+         parser = new CheckerString();
     }
     
-    @After
-    public void tearDown() {
-    }
+    
 
     /**
      * Test of clearString method, of class ParserString.
@@ -77,11 +65,11 @@ public class ParserStringTest {
         System.out.println("checkPossibilePartReal");
         String text = "+3";
         boolean expResult = true;
-        boolean result = parser.checkPossiblePartReal(text);
+        boolean result = parser.checkPossibleRealPart(text);
         assertEquals(expResult, result);
         text = "+3helloword";
         expResult = false;
-        result = parser.checkPossiblePartReal(text);
+        result = parser.checkPossibleRealPart(text);
         assertEquals(expResult, result);
     }
 
@@ -93,11 +81,11 @@ public class ParserStringTest {
         System.out.println("checkPossibilePartImaginary");
         String text = "+3j";
         boolean expResult = true;
-        boolean result = parser.checkPossiblePartImaginary(text);
+        boolean result = parser.checkPossibleImmaginaryPart(text);
         assertEquals(expResult, result);
         text = "+3helloword";
         expResult = false;
-        result = parser.checkPossiblePartImaginary(text);
+        result = parser.checkPossibleImmaginaryPart(text);
         assertEquals(expResult, result);
     }
 
@@ -108,7 +96,7 @@ public class ParserStringTest {
     public void testCheckPossibleOneNumber() {
         System.out.println("checkPossibleOneNumber");
         String text = "4j";
-        String expResult = complex_number;
+        String expResult = single_number;
         String result = parser.checkPossibleOneNumber(text);
         assertEquals(expResult, result);
         text = "+4";
@@ -181,7 +169,7 @@ public class ParserStringTest {
         result = parser.parserString(text);
         assertEquals(expResult, result);
         text = "+4j";
-        expResult = complex_number;
+        expResult = single_number;
         result = parser.parserString(text);
         assertEquals(expResult, result);
         

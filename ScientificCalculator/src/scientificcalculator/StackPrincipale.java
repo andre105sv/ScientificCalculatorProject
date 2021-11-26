@@ -16,29 +16,48 @@ public class StackPrincipale {
     private List<ComplexNumber> stack;
     private int size;
     
-//Crea l'oggetto StackPrincipale inizializzando i suoi attributi. Lo stack è implementato con una LinkedList
+    /**
+    * Costruisce un oggetto di tipo StackPrincipale inizializzando i suoi 
+    * attributi. Lo stack è implementato con una LinkedList.
+    */
     public StackPrincipale(){
         this.stack = new LinkedList<>();
         this.size = this.stack.size();
     }
 
-//Inserisce un elemento in coda alla LiskedList, in modo analogo a ciò che avverrebbe in uno stack    
+    /**
+    * Inserisce un elemento in coda alla LinkedList (analogamente a ciò che 
+    * avviene in uno stack).
+    * @param    number   l'oggetto ComplexNumber da inserire
+    */
     public void insertNumber(ComplexNumber number){
         this.stack.add(number);
-        this.size=this.stack.size();
+        this.size = this.stack.size();
     }
     
-//restituisce il numero di elementi nello stack
+    /**
+    * Restituisce il numero di elementi nello stack.
+    * @return       il numero di elementi nello stack
+    */
     public int getSize(){
         return this.size;
     }
     
+    /**
+    * Restituisce l'ultimo elemento inserito nello stack e lo rimuove.
+    * @return       l'ultimo oggetto ComplexNumber inserito
+    */
     public ComplexNumber removeLastNumber(){
         ComplexNumber number = this.stack.remove(this.stack.size()-1);
-        this.size=this.stack.size();
+        this.size = this.stack.size();
         return number;
     }
 
+    /**
+     * Restituisce una lista di ComplexNumber formata dagli ultimi 12 elementi inseriti nella list stack.
+     * Se la lista stack ha meno di 12 elementi restituisce l'intera lista stack.
+     * @return      Gli ultimi elementi presenti nello stack.
+     */
     public List<ComplexNumber> getFirst12Elements() {
         if (this.getSize()>=12)
             return this.stack.subList(this.getSize()-12,this.getSize());

@@ -59,15 +59,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void Inserimento(ActionEvent event) throws Exception {
         String text = input.getText();
-        ParserString parser = new ParserString();
-        String check = parser.parserString(text);
+        CheckerString checker = new CheckerString();
+        String check = checker.parserString(text);
         ComplexNumber z = new ComplexNumber(Double.NaN,Double.NaN);
         if(check.equals("__COMPLEX__NUMBER__")){
-            z = parser.recognizeComplexNumber(text);
+            z = checker.recognizeComplexNumber(text);
             stackPrincipale.insertNumber(z);
         }
         if(check.equals("__SINGLENUMBER__")){
-            z = parser.recognizeNumber(text);
+            z = checker.recognizeNumber(text);
             stackPrincipale.insertNumber(z);
         }
         
@@ -99,7 +99,7 @@ public class FXMLDocumentController implements Initializable {
         
             
         obList.clear();    
-        System.out.println(text + check + z.toString() + stackPrincipale.getSize());
+        System.out.println(text + check + z.toString());
         obList.addAll(stackPrincipale.getFirst12Elements());
         System.out.println(obList.toString());
         elementiStack.maxHeight(12);      

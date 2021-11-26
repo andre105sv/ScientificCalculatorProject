@@ -86,7 +86,7 @@ public class AritmeticalOperationsTest {
      * Test of division method, of class AritmeticalOperations.
      */
     @Test
-    public void testDivision() {
+    public void testDivision() throws Exception {
         System.out.println("division");
         ComplexNumber a = new ComplexNumber(4,5);
         ComplexNumber b = new ComplexNumber(4,0);
@@ -94,7 +94,7 @@ public class AritmeticalOperationsTest {
         ComplexNumber result = AritmeticalOperations.division(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
-        
+
     }
 
     /**

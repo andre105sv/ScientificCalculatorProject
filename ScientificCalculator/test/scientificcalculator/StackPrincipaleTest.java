@@ -5,6 +5,8 @@
  */
 package scientificcalculator;
 
+import java.util.LinkedList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,6 +20,7 @@ import static org.junit.Assert.*;
  */
 public class StackPrincipaleTest {
      StackPrincipale instance;
+     private final int FIRST_NUMBERS = 2;
     
     public StackPrincipaleTest() {
     }
@@ -76,6 +79,24 @@ public class StackPrincipaleTest {
         instance.insertNumber(expResult);
         ComplexNumber result = instance.removeLastNumber();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getFirst12Elements method, of class StackPrincipale.
+     */
+    @Test
+    public void testGetFirst12Elements() {
+        System.out.println("getFirst12Elements");
+        List<ComplexNumber> expResult = new LinkedList<>();
+        for(int i=0;i<FIRST_NUMBERS;i++){
+            expResult.add(new ComplexNumber(i,i));
+            instance.insertNumber(new ComplexNumber(i,i));
+        }
+        List<ComplexNumber> result = instance.getFirst12Elements();
+        for (int i=0;i<Math.max(instance.getSize(),expResult.size());i++){//MODIFICARE EXPRESULT E RESULT
+            assertEquals(expResult.get(i).getRealPart(), result.get(i).getRealPart(),0.0001);
+            assertEquals(expResult.get(i).getImmPart(), result.get(i).getImmPart(),0.0001);
+        }
     }
     
 }
