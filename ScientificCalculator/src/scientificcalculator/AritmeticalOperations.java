@@ -10,6 +10,7 @@ import java.lang.Exception;
  * @author filso
  */
 public class AritmeticalOperations{
+    private final static double DECIMAL_NUMBER = 10000.0;
     /**
      * Restituisce la somma dei due nomeri complessi.
      * @param a Primo ComplexNumber.
@@ -71,27 +72,31 @@ public class AritmeticalOperations{
      * @param a
      * @return Le due radici in forma algebrica di a.
      */
-    public static ComplexNumber[] squareRoot(ComplexNumber a){
-        if (a.getImmPart()==0.0)
-            return new ComplexNumber[]{new ComplexNumber(Math.sqrt(a.getRealPart()),0)};
+    public static ComplexNumber[] squareRoot(ComplexNumber a) throws Exception{
         double modulo = Math.sqrt(Math.pow(a.getRealPart(), 2) + Math.pow(a.getImmPart(), 2));
         double radModulo = Math.sqrt(modulo);
         double fase = 0.0;
+        
         if (a.getRealPart() == 0 && a.getImmPart() > 0)
             fase = 3.14/2;
         if (a.getRealPart() == 0 && a.getImmPart() < 0)
             fase = -3.14/2;
         if (a.getRealPart() == 0 && a.getImmPart() == 0)
-            fase = Double.NaN;            
+            throw (new Exception ("Fase di 0 non ammessa"));
         if (a.getRealPart() > 0)
             fase = Math.atan2(a.getImmPart(), a.getRealPart());     
-        if (a.getRealPart() < 0 && (!(a.getImmPart() < 0)))
+        if (a.getRealPart() < 0 && (a.getImmPart() > 0))
             fase = Math.atan2(a.getImmPart(), a.getRealPart()) + 3.14;
         if (a.getRealPart() < 0 && a.getImmPart() < 0)
             fase = Math.atan2(a.getImmPart(), a.getRealPart()) - 3.14;
+        if (a.getRealPart() < 0 && a.getImmPart() == 0)
+            
+            return new ComplexNumber[]{new ComplexNumber(0,Math.sqrt(Math.abs(a.getRealPart())))};
         
-        ComplexNumber b = new ComplexNumber(radModulo * Math.cos(fase), radModulo * Math.sin(fase));
-        ComplexNumber c = new ComplexNumber(radModulo * Math.cos((fase + 2 * 3.14) / 2), radModulo * Math.sin((fase + 2 * 3.14) / 2));
+        
+        ComplexNumber b = new ComplexNumber(Math.round((radModulo * Math.cos(fase))*DECIMAL_NUMBER)/DECIMAL_NUMBER, Math.round((radModulo * Math.sin(fase))*DECIMAL_NUMBER)/DECIMAL_NUMBER);
+        ComplexNumber c = new ComplexNumber(Math.round((radModulo * Math.cos((fase + 2 * 3.14) / 2))*DECIMAL_NUMBER)/DECIMAL_NUMBER, Math.round((radModulo * Math.sin((fase + 2 * 3.14) / 2))*DECIMAL_NUMBER)/DECIMAL_NUMBER);
+        
         ComplexNumber[] s= new ComplexNumber[]{b, c};
 
         return s;

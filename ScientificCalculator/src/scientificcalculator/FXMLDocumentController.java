@@ -60,14 +60,14 @@ public class FXMLDocumentController implements Initializable {
     private void Inserimento(ActionEvent event) throws Exception {
         String text = input.getText();
         CheckerString checker = new CheckerString();
-        String check = checker.parserString(text);
+        String risultato_check = checker.checkerString(text);
         ComplexNumber z = new ComplexNumber(Double.NaN,Double.NaN);
-        if(check.equals("__COMPLEX__NUMBER__")){
-            z = checker.recognizeComplexNumber(text);
+        if(risultato_check.equals("COMPLEX__NUMBER")){
+            z = checker.createFromComplexNumber(text);
             stackPrincipale.insertNumber(z);
         }
-        if(check.equals("__SINGLENUMBER__")){
-            z = checker.recognizeNumber(text);
+        if(risultato_check.equals("SINGLENUMBER")){
+            z = checker.createFromSingleNumber(text);
             stackPrincipale.insertNumber(z);
         }
         
@@ -89,6 +89,7 @@ public class FXMLDocumentController implements Initializable {
             }
             if(text.equals("sqrt")){
                 ComplexNumber[] result = AritmeticalOperations.squareRoot(stackPrincipale.removeLastNumber());
+                
                 for(ComplexNumber c : result)
                     stackPrincipale.insertNumber(c);
             }
@@ -96,16 +97,11 @@ public class FXMLDocumentController implements Initializable {
                 ComplexNumber result = AritmeticalOperations.reversalSign(stackPrincipale.removeLastNumber());
                 stackPrincipale.insertNumber(result);
             }
-        
-            
         obList.clear();    
-        System.out.println(text + check + z.toString());
+        //System.out.println(text + risultato_check + z.toString());
         obList.addAll(stackPrincipale.getFirst12Elements());
-        System.out.println(obList.toString());
+        //System.out.println(obList.toString());
         elementiStack.maxHeight(12);      
         input.clear();
-    }
-
-    
-    
+    }  
 }

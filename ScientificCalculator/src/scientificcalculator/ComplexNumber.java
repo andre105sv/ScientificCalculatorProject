@@ -19,6 +19,7 @@ public class ComplexNumber{
     * @param    s   la stringa che identifica il numero complesso
     */
     public ComplexNumber(String s){
+        
         String tmp[] = s.split("\\s+");
         if(s.contains("j")){
             this.realPart = Double.parseDouble(tmp[0]);
