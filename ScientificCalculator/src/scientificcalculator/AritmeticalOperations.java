@@ -26,7 +26,9 @@ public class AritmeticalOperations{
         ComplexNumber c = new ComplexNumber(a.getRealPart() * b.getRealPart() - a.getImmPart() * b.getImmPart(), a.getRealPart() * b.getImmPart() + a.getImmPart() * b.getRealPart());
         return c;
     }
-    public static ComplexNumber division(ComplexNumber a, ComplexNumber b){
+    public static ComplexNumber division(ComplexNumber a, ComplexNumber b) throws Exception{
+        if (b.getRealPart()==0&&b.getImmPart()==0)
+            throw new Exception("Divisione per 0 non amessa");
         ComplexNumber c = new ComplexNumber((a.getRealPart() * b.getRealPart() + a.getImmPart() * b.getImmPart()) / (Math.pow(b.getRealPart(), 2) + Math.pow(b.getImmPart(), 2)), (a.getImmPart() * b.getRealPart() - a.getRealPart() * b.getImmPart()) / (Math.pow(b.getRealPart(),2) + Math.pow(b.getImmPart(), 2)));
         return c;
     }

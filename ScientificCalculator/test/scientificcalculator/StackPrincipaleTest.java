@@ -77,4 +77,5 @@ public class StackPrincipaleTest {
         ComplexNumber result = instance.removeLastNumber();
         assertEquals(expResult, result);
     }
+    
 }

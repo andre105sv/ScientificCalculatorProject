@@ -71,33 +71,7 @@ public class ParserStringTest {
     /**
      * Test of checkOperation method, of class ParserString.
      */
-    @Test
-    public void testCheckOperation() {
-        System.out.println("checkOperation");
-        String text = "addition";
-        String expResult = operation;
-        String result = parser.checkOperation(text);
-        assertEquals(expResult, result);
-        text = "substraction";
-        result = parser.checkOperation(text);
-        assertEquals(expResult, result);
-        text = "multiplication";
-        result = parser.checkOperation(text);
-        assertEquals(expResult, result);
-        text = "division";
-        result = parser.checkOperation(text);
-        assertEquals(expResult, result);
-        text = "square root";
-        result = parser.checkOperation(text);
-        assertEquals(expResult, result);
-        text = "invert sign";
-        result = parser.checkOperation(text);
-        assertEquals(expResult, result);
-        text = "hello word";
-        result = parser.checkOperation(text);
-        expResult = invalid_insert;
-        assertEquals(expResult, result);
-    }
+    
     @Test
     public void testCheckPossibilePartReal() {
         System.out.println("checkPossibilePartReal");
@@ -210,10 +184,7 @@ public class ParserStringTest {
         expResult = complex_number;
         result = parser.parserString(text);
         assertEquals(expResult, result);
-        text = "addition";
-        expResult = operation;
-        result = parser.parserString(text);
-        assertEquals(expResult, result);
+        
     }
    
     

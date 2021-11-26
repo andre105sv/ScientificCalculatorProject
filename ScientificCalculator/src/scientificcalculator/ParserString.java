@@ -35,11 +35,7 @@ public class ParserString {
     }
     
 
-    public String checkOperation(String text){
-        String possible_operation = text.toLowerCase();
-        if(possible_operation.equals("addition") || possible_operation.equals("substraction") || possible_operation.equals("multiplication") || possible_operation.equals("division")|| possible_operation.equals("square root")|| possible_operation.equals("invert sign"))return operation;
-        return invalid_insert;
-    }
+    
 
     public boolean checkPossiblePartReal(String text){
         try {
@@ -88,12 +84,19 @@ public class ParserString {
     public String parserString(String text){
         if(text.length() == 0) return invalid_insert;
         text = clearString(text);
-        if(text.startsWith("+") || text.startsWith("-")) return invalid_insert;
+        if(text.startsWith("+") || text.startsWith("-")) 
+            return invalid_insert;
         String return_value = checkComplexNumber(text);
-        if (!(return_value.equals(continue_checking))) return return_value;
+        if (!(return_value.equals(continue_checking)))
+            return return_value;
         return_value = checkPossibleOneNumber(text);
-        return return_value.equals(continue_checking) ?  checkOperation(text): return_value;
- }
+        if(!(return_value.equals(continue_checking)))
+            return return_value;
+        return invalid_insert;
+    
+    }
+    
+    
         public char checkFirstCharacter(String text){
             text = text.replaceAll("\\n", "");
         if(text.startsWith("+") || text.startsWith("-")){

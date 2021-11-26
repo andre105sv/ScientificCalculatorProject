@@ -13,14 +13,13 @@ import javafx.collections.ObservableList;
  * @author anton
  */
 public class StackPrincipale {
-    private ObservableList<ComplexNumber> stack;
+    private List<ComplexNumber> stack;
     private int size;
     
 //Crea l'oggetto StackPrincipale inizializzando i suoi attributi. Lo stack è implementato con una LinkedList
     public StackPrincipale(){
-        this.stack = FXCollections.observableArrayList();
+        this.stack = new LinkedList<>();
         this.size = this.stack.size();
-        
     }
 
 //Inserisce un elemento in coda alla LiskedList, in modo analogo a ciò che avverrebbe in uno stack    
@@ -39,8 +38,14 @@ public class StackPrincipale {
         this.size=this.stack.size();
         return number;
     }
-    
 
+    public List<ComplexNumber> getFirst12Elements() {
+        if (this.getSize()>=12)
+            return this.stack.subList(this.getSize()-12,this.getSize());
+        else
+            return this.stack;
+    }
+    
     
 
 }
