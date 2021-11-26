@@ -9,9 +9,9 @@ package scientificcalculator;
  *
  * @author filso
  */
-class StringToComplexNumber {
+class StringToComplexNumber{
 
-    static ComplexNumber Parser(String text) {
+    static ComplexNumber Parser(String text){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

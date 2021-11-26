@@ -10,26 +10,16 @@ package scientificcalculator;
  * @author Andrea
  */
 public class ComplexNumber{
+
     private double realPart;
     private double immPart;  
 
     /**
     * Costruisce un oggetto di tipo ComplexNumber generato a partire dalla 
-    * stringa "s".
-    * @param    s   la stringa che identifica il numero complesso
+    * sua parte reale e dalla sua parte immaginaria.
+    * @param    realPart    la parte reale (double) di un numero complesso
+    * @param    immPart     la parte immaginaria (double) di un numero complesso
     */
-    public ComplexNumber(String s){
-        String tmp[] = s.split("\\s+");
-        if(s.contains("j")){
-            this.realPart = Double.parseDouble(tmp[0]);
-            this.immPart = Double.parseDouble(tmp[1].replace("j", ""));
-        }
-        else{
-            this.realPart = Double.parseDouble(tmp[0]); 
-            this.immPart = 0;
-        }
-    }
-
     public ComplexNumber(double realPart, double immPart){
         this.realPart = realPart;
         this.immPart = immPart;
@@ -37,7 +27,7 @@ public class ComplexNumber{
 
     /**
     * Restituisce la parte reale del numero complesso.
-    * @return       la parte reale del numero complesso
+    * @return   la parte reale del numero complesso
     */
     public double getRealPart(){
         return this.realPart;
@@ -45,7 +35,7 @@ public class ComplexNumber{
 
     /**
     * Restituisce la parte immaginaria del numero complesso.
-    * @return       la parte immaginaria del numero complesso
+    * @return   la parte immaginaria del numero complesso
     */
     public double getImmPart(){
         return this.immPart;
@@ -54,7 +44,7 @@ public class ComplexNumber{
     /**
     * Restituisce la stringa che rappresenta il numero complesso nel formato 
     * "±a ±bj" oppure "a ±bj" con "a" e "b" numeri reali.
-    * @return       la stringa che identifica il numero complesso
+    * @return   la stringa che identifica il numero complesso
     */
     @Override
     public String toString(){

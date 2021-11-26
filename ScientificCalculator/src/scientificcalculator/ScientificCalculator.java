@@ -22,8 +22,8 @@ public class ScientificCalculator {
      */
     public static void main(String[] args) {
         
-        System.out.println("Progetto: ScientificCalculator ");
-        System.out.println("Versione: 1.2");
+        System.out.println("Progetto: ScientificCalculator");
+        System.out.println("Versione: 1.3");
 
     }
 

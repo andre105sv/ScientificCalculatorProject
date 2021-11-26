@@ -16,26 +16,23 @@ import static org.junit.Assert.*;
  *
  * @author filso
  */
-public class CheckerStringTest {
+public class CheckerStringTest{
     private final String single_number = "__SINGLENUMBER__";
     private final String complex_number = "__COMPLEX__NUMBER__";
     private final String invalid_insert = "__INVALID__";
     private final String continue_checking = "__CHECKING__";
     private CheckerString parser;
     
-    
     @Before
-    public void setUp() {
+    public void setUp(){
          parser = new CheckerString();
     }
     
-    
-
     /**
      * Test of clearString method, of class ParserString.
      */
     @Test
-    public void testClearString() {
+    public void testClearString(){
         System.out.println("clearString");
         String text = "+3 -3j";
         String expResult = "3 -3j";
@@ -52,16 +49,14 @@ public class CheckerStringTest {
         text = "\n+3 +3j";
         expResult = "3 +3j";
         result = parser.clearString(text);
-        assertEquals(expResult, result);
-       
+        assertEquals(expResult, result);    
     }
 
     /**
      * Test of checkOperation method, of class ParserString.
-     */
-    
+     */    
     @Test
-    public void testCheckPossibilePartReal() {
+    public void testCheckPossibilePartReal(){
         System.out.println("checkPossibilePartReal");
         String text = "+3";
         boolean expResult = true;
@@ -106,8 +101,6 @@ public class CheckerStringTest {
         expResult = continue_checking;
         result = parser.checkPossibleOneNumber(text);
         assertEquals(expResult, result);
-        
-    
     }
 
     /**
@@ -145,9 +138,7 @@ public class CheckerStringTest {
         text = "+4 +dkdkdj";
         expResult = invalid_insert;
         result = parser.checkComplexNumber(text);
-        assertEquals(expResult, result);
-        
-       
+        assertEquals(expResult, result);     
     }
 
     /**
@@ -172,9 +163,6 @@ public class CheckerStringTest {
         expResult = single_number;
         result = parser.parserString(text);
         assertEquals(expResult, result);
-        
     }
-   
-    
 
 }

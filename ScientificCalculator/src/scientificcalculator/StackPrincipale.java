@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package scientificcalculator;
+
 import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 /**
  *
  * @author anton
  */
-public class StackPrincipale {
+public class StackPrincipale{
+
     private List<ComplexNumber> stack;
     private int size;
     
@@ -37,7 +39,7 @@ public class StackPrincipale {
     
     /**
     * Restituisce il numero di elementi nello stack.
-    * @return       il numero di elementi nello stack
+    * @return   il numero di elementi nello stack
     */
     public int getSize(){
         return this.size;
@@ -45,26 +47,27 @@ public class StackPrincipale {
     
     /**
     * Restituisce l'ultimo elemento inserito nello stack e lo rimuove.
-    * @return       l'ultimo oggetto ComplexNumber inserito
+    * @return   l'ultimo oggetto ComplexNumber inserito
     */
     public ComplexNumber removeLastNumber(){
-        ComplexNumber number = this.stack.remove(this.stack.size()-1);
+        ComplexNumber number = this.stack.remove(this.stack.size() - 1);
         this.size = this.stack.size();
         return number;
     }
 
     /**
-     * Restituisce una lista di ComplexNumber formata dagli ultimi 12 elementi inseriti nella list stack.
-     * Se la lista stack ha meno di 12 elementi restituisce l'intera lista stack.
-     * @return      Gli ultimi elementi presenti nello stack.
-     */
-    public List<ComplexNumber> getFirst12Elements() {
-        if (this.getSize()>=12)
-            return this.stack.subList(this.getSize()-12,this.getSize());
-        else
+    * Restituisce una lista di ComplexNumber formata dagli ultimi 12 elementi 
+    * inseriti nella list stack.
+    * Se la lista stack ha meno di 12 elementi la restituisce per intero.
+    * @return   gli ultimi elementi presenti nello stack
+    */
+    public List<ComplexNumber> getFirst12Elements(){
+        if (this.getSize() >= 12){
+            return this.stack.subList(this.getSize() - 12, this.getSize());
+        }
+        else{
             return this.stack;
+        }
     }
-    
-    
 
 }
