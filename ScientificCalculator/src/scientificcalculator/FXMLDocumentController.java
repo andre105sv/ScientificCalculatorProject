@@ -54,7 +54,7 @@ public class FXMLDocumentController implements Initializable {
         obList.addAll(stackPrincipale.getFirst12Elements());
        
         elementiStack.setItems(obList);
-        elementiStack.maxHeight(12);
+        
     }    
 
 
@@ -113,7 +113,8 @@ public class FXMLDocumentController implements Initializable {
                 }
             }
         obList.clear(); 
-        obList.addAll(stackPrincipale.getFirst12Elements());   
+        obList.addAll(stackPrincipale.getFirst12Elements());
+        elementiStack.maxHeight(12);
         input.clear();
     }  
 }
