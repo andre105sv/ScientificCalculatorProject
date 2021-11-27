@@ -30,7 +30,7 @@ public class DivisionTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-12.8982 , +2.2324);     
-        ArithmeticalOperations division = factory.getOperation("DIVISION", a, b);
+        ArithmeticalOperations division = factory.getOperation("DIVISION", a, b, 0.0001);
         ComplexNumber result = division.execute();
         assertEquals(expResult.getRealPart(), result.getRealPart(), 0.0001);
         assertEquals(expResult.getImmPart(), result.getImmPart(), 0.0001);

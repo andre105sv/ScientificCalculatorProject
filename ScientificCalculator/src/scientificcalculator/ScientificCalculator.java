@@ -23,27 +23,7 @@ public class ScientificCalculator {
     public static void main(String[] args) throws Exception{
         
         System.out.println("Progetto: ScientificCalculator");
-        System.out.println("Versione: 1.5");
-        
-        ComplexNumber a = new ComplexNumber(-32, +7);
-        ComplexNumber b = new ComplexNumber(+2.5, -0.11);
-        OperationFactory factory = new OperationFactory();
-
-        ArithmeticalOperations addition = factory.getOperation("ADDITION", a, b);
-        ComplexNumber res1 = addition.execute();
-        System.out.println(res1.toString());
-
-        ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", a, b);
-        ComplexNumber res2 = subtraction.execute();
-        System.out.println(res2.toString());
-
-        ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", a, b);
-        ComplexNumber res3 = multiplication.execute();
-        System.out.println(res3.toString());
-
-        ArithmeticalOperations division = factory.getOperation("DIVISION", a, b);
-        ComplexNumber res4 = division.execute();
-        System.out.println(res4.toString());
+        System.out.println("Versione: 1.6");
 
     }
 

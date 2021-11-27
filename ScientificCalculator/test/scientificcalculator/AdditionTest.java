@@ -30,7 +30,7 @@ public class AdditionTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-29.5 , +6.89);     
-        ArithmeticalOperations addition = factory.getOperation("ADDITION", a, b);
+        ArithmeticalOperations addition = factory.getOperation("ADDITION", a, b, 0.0001);
         ComplexNumber result = addition.execute();
         assertEquals(expResult.getRealPart(), result.getRealPart(), 0.0001);
         assertEquals(expResult.getImmPart(), result.getImmPart(), 0.0001);

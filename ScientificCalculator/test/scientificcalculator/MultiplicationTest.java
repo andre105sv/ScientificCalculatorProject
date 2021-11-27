@@ -30,7 +30,7 @@ public class MultiplicationTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-79.23 , +21.02);     
-        ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", a, b);
+        ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", a, b, 0.0001);
         ComplexNumber result = multiplication.execute();
         assertEquals(expResult.getRealPart(), result.getRealPart(), 0.0001);
         assertEquals(expResult.getImmPart(), result.getImmPart(), 0.0001);

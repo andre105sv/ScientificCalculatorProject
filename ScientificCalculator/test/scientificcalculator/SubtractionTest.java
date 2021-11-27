@@ -30,7 +30,7 @@ public class SubtractionTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-34.5 , +7.11);     
-        ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", a, b);
+        ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", a, b, 0.0001);
         ComplexNumber result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result.getRealPart(), 0.0001);
         assertEquals(expResult.getImmPart(), result.getImmPart(), 0.0001);

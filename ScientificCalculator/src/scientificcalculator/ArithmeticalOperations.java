@@ -12,7 +12,7 @@ package scientificcalculator;
  */
 public interface ArithmeticalOperations{
 
-    //public ComplexNumber[] execute(ComplexNumber[]);
     public ComplexNumber execute() throws Exception;
+    public ComplexNumber[] executeSqrt() throws Exception;
 
 }
