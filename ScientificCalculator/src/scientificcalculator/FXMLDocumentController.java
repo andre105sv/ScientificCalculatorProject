@@ -33,7 +33,8 @@ public class FXMLDocumentController implements Initializable {
     private Label label;
     @FXML
     private TextField input;
-    
+    private final double DECIMAL_NUMBERS = 1000.0;
+    private final int MAX_VIEW_SIZE = 12;
     private StackPrincipale stackPrincipale;
     @FXML
     private Button Inserisci;
@@ -53,14 +54,17 @@ public class FXMLDocumentController implements Initializable {
         obList.addAll(stackPrincipale.getFirst12Elements());
        
         elementiStack.setItems(obList);
+        elementiStack.maxHeight(12);
     }    
 
 
     @FXML
     private void Inserimento(ActionEvent event) throws Exception {
+        
         String text = input.getText();
         CheckerString checker = new CheckerString();
-        String risultato_check = checker.checkerString(text);
+        AritmeticalOperations operations = new AritmeticalOperations(DECIMAL_NUMBERS);
+        String risultato_check = checker.checkString(text);
         ComplexNumber z = new ComplexNumber(Double.NaN,Double.NaN);
         if(risultato_check.equals("COMPLEX__NUMBER")){
             z = checker.createFromComplexNumber(text);
@@ -72,36 +76,44 @@ public class FXMLDocumentController implements Initializable {
         }
         
             if(text.equals("+")){
-                ComplexNumber result = AritmeticalOperations.addition(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
-                stackPrincipale.insertNumber(result);
+                if(stackPrincipale.getSize()>1){
+                    ComplexNumber result = operations.addition(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
+                    stackPrincipale.insertNumber(result);
+                }
             }
             if(text.equals("-")){
-                ComplexNumber result = AritmeticalOperations.substraction(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
-                stackPrincipale.insertNumber(result);
+                if(stackPrincipale.getSize()>1){
+                    ComplexNumber result = operations.substraction(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
+                    stackPrincipale.insertNumber(result);
+                }
             }
             if(text.equals("*")){
-                ComplexNumber result = AritmeticalOperations.multiplication(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
-                stackPrincipale.insertNumber(result);
+                if(stackPrincipale.getSize()>1){
+                    ComplexNumber result = operations.multiplication(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
+                    stackPrincipale.insertNumber(result);
+                }
             }
             if(text.equals("/")){
-                ComplexNumber result = AritmeticalOperations.division(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
-                stackPrincipale.insertNumber(result);
+                if(stackPrincipale.getSize()>1){
+                    ComplexNumber result = operations.division(stackPrincipale.removeLastNumber(),stackPrincipale.removeLastNumber());
+                    stackPrincipale.insertNumber(result);
+                }
             }
             if(text.equals("sqrt")){
-                ComplexNumber[] result = AritmeticalOperations.squareRoot(stackPrincipale.removeLastNumber());
-                
-                for(ComplexNumber c : result)
-                    stackPrincipale.insertNumber(c);
+                if(stackPrincipale.getSize()>0){
+                    ComplexNumber[] result = operations.squareRoot(stackPrincipale.removeLastNumber());    
+                    for(ComplexNumber c : result)
+                        stackPrincipale.insertNumber(c);
+                }
             }
             if(text.equals("+-")){
-                ComplexNumber result = AritmeticalOperations.reversalSign(stackPrincipale.removeLastNumber());
+                if(stackPrincipale.getSize()>0){
+                ComplexNumber result = operations.reversalSign(stackPrincipale.removeLastNumber());
                 stackPrincipale.insertNumber(result);
+                }
             }
-        obList.clear();    
-        //System.out.println(text + risultato_check + z.toString());
-        obList.addAll(stackPrincipale.getFirst12Elements());
-        //System.out.println(obList.toString());
-        elementiStack.maxHeight(12);      
+        obList.clear(); 
+        obList.addAll(stackPrincipale.getFirst12Elements());   
         input.clear();
     }  
 }

@@ -170,19 +170,19 @@ public class CheckerStringTest {
         System.out.println("parserString_");
         String text = "";
         String expResult = invalid_insert;
-        String result = checker.checkerString(text);
+        String result = checker.checkString(text);
         assertEquals(expResult, result);
         text = "++4";
         expResult = invalid_insert;
-        result = checker.checkerString(text);
+        result = checker.checkString(text);
         assertEquals(expResult, result);
         text = "+4 +3j";
         expResult = complex_number;
-        result = checker.checkerString(text);
+        result = checker.checkString(text);
         assertEquals(expResult, result);
         text = "+4j";
         expResult = single_number;
-        result = checker.checkerString(text);
+        result = checker.checkString(text);
         assertEquals(expResult, result);
         
     }

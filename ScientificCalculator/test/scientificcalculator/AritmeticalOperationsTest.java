@@ -17,12 +17,11 @@ import static org.junit.Assert.*;
  * @author filso
  */
 public class AritmeticalOperationsTest {
-    
-    public AritmeticalOperationsTest() {
-    }
-    
+    AritmeticalOperations operations;
+        
     @BeforeClass
     public static void setUpClass() {
+       
     }
     
     @AfterClass
@@ -31,6 +30,7 @@ public class AritmeticalOperationsTest {
     
     @Before
     public void setUp() {
+        operations = new AritmeticalOperations(10000.0);
     }
     
     @After
@@ -46,25 +46,25 @@ public class AritmeticalOperationsTest {
         ComplexNumber a = new ComplexNumber(4,5);
         ComplexNumber b = new ComplexNumber(4,5);
         ComplexNumber expResult = new ComplexNumber(8,10);
-        ComplexNumber result = AritmeticalOperations.addition(a, b);
+        ComplexNumber result = operations.addition(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,5);
         b = new ComplexNumber(-4,5);
         expResult = new ComplexNumber(-8,10);
-        result = AritmeticalOperations.addition(a, b);
+        result = operations.addition(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(4,-5);
         b = new ComplexNumber(4,-5);
         expResult = new ComplexNumber(8,-10);
-        result = AritmeticalOperations.addition(a, b);
+        result = operations.addition(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,-5);
         b = new ComplexNumber(-4,-5);
         expResult = new ComplexNumber(-8,-10);
-        result = AritmeticalOperations.addition(a, b);
+        result = operations.addition(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         
@@ -79,25 +79,25 @@ public class AritmeticalOperationsTest {
         ComplexNumber a = new ComplexNumber(4,5);
         ComplexNumber b = new ComplexNumber(4,5);
         ComplexNumber expResult = new ComplexNumber(0,0);
-        ComplexNumber result = AritmeticalOperations.substraction(a, b);
+        ComplexNumber result = operations.substraction(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,5);
         b = new ComplexNumber(-4,5);
         expResult = new ComplexNumber(0,0);
-        result = AritmeticalOperations.substraction(a, b);
+        result = operations.substraction(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(4,-5);
         b = new ComplexNumber(4,-5);
         expResult = new ComplexNumber(0,0);
-        result = AritmeticalOperations.substraction(a, b);
+        result = operations.substraction(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,-5);
         b = new ComplexNumber(-4,-5);
         expResult = new ComplexNumber(0,0);
-        result = AritmeticalOperations.substraction(a, b);
+        result = operations.substraction(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
     }
@@ -111,25 +111,25 @@ public class AritmeticalOperationsTest {
         ComplexNumber a = new ComplexNumber(4,5);
         ComplexNumber b = new ComplexNumber(4,0);
         ComplexNumber expResult = new ComplexNumber(16,20);
-        ComplexNumber result = AritmeticalOperations.multiplication(a, b);
+        ComplexNumber result = operations.multiplication(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,5);
         b = new ComplexNumber(-4,5);
         expResult = new ComplexNumber(-9,-40);
-        result = AritmeticalOperations.multiplication(a, b);
+        result = operations.multiplication(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(4,-5);
         b = new ComplexNumber(4,-5);
         expResult = new ComplexNumber(-9,-40);
-        result = AritmeticalOperations.multiplication(a, b);
+        result = operations.multiplication(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,-5);
         b = new ComplexNumber(-4,-5);
         expResult = new ComplexNumber(-9,40);
-        result = AritmeticalOperations.multiplication(a, b);
+        result = operations.multiplication(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
     }
@@ -143,25 +143,25 @@ public class AritmeticalOperationsTest {
         ComplexNumber a = new ComplexNumber(4,5);
         ComplexNumber b = new ComplexNumber(4,0);
         ComplexNumber expResult = new ComplexNumber(1,1.25);
-        ComplexNumber result = AritmeticalOperations.division(a, b);
+        ComplexNumber result = operations.division(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,5);
         b = new ComplexNumber(-4,5);
         expResult = new ComplexNumber(1,0);
-        result = AritmeticalOperations.division(a, b);
+        result = operations.division(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(4,-5);
         b = new ComplexNumber(4,-52);
         expResult = new ComplexNumber(0.1014,0.0691);
-        result = AritmeticalOperations.division(a, b);
+        result = operations.division(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,-5);
         b = new ComplexNumber(-4,-53);
         expResult = new ComplexNumber(0.09946,-0.067964);
-        result = AritmeticalOperations.division(a, b);
+        result = operations.division(a, b);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         /*a = new ComplexNumber(-4,-5);
@@ -182,22 +182,22 @@ public class AritmeticalOperationsTest {
         System.out.println("reversalSign");
         ComplexNumber a =new ComplexNumber(-4,-5);
         ComplexNumber expResult = new ComplexNumber(4,5);
-        ComplexNumber result = AritmeticalOperations.reversalSign(a);
+        ComplexNumber result = operations.reversalSign(a);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(4,5);
         expResult = new ComplexNumber(-4,-5);
-        result = AritmeticalOperations.reversalSign(a);
+        result = operations.reversalSign(a);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(-4,5);
         expResult = new ComplexNumber(4,-5);
-        result = AritmeticalOperations.reversalSign(a);
+        result = operations.reversalSign(a);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
         a = new ComplexNumber(4,-5);
         expResult = new ComplexNumber(-4,5);
-        result = AritmeticalOperations.reversalSign(a);
+        result = operations.reversalSign(a);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.0001);
         assertEquals(expResult.getImmPart(),result.getImmPart(),0.0001);
     }
@@ -209,23 +209,23 @@ public class AritmeticalOperationsTest {
     public void testSquareRoot() throws Exception {
         System.out.println("squareRoot");
         ComplexNumber a = new ComplexNumber(4, 5);
-        ComplexNumber b = new ComplexNumber(1.5807, 1.9759);
+        ComplexNumber b = new ComplexNumber(1.5808, 1.9759);
         ComplexNumber c = new ComplexNumber(-2.2824, -1.0925);
         ComplexNumber[] expResult = new ComplexNumber[]{b, c};
-        ComplexNumber[] result = AritmeticalOperations.squareRoot(a);
+        ComplexNumber[] result = operations.squareRoot(a);
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(),0.0001);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(),0.0001);
         assertEquals(expResult[1].getRealPart(), result[1].getRealPart(),0.0001);
         assertEquals(expResult[1].getImmPart(), result[1].getImmPart(),0.0001);
         a = new ComplexNumber(4,0);
         expResult = new ComplexNumber[]{new ComplexNumber(2,0)};
-        result = AritmeticalOperations.squareRoot(a);
+        result = operations.squareRoot(a);
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(),0.0001);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(),0.0001);
         a = new ComplexNumber(0,4);
         b = new ComplexNumber(0.0016, 2);
         c = new ComplexNumber(-1.417, -1.4114);
-        result = AritmeticalOperations.squareRoot(a);
+        result = operations.squareRoot(a);
         expResult = new ComplexNumber[]{b, c};
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(),0.0001);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(),0.0001);
@@ -238,7 +238,7 @@ public class AritmeticalOperationsTest {
         a = new ComplexNumber(-2,-2);
         b = new ComplexNumber(1.1873, 1.1911);
         c = new ComplexNumber(1.5543, 0.6424);
-        result = AritmeticalOperations.squareRoot(a);
+        result = operations.squareRoot(a);
         expResult = new ComplexNumber[]{b, c};
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(),0.0001);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(),0.0001);
@@ -246,13 +246,13 @@ public class AritmeticalOperationsTest {
         assertEquals(expResult[1].getImmPart(), result[1].getImmPart(),0.0001);
         a = new ComplexNumber(-4,0);
         expResult = new ComplexNumber[]{new ComplexNumber(0,2)};
-        result = AritmeticalOperations.squareRoot(a);
+        result = operations.squareRoot(a);
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(),0.0001);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(),0.0001);
         a = new ComplexNumber(-2,2);
         b = new ComplexNumber(1.1873, -1.1911);
         c = new ComplexNumber(1.5522, -0.6473);
-        result = AritmeticalOperations.squareRoot(a);
+        result = operations.squareRoot(a);
         expResult = new ComplexNumber[]{b, c};
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(),0.0001);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(),0.0001);

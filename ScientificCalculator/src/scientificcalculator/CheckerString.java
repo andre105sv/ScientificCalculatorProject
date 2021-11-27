@@ -11,20 +11,28 @@ package scientificcalculator;
  */
 public class CheckerString {
 
-    private final String complex_number = "COMPLEX__NUMBER";
-    private final String single_number = "SINGLENUMBER";
-    private final String invalid_insert = "INVALID";
-    private final String continue_checking = "CHECKING";
+    private String complex_number;
+    private String single_number;
+    private String invalid_insert;
+    private String continue_checking;
 
+    public CheckerString() {
+        this.complex_number = "COMPLEX__NUMBER";
+        this.single_number = "SINGLENUMBER";
+        this.invalid_insert = "INVALID";
+        this.continue_checking = "CHECKING";
+    }
+
+    
     /**
      * Ritorna la stringa eliminando spazi bianchi ed eventuali segni inziali.
      *
      * @param text
      * @return Stringa ripulita.
      */
-    public String clearString(String text) {
+    public String clearString(String text){
         text = text.replaceAll("\\n", "");
-        if (text.startsWith("+") || text.startsWith("-")) {
+        if(text.startsWith("+") || text.startsWith("-")){
             StringBuilder sb = new StringBuilder(text);
             sb.deleteCharAt(0);
             return sb.toString();
@@ -38,12 +46,11 @@ public class CheckerString {
      * @param text
      * @return True se trova un numero reale, false altrimenti.
      */
-    public boolean checkPossibleRealPart(String text) {
-        try {
+    public boolean checkPossibleRealPart(String text){
+        try{
             double real = Double.parseDouble(text);
             return true;
-        } catch (Exception ex) {
-            System.err.println("Parte reale non trovata");
+        }catch(Exception ex){
             return false;
         }
     }
@@ -54,14 +61,13 @@ public class CheckerString {
      * @param text
      * @return True se trova un numero immaginario, false altrimenti.
      */
-    public boolean checkPossibleImmaginaryPart(String text) {
-        if (text.contains("j")) {
+    public boolean checkPossibleImmaginaryPart(String text){
+        if(text.contains("j")){
             String image = text.replace("j", "");
-            try {
+            try{
                 double image_finale = Double.parseDouble(image);
                 return true;
-            } catch (Exception e) {
-                System.err.println("Parte immaginaria non trovata");
+            }catch(Exception e){
                 return false;
             }
         }
@@ -76,13 +82,13 @@ public class CheckerString {
      * @return SINGLENUMBER se trova solo un numero reale o solo un numero
      * immaginario, CHECKING altrimenti.
      */
-    public String checkPossibleOneNumber(String text) {
-        if (this.checkPossibleRealPart(text)) {
+    public String checkPossibleOneNumber(String text){
+        if(this.checkPossibleRealPart(text)){
             return single_number;
         }
-        if (this.checkPossibleImmaginaryPart(text)) {
+        if(this.checkPossibleImmaginaryPart(text)){
             return single_number;
-        } else {
+        }else{
             return continue_checking;
         }
 
@@ -96,24 +102,24 @@ public class CheckerString {
      * @return COMPLEX_NUMBER se trova un numero complesso, INVALID se
      * l'inserimento non è valido, CHECKING altrimenti.
      */
-    public String checkComplexNumber(String text) {
-        if (text.contains("+") || text.contains("-")) {
+    public String checkComplexNumber(String text){
+        if(text.contains("+") || text.contains("-")){
             String replaceAll = text.replaceAll(" ", "");
             String[] scanner = replaceAll.split("\\+|\\-");
-            if (scanner.length > 2) {
+            if(scanner.length > 2){
                 return invalid_insert;
             }
-            if (this.checkPossibleRealPart(scanner[0])) {
-                if (this.checkPossibleImmaginaryPart(scanner[1])) {
+            if(this.checkPossibleRealPart(scanner[0])){
+                if(this.checkPossibleImmaginaryPart(scanner[1])){
                     return complex_number;
-                } else {
+                }else{
                     return invalid_insert;
                 }
             }
-            if (this.checkPossibleImmaginaryPart(scanner[0])) {
-                if (this.checkPossibleRealPart(scanner[1])) {
+            if(this.checkPossibleImmaginaryPart(scanner[0])){
+                if(this.checkPossibleRealPart(scanner[1])){
                     return complex_number;
-                } else {
+                }else{
                     return invalid_insert;
                 }
             }
@@ -130,20 +136,20 @@ public class CheckerString {
      * @return COMPLEX_NUMBER se è un numero complesso, se è un numero reale o
      * se è un numero immaginario, INVALID se l'inserimento non è valido.
      */
-    public String checkerString(String text) {
-        if (text.length() == 0) {
+    public String checkString(String text){
+        if(text.length() == 0){
             return invalid_insert;
         }
         text = clearString(text);
-        if (text.startsWith("+") || text.startsWith("-")) {
+        if(text.startsWith("+") || text.startsWith("-")){
             return invalid_insert;
         }
         String return_value = checkComplexNumber(text);
-        if (!(return_value.equals(continue_checking))) {
+        if(!(return_value.equals(continue_checking))){
             return return_value;
         }
         return_value = checkPossibleOneNumber(text);
-        if (!(return_value.equals(continue_checking))) {
+        if(!(return_value.equals(continue_checking))){
             return return_value;
         }
         return invalid_insert;
@@ -153,7 +159,7 @@ public class CheckerString {
      * @param text
      * @return La stringa modificata.
      */
-    public char checkFirstCharacter(String text) {
+    public char checkFirstCharacter(String text){
         text = text.replaceAll("\\n", "");
         if (text.startsWith("+") || text.startsWith("-")) {
             StringBuilder sb = new StringBuilder(text);
@@ -166,22 +172,22 @@ public class CheckerString {
      * @param text
      * @return ComplexNumber creato.
      */
-    public ComplexNumber createFromComplexNumber(String text) {
+    public ComplexNumber createFromComplexNumber(String text){
         String replaceAll = text.replaceAll(" ", "");
         char operator1 = this.checkFirstCharacter(text);
         text = this.clearString(replaceAll);
         char operator2 = ' ';
-        if (text.contains("+")) {
+        if(text.contains("+")){
             operator2 = '+';
         }
-        if (text.contains("-")) {
+        if(text.contains("-")){
             operator2 = '-';
         }
         String[] scanner = text.split("\\+|\\-");
-        if (scanner[0].contains("j")) {
+        if(scanner[0].contains("j")){
             String image = scanner[0].replace("j", "");
             return new ComplexNumber(Double.parseDouble(operator2 + scanner[1]), Double.parseDouble(operator1 + image));
-        } else {
+        }else{
             double real = Double.parseDouble(operator1 + scanner[0]);
             String image = scanner[1].replace("j", "");
             return new ComplexNumber(real, Double.parseDouble(operator2 + image));
@@ -192,14 +198,14 @@ public class CheckerString {
      * @param text
      * @return ComplexNumber Creato.
      */
-    public ComplexNumber createFromSingleNumber(String text) {
+    public ComplexNumber createFromSingleNumber(String text){
         String replaceAll = text.replaceAll(" ", "");
         char operator1 = this.checkFirstCharacter(text);
         text = this.clearString(text);
-        if (text.contains("j")) {
+        if(text.contains("j")){
             String image = text.replace("j", "");
             return new ComplexNumber(0, Double.parseDouble(operator1 + image));
-        } else {
+        }else{
             double real = Double.parseDouble(operator1 + text);
             return new ComplexNumber(real, 0);
         }
