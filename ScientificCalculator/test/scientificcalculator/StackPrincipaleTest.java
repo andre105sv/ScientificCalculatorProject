@@ -66,6 +66,10 @@ public class StackPrincipaleTest {
         instance.insertNumber(new ComplexNumber(5,5));
         int result = instance.getSize();
         assertEquals(expResult, result);
+        expResult = 0;
+        instance.removeLastNumber();
+        result = instance.getSize();
+        assertEquals(expResult,result);
     }
 
     /**
