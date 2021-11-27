@@ -13,6 +13,6 @@ package scientificcalculator;
 public interface ArithmeticalOperations{
 
     //public ComplexNumber[] execute(ComplexNumber[]);
-    public ComplexNumber execute();
+    public ComplexNumber execute() throws Exception;
 
 }

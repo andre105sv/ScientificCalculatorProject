@@ -11,26 +11,26 @@ package scientificcalculator;
  * @author Andrea
  */
 public class OperationFactory{
-
-    private ComplexNumber firstOp;
-    private ComplexNumber secondOp;
     
-    public OperationFactory(ComplexNumber c1, ComplexNumber c2){
-        this.firstOp = c1;
-        this.secondOp = c2;
-    }
-
-    public ArithmeticalOperations getOperation(String operation){
+    public ArithmeticalOperations getOperation(String operation, ComplexNumber firstOp, ComplexNumber secondOp){
         if(operation == null){
             return null;
         }
         else if(operation.equalsIgnoreCase("ADDITION")){
             return new Addition(firstOp, secondOp);
         }
+        else if(operation.equalsIgnoreCase("SUBTRACTION")){
+            return new Subtraction(firstOp, secondOp);
+        }
+        else if(operation.equalsIgnoreCase("MULTIPLICATION")){
+            return new Multiplication(firstOp, secondOp);
+        }
+        else if(operation.equalsIgnoreCase("DIVISION")){
+            return new Division(firstOp, secondOp);
+        }
         else{
             return null;
         }
     }
-
 
 }

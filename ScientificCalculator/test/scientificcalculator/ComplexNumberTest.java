@@ -20,7 +20,7 @@ public class ComplexNumberTest {
      */
     @Test
     public void testCartesianNotation(){
-        ComplexNumber c1 = new ComplexNumber(+63, -12); 
+        ComplexNumber c1 = new ComplexNumber(+63, -12);
         assertEquals("63.0 -12.0j", c1.toString());
         ComplexNumber c2 = new ComplexNumber(42, -35); 
         assertEquals("42.0 -35.0j", c2.toString());
