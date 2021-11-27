@@ -23,7 +23,15 @@ public class ScientificCalculator {
     public static void main(String[] args) {
         
         System.out.println("Progetto: ScientificCalculator");
-        System.out.println("Versione: 1.3");
+        System.out.println("Versione: 1.4");
+        
+        ComplexNumber a = new ComplexNumber(-32, +7);
+        ComplexNumber b = new ComplexNumber(+2.5, -0.11);
+        OperationFactory factory = new OperationFactory(a, b);
+
+        ArithmeticalOperations addition = factory.getOperation("ADDITION");
+        ComplexNumber res = addition.execute();
+        System.out.println(res.toString());
 
     }
 
