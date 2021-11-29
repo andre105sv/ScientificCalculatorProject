@@ -114,6 +114,22 @@ public class FXMLDocumentController implements Initializable {
                 stackPrincipale.insertNumber(result);
             }
         }
+        if(text.toLowerCase().equals("swap")){
+            if(stackPrincipale.getSize()>1){
+                stackPrincipale.Swap();
+            }
+        }
+        if(text.toLowerCase().equals("over")){
+            if(stackPrincipale.getSize()>1){
+                stackPrincipale.Over();
+            }
+        }
+        
+        if(text.toLowerCase().equals("dup")){
+            if(stackPrincipale.getSize()>0){
+                stackPrincipale.Dup();
+            }
+        }
         obList.clear(); 
         obList.addAll(stackPrincipale.getFirst12Elements());
         elementiStack.maxHeight(12);

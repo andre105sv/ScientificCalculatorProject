@@ -69,5 +69,24 @@ public class StackPrincipale{
             return this.stack;
         }
     }
+    
+    public void Swap(){
+        ComplexNumber tmp1 = this.removeLastNumber();
+        ComplexNumber tmp2 = this.removeLastNumber();
+        this.insertNumber(tmp1);
+        this.insertNumber(tmp2);
+    }
+    public void Over(){
+        ComplexNumber tmp1 = this.removeLastNumber();
+        ComplexNumber tmp2 = this.removeLastNumber();
+        this.insertNumber(tmp2);
+        this.insertNumber(tmp1);
+        this.insertNumber(tmp2);
+    }
+    public void Dup(){
+        ComplexNumber tmp1 = this.removeLastNumber();
+        this.insertNumber(tmp1);
+        this.insertNumber(tmp1);
+    }
 
 }

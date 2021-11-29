@@ -22,10 +22,22 @@ public class StackPrincipaleTest{
 
     StackPrincipale instance;
     private final int FIRST_NUMBERS = 2;
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
     
     @Before
     public void setUp(){
         instance = new StackPrincipale();   
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
 
     /**
@@ -84,6 +96,59 @@ public class StackPrincipaleTest{
             assertEquals(expResult.get(i).getRealPart(), result.get(i).getRealPart(), 0.0001);
             assertEquals(expResult.get(i).getImmPart(), result.get(i).getImmPart(), 0.0001);
         }
+    }
+
+    /**
+     * Test of Swap method, of class StackPrincipale.
+     */
+    @Test
+    public void testSwap() {
+        System.out.println("Swap");
+        StackPrincipale instance = new StackPrincipale();
+        instance.insertNumber(new ComplexNumber(4,5));
+        instance.insertNumber(new ComplexNumber(5,4));
+        instance.Swap();
+        ComplexNumber z = new ComplexNumber(5,4);
+        ComplexNumber last = instance.removeLastNumber();
+        ComplexNumber second_last = instance.removeLastNumber();
+        assertEquals(z.getRealPart(), second_last.getRealPart(),0.001);
+        assertEquals(z.getImmPart(), second_last.getImmPart(),0.001);
+        
+    }
+
+    /**
+     * Test of Over method, of class StackPrincipale.
+     */
+    @Test
+    public void testOver() {
+        System.out.println("Over");
+        StackPrincipale instance = new StackPrincipale();
+        instance.insertNumber(new ComplexNumber(4,5));
+        instance.insertNumber(new ComplexNumber(5,4));
+        instance.Over();
+        ComplexNumber last = instance.removeLastNumber();
+        ComplexNumber z = new ComplexNumber(4,5);
+        assertEquals(z.getRealPart(), last.getRealPart(),0.001);
+        assertEquals(z.getImmPart(), last.getImmPart(),0.001);
+        
+    }
+
+    /**
+     * Test of Dup method, of class StackPrincipale.
+     */
+    @Test
+    public void testDup() {
+        System.out.println("Dup");
+        StackPrincipale instance = new StackPrincipale();
+        ComplexNumber z = new ComplexNumber(4,5);
+        instance.insertNumber(z);
+        instance.Dup();
+        ComplexNumber last = instance.removeLastNumber();
+        ComplexNumber second_last = instance.removeLastNumber();
+        assertEquals(z.getRealPart(), last.getRealPart(),0.001);
+        assertEquals(z.getImmPart(), last.getImmPart(),0.001);
+        assertEquals(z.getRealPart(), second_last.getRealPart(),0.001);
+        assertEquals(z.getImmPart(), second_last.getImmPart(),0.001);
     }
     
 }
