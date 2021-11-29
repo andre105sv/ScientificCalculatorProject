@@ -59,7 +59,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void inserimento(ActionEvent event) throws Exception{
         String text = input.getText();
-        CheckerString checker = new CheckerString();
+        CheckerString checker = new CheckerString(DECIMAL_NUMBERS);
         OperationFactory factory = new OperationFactory();
         String risultato_check = checker.checkString(text);
         ComplexNumber z;
@@ -74,35 +74,35 @@ public class FXMLDocumentController implements Initializable {
         if(text.equals("+")){
             if(stackPrincipale.getSize() > 1){
                 ArithmeticalOperations addition = factory.getOperation("ADDITION", stackPrincipale.removeLastNumber(), stackPrincipale.removeLastNumber(), DECIMAL_NUMBERS);
-                ComplexNumber result = addition.execute();
-                stackPrincipale.insertNumber(result);
+                ComplexNumber[] result = addition.execute();
+                stackPrincipale.insertNumber(result[0]);
             }
         }
         if(text.equals("-")){
             if(stackPrincipale.getSize() > 1){
                 ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stackPrincipale.removeLastNumber(), stackPrincipale.removeLastNumber(), DECIMAL_NUMBERS);
-                ComplexNumber result = subtraction.execute();
-                stackPrincipale.insertNumber(result);
+                ComplexNumber[] result = subtraction.execute();
+                stackPrincipale.insertNumber(result[0]);
             }
         }
         if(text.equals("*")){
             if(stackPrincipale.getSize() > 1){
                 ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", stackPrincipale.removeLastNumber(), stackPrincipale.removeLastNumber(), DECIMAL_NUMBERS);
-                ComplexNumber result = multiplication.execute();
-                stackPrincipale.insertNumber(result);
+                ComplexNumber[] result = multiplication.execute();
+                stackPrincipale.insertNumber(result[0]);
             }
         }
         if(text.equals("/")){
             if(stackPrincipale.getSize() > 1){
                 ArithmeticalOperations division = factory.getOperation("DIVISION", stackPrincipale.removeLastNumber(), stackPrincipale.removeLastNumber(), DECIMAL_NUMBERS);
-                ComplexNumber result = division.execute();
-                stackPrincipale.insertNumber(result);
+                ComplexNumber[] result = division.execute();
+                stackPrincipale.insertNumber(result[0]);
             }
         }
         if(text.equals("sqrt")){
             if(stackPrincipale.getSize() > 0){
                 ArithmeticalOperations squareRoot = factory.getOperation("SQUARE_ROOT", stackPrincipale.removeLastNumber(), DECIMAL_NUMBERS);
-                ComplexNumber[] result = squareRoot.executeSqrt(); 
+                ComplexNumber[] result = squareRoot.execute(); 
                 for(ComplexNumber c : result)
                     stackPrincipale.insertNumber(c);
             }
@@ -110,8 +110,8 @@ public class FXMLDocumentController implements Initializable {
         if(text.equals("+-")){
             if(stackPrincipale.getSize() > 0){
                 ArithmeticalOperations reverse = factory.getOperation("REVERSAL_SIGN", stackPrincipale.removeLastNumber(), DECIMAL_NUMBERS);
-                ComplexNumber result = reverse.execute();
-                stackPrincipale.insertNumber(result);
+                ComplexNumber[] result = reverse.execute();
+                stackPrincipale.insertNumber(result[0]);
             }
         }
         if(text.toLowerCase().equals("swap")){

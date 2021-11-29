@@ -23,10 +23,22 @@ public class CheckerStringTest{
     private final String invalid_insert = "INVALID";
     private final String continue_checking = "CHECKING";
     private CheckerString checker;
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
     
     @Before
     public void setUp() {
-         checker = new CheckerString();
+         checker = new CheckerString(1000);
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
 
     /**
@@ -164,6 +176,10 @@ public class CheckerStringTest{
         expResult = single_number;
         result = checker.checkString(text);
         assertEquals(expResult, result);
+        text = "j";
+        expResult = single_number;
+        result = checker.checkString(text);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -173,12 +189,12 @@ public class CheckerStringTest{
     public void testCheckFirstCharacter() {
         System.out.println("checkFirstCharacter");
         String text = "+2";
-        CheckerString instance = new CheckerString();
+        
         char expResult = '+';
-        char result = instance.checkFirstCharacter(text);
+        char result = checker.checkFirstCharacter(text);
         assertEquals(expResult, result);
         text = "-2";
-        result = instance.checkFirstCharacter(text);
+        result = checker.checkFirstCharacter(text);
         expResult = '-';
         assertEquals(expResult, result);
     }
@@ -190,9 +206,9 @@ public class CheckerStringTest{
     public void testCreateFromComplexNumber() {
         System.out.println("createFromComplexNumber");
         String text = "4+5j";
-        CheckerString instance = new CheckerString();
+        
         ComplexNumber expResult = new ComplexNumber(4,5);
-        ComplexNumber result = instance.createFromComplexNumber(text);
+        ComplexNumber result = checker.createFromComplexNumber(text);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.001);
         assertEquals(expResult.getImmPart(), result.getImmPart(),0.001);
     }
@@ -204,14 +220,48 @@ public class CheckerStringTest{
     public void testCreateFromSingleNumber() {
         System.out.println("createFromSingleNumber");
         String text = "4";
-        CheckerString instance = new CheckerString();
+        
         ComplexNumber expResult = new ComplexNumber(4,0);
-        ComplexNumber result = instance.createFromSingleNumber(text);
+        ComplexNumber result = checker.createFromSingleNumber(text);
         assertEquals(expResult.getRealPart(), result.getRealPart(),0.001);
         text = "5j";
         expResult = new ComplexNumber(0,5);
-        result = instance.createFromSingleNumber(text);
+        result = checker.createFromSingleNumber(text);
+        assertEquals(expResult.getImmPart(), result.getImmPart(),0.001);
+        text = "j";
+        expResult = new ComplexNumber(0,1);
+        result = checker.createFromSingleNumber(text);
         assertEquals(expResult.getImmPart(), result.getImmPart(),0.001);
     }
 
+    /**
+     * Test of checkString method, of class CheckerString.
+     */
+    @Test
+    public void testCheckString(){
+        System.out.println("checkString");
+        String text = "";
+        String expResult = invalid_insert;
+        String result = checker.checkString(text);
+        assertEquals(expResult, result);
+        
+        text = "+2";
+        result = checker.checkString(text);
+        expResult = single_number;
+        assertEquals(expResult, result);
+        
+        text = "2+3j";
+        result = checker.checkString(text);
+        expResult = complex_number;
+        assertEquals(expResult, result);
+        
+        
+        text = "3";
+        result = checker.checkString(text);
+        expResult = single_number;
+        assertEquals(expResult, result);
+        
+    }
+
+    
 }

@@ -15,12 +15,14 @@ public class CheckerString {
     private String single_number;
     private String invalid_insert;
     private String continue_checking;
-
-    public CheckerString() {
+    private double decimals;
+    
+    public CheckerString(double decimals) {
         this.complex_number = "COMPLEX__NUMBER";
         this.single_number = "SINGLENUMBER";
         this.invalid_insert = "INVALID";
         this.continue_checking = "CHECKING";
+        this.decimals = decimals;
     }
     
     /**
@@ -152,6 +154,8 @@ public class CheckerString {
         if(!(return_value.equals(continue_checking))){
             return return_value;
         }
+        if(text.equals("j"))
+            return single_number;
         return invalid_insert;
     }
 
@@ -189,12 +193,12 @@ public class CheckerString {
         String[] scanner = text.split("\\+|\\-");
         if(scanner[0].contains("j")){
             String image = scanner[0].replace("j", "");
-            return new ComplexNumber(Double.parseDouble(operator2 + scanner[1]), Double.parseDouble(operator1 + image));
+            return new ComplexNumber(Math.round(Double.parseDouble(operator2 + scanner[1])*decimals)/decimals, Math.round(Double.parseDouble(operator1 + image)*decimals)/decimals);
         }
         else{
             double real = Double.parseDouble(operator1 + scanner[0]);
             String image = scanner[1].replace("j", "");
-            return new ComplexNumber(real, Double.parseDouble(operator2 + image));
+            return new ComplexNumber(Math.round(real*decimals)/decimals, Math.round(Double.parseDouble(operator2 + image)*decimals)/decimals);
         }
     }
 
@@ -208,13 +212,15 @@ public class CheckerString {
         String replaceAll = text.replaceAll(" ", "");
         char operator1 = this.checkFirstCharacter(text);
         text = this.clearString(text);
+        if(text.equals("j"))
+            return new ComplexNumber(0,1);
         if(text.contains("j")){
             String image = text.replace("j", "");
-            return new ComplexNumber(0, Double.parseDouble(operator1 + image));
+            return new ComplexNumber(0, Math.round(Double.parseDouble(operator1 + image)*decimals)/decimals);
         }
         else{
             double real = Double.parseDouble(operator1 + text);
-            return new ComplexNumber(real, 0);
+            return new ComplexNumber(Math.round(real*decimals)/decimals, 0);
         }
     }
 }

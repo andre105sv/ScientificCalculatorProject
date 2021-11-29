@@ -30,15 +30,12 @@ public class Subtraction implements ArithmeticalOperations{
     *           tra due numeri complessi o reali
     */
     @Override
-    public ComplexNumber execute() throws Exception{
-        double realSum = ((firstOp.getRealPart() - secondOp.getRealPart()) * decimals) / decimals;
-        double immSum = ((firstOp.getImmPart() - secondOp.getImmPart()) * decimals) / decimals;
-        return new ComplexNumber(realSum, immSum);
+    public ComplexNumber[] execute() throws Exception{
+        double realSum = Math.round((firstOp.getRealPart() - secondOp.getRealPart()) * decimals) / decimals;
+        double immSum = Math.round((firstOp.getImmPart() - secondOp.getImmPart()) * decimals) / decimals;
+        return new ComplexNumber[]{new ComplexNumber(realSum, immSum)};
     }
 
-    @Override
-    public ComplexNumber[] executeSqrt() throws Exception{
-        return null;
-    }
+    
 
 }

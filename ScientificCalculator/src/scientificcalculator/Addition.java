@@ -30,15 +30,12 @@ public class Addition implements ArithmeticalOperations{
     *           due numeri complessi o reali
     */
     @Override
-    public ComplexNumber execute() throws Exception{
-        double realSum = ((firstOp.getRealPart() + secondOp.getRealPart()) * decimals) / decimals;
-        double immSum = ((firstOp.getImmPart() + secondOp.getImmPart()) * decimals) / decimals;
-        return new ComplexNumber(realSum, immSum);
+    public ComplexNumber[] execute() throws Exception{
+        double realSum = firstOp.getRealPart() + secondOp.getRealPart();
+        double immSum = firstOp.getImmPart() + secondOp.getImmPart();
+        return new ComplexNumber[]{new ComplexNumber(Math.round(realSum* decimals) / decimals, Math.round(immSum * decimals) / decimals)};
     }
 
-    @Override
-    public ComplexNumber[] executeSqrt() throws Exception{
-        return null;
-    }
+   
 
 }

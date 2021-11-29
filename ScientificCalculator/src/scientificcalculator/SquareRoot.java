@@ -29,12 +29,12 @@ public class SquareRoot implements ArithmeticalOperations{
     *           un numero complesso o la radice quadrata di un numero reale
     */
     @Override
-    public ComplexNumber[] executeSqrt() throws Exception{
+    public ComplexNumber[] execute() throws Exception{
         double modulo = Math.sqrt(Math.pow(operand.getRealPart(), 2) + Math.pow(operand.getImmPart(), 2));
         double radModulo = Math.sqrt(modulo);
         double fase = 0.0;
         if((operand.getRealPart() > 0) && (operand.getImmPart() == 0)){
-            return new ComplexNumber[]{new ComplexNumber(Math.sqrt(Math.abs(operand.getRealPart())),0)};
+            return new ComplexNumber[]{new ComplexNumber(Math.round(Math.sqrt(Math.abs(operand.getRealPart()))*decimals)/decimals,0)};
         }
         if((operand.getRealPart() == 0) && (operand.getImmPart() > 0)){
             fase = 3.14 / 2;
@@ -63,9 +63,5 @@ public class SquareRoot implements ArithmeticalOperations{
         return s;
     }
 
-    @Override
-    public ComplexNumber execute() throws Exception{
-        return null;
-    }
-
+    
 }

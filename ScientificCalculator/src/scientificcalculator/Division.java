@@ -30,18 +30,17 @@ public class Division implements ArithmeticalOperations{
     *           due numeri complessi o reali
     */
     @Override
-    public ComplexNumber execute() throws Exception{
+    public ComplexNumber[] execute() throws Exception{
         if((secondOp.getRealPart() == 0) && (secondOp.getImmPart() == 0)){
             throw new Exception("Divisione per 0 non amessa");
         }
-        ComplexNumber c = new ComplexNumber((((firstOp.getRealPart() * secondOp.getRealPart() + firstOp.getImmPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(), 2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals, (((firstOp.getImmPart() * secondOp.getRealPart() - firstOp.getRealPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(),2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals);
-        return c;
+        double quoz = Math.round(((firstOp.getRealPart() * secondOp.getRealPart() + firstOp.getImmPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(), 2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals;
+        double div =  Math.round(((firstOp.getImmPart() * secondOp.getRealPart() - firstOp.getRealPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(),2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals;
+        
+        return new ComplexNumber[]{new ComplexNumber(quoz, div)};
     }
 
-    @Override
-    public ComplexNumber[] executeSqrt() throws Exception{
-        return null;
-    }
+   
 
 
 }

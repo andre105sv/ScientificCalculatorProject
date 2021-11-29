@@ -28,13 +28,10 @@ public class ReversalSign implements ArithmeticalOperations{
     *           segno di un numero complesso o reale
     */
     @Override
-    public ComplexNumber execute() throws Exception{
-        return new ComplexNumber(((-operand.getRealPart()) * decimals) / decimals, ((-operand.getImmPart()) * decimals) / decimals);
+    public ComplexNumber[] execute() throws Exception{
+        return new ComplexNumber[]{new ComplexNumber(Math.round((-operand.getRealPart()) * decimals) / decimals, Math.round((-operand.getImmPart()) * decimals) / decimals)};
     }
 
-    @Override
-    public ComplexNumber[] executeSqrt() throws Exception{
-        return null;
-    }
+    
 
 }

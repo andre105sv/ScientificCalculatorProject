@@ -30,14 +30,9 @@ public class Multiplication implements ArithmeticalOperations{
     *           due numeri complessi o reali
     */
     @Override
-    public ComplexNumber execute() throws Exception{
-        ComplexNumber c = new ComplexNumber(((firstOp.getRealPart() * secondOp.getRealPart() - firstOp.getImmPart() * secondOp.getImmPart()) * decimals) / decimals, ((firstOp.getRealPart() * secondOp.getImmPart() + firstOp.getImmPart() * secondOp.getRealPart()) * decimals) / decimals);
-        return c;
+    public ComplexNumber[] execute() throws Exception{
+        double op1 = Math.round((firstOp.getRealPart() * secondOp.getRealPart() - firstOp.getImmPart() * secondOp.getImmPart()) * decimals) / decimals;
+        double op2 = Math.round((firstOp.getRealPart() * secondOp.getImmPart() + firstOp.getImmPart() * secondOp.getRealPart()) * decimals) / decimals;
+        return new ComplexNumber[]{new ComplexNumber(op1, op2)};
     }
-
-    @Override
-    public ComplexNumber[] executeSqrt() throws Exception{
-        return null;
-    }
-
 }

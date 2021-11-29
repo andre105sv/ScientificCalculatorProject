@@ -34,7 +34,7 @@ public class SquareRootTest{
         expResult[0] = new ComplexNumber(1.1583, 2.3166);
         expResult[1] = new ComplexNumber(-2.2054, -1.3581);
         ArithmeticalOperations sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
-        ComplexNumber[] result = sqrt.executeSqrt();
+        ComplexNumber[] result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), 0.001);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), 0.001);
         assertEquals(expResult[1].getRealPart(), result[1].getRealPart(), 0.001);
