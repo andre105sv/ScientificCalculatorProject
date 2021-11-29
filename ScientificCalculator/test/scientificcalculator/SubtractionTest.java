@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
  */
 public class SubtractionTest{
 
+    private double DECIMAL_NUMBERS = 1000;
+    private double PRECISION = 0.0001;
     private OperationFactory factory;
 
     @Before
@@ -30,10 +32,10 @@ public class SubtractionTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-34.5 , +7.11);     
-        ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", a, b, 1000);
+        ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         ComplexNumber result[] = subtraction.execute();
-        assertEquals(expResult.getRealPart(), result[0].getRealPart(), 0.0001);
-        assertEquals(expResult.getImmPart(), result[0].getImmPart(), 0.0001);
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
     }
 
 }

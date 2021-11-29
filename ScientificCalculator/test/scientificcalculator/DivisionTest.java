@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
  */
 public class DivisionTest{
 
+    private double DECIMAL_NUMBERS = 1000;
+    private double PRECISION = 0.0001;
     private OperationFactory factory;
 
     @Before
@@ -30,10 +32,10 @@ public class DivisionTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-12.8982 , +2.2324);     
-        ArithmeticalOperations division = factory.getOperation("DIVISION", a, b, 1000);
+        ArithmeticalOperations division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         ComplexNumber result[] = division.execute();
-        assertEquals(expResult.getRealPart(), result[0].getRealPart(), 0.001);
-        assertEquals(expResult.getImmPart(), result[0].getImmPart(), 0.001);
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
     }
 
 }

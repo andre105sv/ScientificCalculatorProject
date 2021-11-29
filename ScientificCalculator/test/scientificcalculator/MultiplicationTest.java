@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
  */
 public class MultiplicationTest{
 
+    private double DECIMAL_NUMBERS = 1000;
+    private double PRECISION = 0.0001;
     private OperationFactory factory;
 
     @Before
@@ -30,10 +32,10 @@ public class MultiplicationTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-79.23 , +21.02);     
-        ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", a, b, 1000);
+        ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         ComplexNumber result[] = multiplication.execute();
-        assertEquals(expResult.getRealPart(), result[0].getRealPart(), 0.0001);
-        assertEquals(expResult.getImmPart(), result[0].getImmPart(), 0.0001);
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
     }
 
 }
