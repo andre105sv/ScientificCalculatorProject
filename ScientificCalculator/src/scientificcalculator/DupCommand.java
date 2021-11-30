@@ -25,7 +25,7 @@ public class DupCommand extends StackPrincipaleCommand{
     */
     @Override
     public ComplexNumber perform() {
-        stackPrincipale.Dup();
+        stackPrincipale.dup();
         return null;
     }
     

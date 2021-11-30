@@ -25,7 +25,7 @@ public class OverCommand extends StackPrincipaleCommand{
     */
     @Override
     public ComplexNumber perform() {
-        this.stackPrincipale.Over();
+        this.stackPrincipale.over();
         return null;
     }
     

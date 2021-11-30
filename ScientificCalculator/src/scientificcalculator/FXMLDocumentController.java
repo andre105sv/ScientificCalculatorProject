@@ -125,30 +125,19 @@ public class FXMLDocumentController implements Initializable {
             }
         }
         if(text.toLowerCase().equals("swap")){
-            if(stackPrincipale.getSize()>1){
-                //stackPrincipale.Swap();
                 swapForStackPrincipale.perform();
-            }
         }
         if(text.toLowerCase().equals("over")){
-            if(stackPrincipale.getSize()>1){
-                //stackPrincipale.Over();
-                overForStackPrincipale.perform();
-            }
+            overForStackPrincipale.perform();
         }
         
         if(text.toLowerCase().equals("dup")){
-            if(stackPrincipale.getSize()>0){
-                //stackPrincipale.Dup();
-                dupForStackPrincipale.perform();
-            }
+            dupForStackPrincipale.perform();
         }
         if(text.toLowerCase().equals("clear")){
-            //stackPrincipale.clear();
             clearForStackPrincipale.perform();
         }
         if(text.toLowerCase().equals("drop")){
-            //stackPrincipale.removeLastNumber();
             dropForStackPrincipale.perform();
         }
         obList.clear(); 

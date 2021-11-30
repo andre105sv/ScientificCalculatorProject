@@ -111,7 +111,7 @@ public class StackPrincipaleTest{
         //StackPrincipale instance = new StackPrincipale();
         instance.insertNumber(new ComplexNumber(4,5));
         instance.insertNumber(new ComplexNumber(5,4));
-        instance.Swap();
+        instance.swap();
         ComplexNumber z = new ComplexNumber(5,4);
         ComplexNumber last = instance.removeLastNumber();
         ComplexNumber second_last = instance.removeLastNumber();
@@ -129,7 +129,7 @@ public class StackPrincipaleTest{
         //StackPrincipale instance = new StackPrincipale();
         instance.insertNumber(new ComplexNumber(4,5));
         instance.insertNumber(new ComplexNumber(5,4));
-        instance.Over();
+        instance.over();
         ComplexNumber last = instance.removeLastNumber();
         ComplexNumber z = new ComplexNumber(4,5);
         assertEquals(z.getRealPart(), last.getRealPart(),0.001);
@@ -146,7 +146,7 @@ public class StackPrincipaleTest{
         //StackPrincipale instance = new StackPrincipale();
         ComplexNumber z = new ComplexNumber(4,5);
         instance.insertNumber(z);
-        instance.Dup();
+        instance.dup();
         ComplexNumber last = instance.removeLastNumber();
         ComplexNumber second_last = instance.removeLastNumber();
         assertEquals(z.getRealPart(), last.getRealPart(),0.001);

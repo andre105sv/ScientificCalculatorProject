@@ -25,7 +25,7 @@ public class SwapCommand extends StackPrincipaleCommand{
     */
     @Override
     public ComplexNumber perform() {
-        this.stackPrincipale.Swap();
+        this.stackPrincipale.swap();
         return null;
     }
     

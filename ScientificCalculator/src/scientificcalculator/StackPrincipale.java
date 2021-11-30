@@ -70,23 +70,46 @@ public class StackPrincipale{
         }
     }
     
-    public void Swap(){
-        ComplexNumber tmp1 = this.removeLastNumber();
-        ComplexNumber tmp2 = this.removeLastNumber();
-        this.insertNumber(tmp1);
-        this.insertNumber(tmp2);
+     /**
+    * Scambia di posto gli ultimi due elementi inseriti nello stack.
+    * Se lo stack ha meno di 2 elementi non esegue nessuna operazione
+    * @return   void
+    */
+    public void swap(){
+        if(this.getSize() > 1){
+            ComplexNumber tmp1 = this.removeLastNumber();
+            ComplexNumber tmp2 = this.removeLastNumber();
+            this.insertNumber(tmp1);
+            this.insertNumber(tmp2);
+        }
     }
-    public void Over(){
-        ComplexNumber tmp1 = this.removeLastNumber();
-        ComplexNumber tmp2 = this.removeLastNumber();
-        this.insertNumber(tmp2);
-        this.insertNumber(tmp1);
-        this.insertNumber(tmp2);
+    
+     /**
+    * Inserisce nello stack il penultimo elemento precedentemente inserito.
+    * Se lo stack ha meno di 2 element1 non esegue nessuna operazione
+    * @return   void
+    */
+    public void over(){
+        if(this.getSize() > 1){
+            ComplexNumber tmp1 = this.removeLastNumber();
+            ComplexNumber tmp2 = this.removeLastNumber();
+            this.insertNumber(tmp2);
+            this.insertNumber(tmp1);
+            this.insertNumber(tmp2);
+        }
     }
-    public void Dup(){
-        ComplexNumber tmp1 = this.removeLastNumber();
-        this.insertNumber(tmp1);
-        this.insertNumber(tmp1);
+    
+     /**
+    * Reinserisce l'ultimo elemento inserito nello stack.
+    * Se lo stack ha meno di 1 elemento non esegue nessuna operazione
+    * @return   void
+    */
+    public void dup(){
+        if(this.getSize() > 0){
+            ComplexNumber tmp1 = this.removeLastNumber();
+            this.insertNumber(tmp1);
+            this.insertNumber(tmp1);
+        }
     }
 
     /**
