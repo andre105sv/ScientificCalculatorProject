@@ -44,7 +44,8 @@ public class FXMLDocumentController implements Initializable {
     private DropCommand dropForStackPrincipale; //oggetto che esegue tutte le drop su stackPrincipale
     private ClearCommand clearForStackPrincipale;// -- tutte le clear
     private DupCommand dupForStackPrincipale;// -- tutte le dup
-    
+    private SwapCommand swapForStackPrincipale;// -- tutte le swap
+    private OverCommand overForStackPrincipale;// -- tutte le over
 
     /**
      * Initializes the controller class.
@@ -59,6 +60,8 @@ public class FXMLDocumentController implements Initializable {
         dropForStackPrincipale = new DropCommand(stackPrincipale);
         clearForStackPrincipale = new ClearCommand(stackPrincipale);
         dupForStackPrincipale = new DupCommand(stackPrincipale);
+        swapForStackPrincipale = new SwapCommand(stackPrincipale);
+        overForStackPrincipale = new OverCommand(stackPrincipale);
         obList.addAll(stackPrincipale.getFirst12Elements());
         elementiStack.setItems(obList);  
     }    
@@ -123,12 +126,14 @@ public class FXMLDocumentController implements Initializable {
         }
         if(text.toLowerCase().equals("swap")){
             if(stackPrincipale.getSize()>1){
-                stackPrincipale.Swap();
+                //stackPrincipale.Swap();
+                swapForStackPrincipale.perform();
             }
         }
         if(text.toLowerCase().equals("over")){
             if(stackPrincipale.getSize()>1){
-                stackPrincipale.Over();
+                //stackPrincipale.Over();
+                overForStackPrincipale.perform();
             }
         }
         
