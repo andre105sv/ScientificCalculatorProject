@@ -78,6 +78,10 @@ public class StackPrincipaleTest{
         instance.insertNumber(expResult);
         ComplexNumber result = instance.removeLastNumber();
         assertEquals(expResult, result);
+        instance.insertNumber(result);
+        int size = instance.getSize();
+        instance.removeLastNumber();
+        assertEquals(size - 1, instance.getSize());
     }
 
     /**
@@ -104,7 +108,7 @@ public class StackPrincipaleTest{
     @Test
     public void testSwap() {
         System.out.println("Swap");
-        StackPrincipale instance = new StackPrincipale();
+        //StackPrincipale instance = new StackPrincipale();
         instance.insertNumber(new ComplexNumber(4,5));
         instance.insertNumber(new ComplexNumber(5,4));
         instance.Swap();
@@ -122,7 +126,7 @@ public class StackPrincipaleTest{
     @Test
     public void testOver() {
         System.out.println("Over");
-        StackPrincipale instance = new StackPrincipale();
+        //StackPrincipale instance = new StackPrincipale();
         instance.insertNumber(new ComplexNumber(4,5));
         instance.insertNumber(new ComplexNumber(5,4));
         instance.Over();
@@ -139,7 +143,7 @@ public class StackPrincipaleTest{
     @Test
     public void testDup() {
         System.out.println("Dup");
-        StackPrincipale instance = new StackPrincipale();
+        //StackPrincipale instance = new StackPrincipale();
         ComplexNumber z = new ComplexNumber(4,5);
         instance.insertNumber(z);
         instance.Dup();
@@ -149,6 +153,22 @@ public class StackPrincipaleTest{
         assertEquals(z.getImmPart(), last.getImmPart(),0.001);
         assertEquals(z.getRealPart(), second_last.getRealPart(),0.001);
         assertEquals(z.getImmPart(), second_last.getImmPart(),0.001);
+    }
+
+    /**
+     * Test of clear method, of class StackPrincipale.
+     */
+    @Test
+    public void testClear() {
+        System.out.println("clear");
+        //StackPrincipale instance = new StackPrincipale();
+        instance.insertNumber(new ComplexNumber(2.0, 3.6));
+        instance.insertNumber(new ComplexNumber(2.4, 3.2));
+        instance.insertNumber(new ComplexNumber(2.8, 2.8));
+        instance.clear();
+        assertEquals(0,instance.getSize());
+        instance.clear();
+        assertEquals(0,instance.getSize());
     }
     
 }

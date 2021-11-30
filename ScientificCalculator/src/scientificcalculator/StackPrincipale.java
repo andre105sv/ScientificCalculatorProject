@@ -89,4 +89,14 @@ public class StackPrincipale{
         this.insertNumber(tmp1);
     }
 
+    /**
+    * Rimuove tutti gli elementi presenti nello stack.
+    * Lo stack sarà vuoto al termine dell'esecuzione del metodo
+    * @return   void
+    */
+    public void clear(){
+        this.stack.clear();
+        this.size = this.stack.size();
+    }
+
 }
