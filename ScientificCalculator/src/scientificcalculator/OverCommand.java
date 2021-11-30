@@ -10,7 +10,12 @@ package scientificcalculator;
  * @author anton
  */
 public class OverCommand extends StackPrincipaleCommand{
-
+    
+     /**
+    * Crea un oggetto della classe OverCommand, che permette di effettuare l'operazione di over sullo stack che gli viene passato.
+    * Setta l'attributo stackPrincipale 
+    * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
+    */
     public OverCommand(StackPrincipale stackPrincipale) {
         super(stackPrincipale);
     }

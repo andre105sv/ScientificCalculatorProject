@@ -11,6 +11,11 @@ package scientificcalculator;
  */
 public class DropCommand extends StackPrincipaleCommand{
 
+     /**
+    * Crea un oggetto della classe DropCommand, che permette di effettuare l'operazione di drop sullo stack che gli viene passato.
+    * Setta l'attributo stackPrincipale 
+    * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
+    */
     public DropCommand(StackPrincipale stackPrincipale) {
         super(stackPrincipale);
     }
