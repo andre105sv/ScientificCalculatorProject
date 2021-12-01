@@ -5,13 +5,12 @@
  */
 
 package scientificcalculator;
- 
+
 /**
  *
  * @author Andrea
  */
-public interface ArithmeticalOperations{
+public class CustomizedOperation{
 
-    public ComplexNumber[] execute() throws Exception;
-
+    
 }

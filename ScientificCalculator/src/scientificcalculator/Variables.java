@@ -12,9 +12,10 @@ import java.util.Objects;
 
 /**
  *
- * @author filso
+ * @author Andrea
  */
 public class Variables{
+
     private HashMap<Character,ComplexNumber> variablesMap;
 
     public Variables(){
@@ -33,8 +34,5 @@ public class Variables{
         }
         return s;
     }
-
-    
-
     
 }
