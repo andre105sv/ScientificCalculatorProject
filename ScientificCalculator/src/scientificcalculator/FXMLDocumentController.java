@@ -40,12 +40,18 @@ public class FXMLDocumentController implements Initializable {
     private Button inserisci;
     @FXML
     private ListView<ComplexNumber> elementiStack;
-    private ObservableList<ComplexNumber> obList = FXCollections.observableArrayList();
+    private ObservableList<ComplexNumber> obList; 
+    private ObservableList<String> obVariables;
     private DropCommand dropForStackPrincipale; //oggetto che esegue tutte le drop su stackPrincipale
     private ClearCommand clearForStackPrincipale;// -- tutte le clear
     private DupCommand dupForStackPrincipale;// -- tutte le dup
     private SwapCommand swapForStackPrincipale;// -- tutte le swap
-    private OverCommand overForStackPrincipale;// -- tutte le over
+    private OverCommand overForStackPrincipale;// -- tutte le overù
+    private Variables variables;
+    CheckerString checker;
+    OperationFactory factory;
+    @FXML
+    private ListView<String> listVariables;
 
     /**
      * Initializes the controller class.
@@ -53,6 +59,9 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         stackPrincipale = new StackPrincipale();
+        variables = new Variables();
+        checker = new CheckerString(DECIMAL_NUMBERS);
+        factory = new OperationFactory();
         input.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ENTER))
                 inserisci.fire();
@@ -62,15 +71,17 @@ public class FXMLDocumentController implements Initializable {
         dupForStackPrincipale = new DupCommand(stackPrincipale);
         swapForStackPrincipale = new SwapCommand(stackPrincipale);
         overForStackPrincipale = new OverCommand(stackPrincipale);
+        obList = FXCollections.observableArrayList();
+        obVariables = FXCollections.observableArrayList();
         obList.addAll(stackPrincipale.getFirst12Elements());
+        listVariables.setItems(obVariables);
         elementiStack.setItems(obList);  
     }    
 
     @FXML
     private void inserimento(ActionEvent event) throws Exception{
         String text = input.getText();
-        CheckerString checker = new CheckerString(DECIMAL_NUMBERS);
-        OperationFactory factory = new OperationFactory();
+        
         String risultato_check = checker.checkString(text);
         ComplexNumber z;
         if(risultato_check.equals("COMPLEX__NUMBER")){
@@ -140,6 +151,29 @@ public class FXMLDocumentController implements Initializable {
         if(text.toLowerCase().equals("drop")){
             dropForStackPrincipale.perform();
         }
+        
+        if(text.length() == 2 && text.charAt(0) == '>' && (int)text.charAt(1) > 96 && (int)text.charAt(1) < 123){
+            variables.getVariablesMap().put(text.charAt(1),stackPrincipale.removeLastNumber());
+        }
+        if(text.length() == 2 && text.charAt(0) == '<'){
+            stackPrincipale.insertNumber(variables.getVariablesMap().get(text.charAt(1)));
+        }
+        if(text.length() == 2 && text.charAt(0) == '+'){
+            ArithmeticalOperations addition = factory.getOperation("ADDITION", stackPrincipale.removeLastNumber(), variables.getVariablesMap().get(text.charAt(1)), DECIMAL_NUMBERS);
+            ComplexNumber[] result = addition.execute();
+            stackPrincipale.insertNumber(result[0]); 
+        }
+        if(text.length() == 2 && text.charAt(0) == '-'){
+            ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stackPrincipale.removeLastNumber(), variables.getVariablesMap().get(text.charAt(1)), DECIMAL_NUMBERS);
+            ComplexNumber[] result = subtraction.execute();
+            stackPrincipale.insertNumber(result[0]); 
+        }
+        //Mostrare Variabili
+        obVariables.clear();
+        String s = variables.toString();
+        String[] tmp = s.split("SPLITTA_QUA");
+        for(String x : tmp)
+            obVariables.add(x);
         obList.clear(); 
         obList.addAll(stackPrincipale.getFirst12Elements());
         elementiStack.maxHeight(12);
