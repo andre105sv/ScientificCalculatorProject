@@ -16,7 +16,7 @@ public class SwapCommand extends StackPrincipaleCommand{
     * Setta l'attributo stackPrincipale 
     * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
     */
-    public SwapCommand(StackPrincipale stackPrincipale) {
+    public SwapCommand(StackPrincipale stackPrincipale){
         super(stackPrincipale);
     }
     /**
@@ -24,7 +24,7 @@ public class SwapCommand extends StackPrincipaleCommand{
     * @return   null
     */
     @Override
-    public ComplexNumber perform() {
+    public ComplexNumber perform(){
         this.stackPrincipale.swap();
         return null;
     }

@@ -16,7 +16,7 @@ public class DropCommand extends StackPrincipaleCommand{
     * Setta l'attributo stackPrincipale 
     * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
     */
-    public DropCommand(StackPrincipale stackPrincipale) {
+    public DropCommand(StackPrincipale stackPrincipale){
         super(stackPrincipale);
     }
 
@@ -25,7 +25,7 @@ public class DropCommand extends StackPrincipaleCommand{
     * @return   un ComplexNumber
     */
     @Override
-    public ComplexNumber perform() {
+    public ComplexNumber perform(){
         return stackPrincipale.removeLastNumber();
     }
     

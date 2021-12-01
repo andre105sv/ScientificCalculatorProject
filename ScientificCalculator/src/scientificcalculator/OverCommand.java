@@ -16,7 +16,7 @@ public class OverCommand extends StackPrincipaleCommand{
     * Setta l'attributo stackPrincipale 
     * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
     */
-    public OverCommand(StackPrincipale stackPrincipale) {
+    public OverCommand(StackPrincipale stackPrincipale){
         super(stackPrincipale);
     }
     /**
@@ -24,7 +24,7 @@ public class OverCommand extends StackPrincipaleCommand{
     * @return   null
     */
     @Override
-    public ComplexNumber perform() {
+    public ComplexNumber perform(){
         this.stackPrincipale.over();
         return null;
     }

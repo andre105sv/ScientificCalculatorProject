@@ -9,13 +9,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="563.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scientificcalculator.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scientificcalculator.FXMLDocumentController">
     <children>
-        <Button fx:id="inserisci" layoutX="253.0" layoutY="65.0" onAction="#inserimento" text="Inserisci" />
+        <Button fx:id="inserisci" layoutX="218.0" layoutY="53.0" onAction="#inserimento" text="Inserisci" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <TextField fx:id="input" layoutX="52.0" layoutY="65.0" />
-      <Label layoutX="52.0" layoutY="39.0" text="Operando/Operazione" />
-      <ListView fx:id="elementiStack" layoutX="338.0" layoutY="39.0" prefHeight="304.0" prefWidth="187.0" />
-      <ListView fx:id="listVariables" layoutX="52.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="input" layoutX="52.0" layoutY="53.0" />
+      <Label layoutX="52.0" layoutY="36.0" text="Operando/Operazione" />
+      <ListView fx:id="elementiStack" layoutX="307.0" layoutY="120.0" prefHeight="282.0" prefWidth="187.0" />
+      <ListView fx:id="listVariables" layoutX="52.0" layoutY="120.0" prefHeight="282.0" prefWidth="187.0" />
+      <Label layoutX="307.0" layoutY="103.0" text="Operandi disponibini" />
+      <Label layoutX="52.0" layoutY="103.0" text="Variabili definite" />
     </children>
 </AnchorPane>

@@ -14,22 +14,22 @@ import java.util.Objects;
  *
  * @author filso
  */
-public class Variables {
+public class Variables{
     private HashMap<Character,ComplexNumber> variablesMap;
 
-    public Variables()  {
+    public Variables(){
         this.variablesMap = new HashMap<>();
     }
 
-    public HashMap<Character, ComplexNumber> getVariablesMap() {
+    public HashMap<Character, ComplexNumber> getVariablesMap(){
         return this.variablesMap;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         String s = "";
-        for (Map.Entry<Character, ComplexNumber> entry : variablesMap.entrySet()) {
-            s += entry.getKey()+ " = " + entry.getValue() + "SPLITTA_QUA";
+        for (Map.Entry<Character, ComplexNumber> entry : variablesMap.entrySet()){
+            s += entry.getKey() + " = " + entry.getValue() + "SPLITTA_QUA";
         }
         return s;
     }

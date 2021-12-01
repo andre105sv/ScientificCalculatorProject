@@ -16,7 +16,7 @@ public class DupCommand extends StackPrincipaleCommand{
     * Setta l'attributo stackPrincipale 
     * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
     */
-    public DupCommand(StackPrincipale stackPrincipale) {
+    public DupCommand(StackPrincipale stackPrincipale){
         super(stackPrincipale);
     }
     /**
@@ -24,7 +24,7 @@ public class DupCommand extends StackPrincipaleCommand{
     * @return   null
     */
     @Override
-    public ComplexNumber perform() {
+    public ComplexNumber perform(){
         stackPrincipale.dup();
         return null;
     }
