@@ -335,12 +335,12 @@ public class FXMLDocumentController implements Initializable {
     }    
 
     @FXML
-    private void deleteText(ActionEvent event) throws Exception{
+    private void deleteText(ActionEvent event){
         input.setText("");
     }
 
     @FXML
-    private void clearStack(ActionEvent event) throws Exception{
+    private void clearStack(ActionEvent event){
         clear.perform();
         obList.clear();
     }
