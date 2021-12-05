@@ -9,7 +9,7 @@ package scientificcalculator;
  *
  * @author filso
  */
-public class CheckerString {
+public class CheckerString{
 
     private String complex_number;
     private String single_number;
@@ -62,6 +62,9 @@ public class CheckerString {
     * @return  True    se è la parte immaginaria di un numero complesso
     */
     public boolean checkPossibleImmaginaryPart(String text){
+        if(text.equals("j")){
+            return true;
+        }
         if(text.contains("j")){
             String image = text.replace("j", "");
             try{
@@ -130,7 +133,7 @@ public class CheckerString {
     }
 
     /**
-    * Controlla se la stringa è un numero complesso, se è un numero reale , se
+    * Controlla se la stringa è un numero complesso, se è un numero reale, se
     * è un numero immaginario o se l'inserimento non è valido.
     *
     * @param   text    la stringa da verificare
@@ -191,14 +194,21 @@ public class CheckerString {
             operator2 = '-';
         }
         String[] scanner = text.split("\\+|\\-");
+        if(scanner[0].equals("j")){
+            return new ComplexNumber(Math.round(Double.parseDouble(operator2 + scanner[1]) * decimals) / decimals, Math.round(Double.parseDouble(operator1 + "1") * decimals) / decimals);
+        }
+        if(scanner[1].equals("j")){
+            double real = Double.parseDouble(operator1 + scanner[0]);
+            return new ComplexNumber(Math.round(real * decimals) / decimals, Math.round(Double.parseDouble(operator2 + "1") * decimals) / decimals);
+        }
         if(scanner[0].contains("j")){
             String image = scanner[0].replace("j", "");
-            return new ComplexNumber(Math.round(Double.parseDouble(operator2 + scanner[1])*decimals)/decimals, Math.round(Double.parseDouble(operator1 + image)*decimals)/decimals);
+            return new ComplexNumber(Math.round(Double.parseDouble(operator2 + scanner[1]) * decimals) / decimals, Math.round(Double.parseDouble(operator1 + image) * decimals) / decimals);
         }
         else{
             double real = Double.parseDouble(operator1 + scanner[0]);
             String image = scanner[1].replace("j", "");
-            return new ComplexNumber(Math.round(real*decimals)/decimals, Math.round(Double.parseDouble(operator2 + image)*decimals)/decimals);
+            return new ComplexNumber(Math.round(real * decimals) / decimals, Math.round(Double.parseDouble(operator2 + image) * decimals) / decimals);
         }
     }
 
@@ -223,4 +233,5 @@ public class CheckerString {
             return new ComplexNumber(Math.round(real*decimals)/decimals, 0);
         }
     }
+
 }

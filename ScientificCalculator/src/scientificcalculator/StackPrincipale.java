@@ -70,7 +70,7 @@ public class StackPrincipale{
         }
     }
     
-     /**
+    /**
     * Scambia di posto gli ultimi due elementi inseriti nello stack.
     * Se lo stack ha meno di 2 elementi non esegue nessuna operazione
     * @return   void

@@ -49,7 +49,7 @@ public class StackPrincipaleTest{
         ComplexNumber number = new ComplexNumber(4,5);
         int prevSize = instance.getSize();
         instance.insertNumber(number);
-        assertEquals(prevSize+1, instance.getSize());
+        assertEquals(prevSize + 1, instance.getSize());
     }
 
     /**
