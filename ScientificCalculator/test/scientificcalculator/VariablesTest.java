@@ -38,5 +38,16 @@ public class VariablesTest {
         assertTrue(variablesMap.getVariablesMap().containsKey(character));
         assertEquals(number, variablesMap.getVariablesMap().get(character));
     }
+    
+    @Test
+    public void testDeleteVariables(){
+        System.out.println("deleteVariables");
+        Character character = new Character('a');
+        ComplexNumber number = new ComplexNumber(10, 7);
+        int prevSize = variablesMap.getSize();
+        variablesMap.insertVariable(character, number);
+        variablesMap.deleteVariables();
+        assertEquals(0,variablesMap.getSize());
+    }
 
 }

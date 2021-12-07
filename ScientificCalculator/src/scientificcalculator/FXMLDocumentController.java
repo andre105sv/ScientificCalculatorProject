@@ -8,6 +8,7 @@ package scientificcalculator;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -51,6 +52,7 @@ public class FXMLDocumentController implements Initializable {
     private SwapCommand swap;// -- tutte le swap
     private OverCommand over;// -- tutte le over
     private Variables variables;
+    private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
     private OperationFactory factory;
     private CheckerString checker;
@@ -182,6 +184,14 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    private void showVariables(){
+        obVariables.clear();
+        String s = variables.toString();
+        String[] tmp = s.split("\n");
+        for(String x : tmp)
+            obVariables.add(x);
+    }
+    
     private void runOperationOnVariables(String command) throws Exception{
         if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
             variables.insertVariable(command.charAt(1), stack.removeLastNumber());
@@ -307,6 +317,19 @@ public class FXMLDocumentController implements Initializable {
             }
         }
     }
+    
+    private void saveVariables(String text){
+         if(text.equalsIgnoreCase("save") && variables.getSize() > 0){
+            variablesStack.insertVariables(new Variables(variables.getVariablesMap())); //implementarlo con il pattern Command
+         }
+    }
+    
+    private void restoreVariables(String text){
+        if(text.equalsIgnoreCase("restore") && variablesStack.getSize() > 0){
+            variables = variablesStack.removeLast();
+        }
+    }
+    
 
     /**
      * Initializes the controller class.
@@ -315,6 +338,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
         stack = new StackPrincipale();
         variables = new Variables();
+        variablesStack = new VariablesStack();
         customizedOperations = new CustomizedOperationsMap();
         checker = new CheckerString(DECIMAL_NUMBERS);
         factory = new OperationFactory();
@@ -354,12 +378,10 @@ public class FXMLDocumentController implements Initializable {
         this.customOperation(text);
         this.runOperationOnVariables(text);
         this.runCustomizedOperation(text);
-        //Mostrare Variabili
-        obVariables.clear();
-        String s = variables.toString();
-        String[] tmp = s.split("\n");
-        for(String x : tmp)
-            obVariables.add(x);
+        this.saveVariables(text);
+        this.restoreVariables(text);
+        
+        this.showVariables();
         obList.clear(); 
         obList.addAll(stack.getFirst12Elements());
         elementiStack.maxHeight(12);

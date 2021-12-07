@@ -27,6 +27,18 @@ public class Variables{
         this.variablesMap = new HashMap<>();
         this.size = 0;
     }
+    
+    /**
+    * Costruisce un oggetto di tipo Variables a partire da una HashMap.
+    * Inizializza l'attributo variablesMap con una HashMap che è la copia di quella passata come parametro.
+    * @param map la HashMap usata per l'inizializzazione
+    */
+    public Variables( HashMap<Character,ComplexNumber> map){
+        this.variablesMap = new HashMap<>();
+        for(Character key : map.keySet())
+            this.variablesMap.put(key, map.get(key));
+        this.size = this.getSize();
+    }
 
     /**
     * Restituisce la mappa delle variabili memorizzate.
@@ -63,7 +75,15 @@ public class Variables{
     public ComplexNumber getValueFromVariable(Character character){
         return this.variablesMap.get(character);
     }
-
+    
+    /**
+    * Pulisce la HashMap contenente le variabili.
+    * @return   void
+    */
+    public void deleteVariables(){
+        this.variablesMap.clear();
+    }
+    
     /**
     * Restituisce tutte le associazioni variabile-valore sotto forma di stringa.
     * @return   una stringa che indica le associazioni variabile-valore separate
