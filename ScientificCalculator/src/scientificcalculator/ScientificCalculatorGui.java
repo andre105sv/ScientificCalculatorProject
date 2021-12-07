@@ -21,6 +21,7 @@ public class ScientificCalculatorGui extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("./CalculatorStyleSheet.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
