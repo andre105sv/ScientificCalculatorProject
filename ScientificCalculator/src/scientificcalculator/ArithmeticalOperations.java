@@ -12,6 +12,12 @@ package scientificcalculator;
  */
 public interface ArithmeticalOperations{
 
+    /**
+    * Restituisce un vettore di numeri complessi contenente il risultato della
+    * operazione aritmetica.
+    * @return   il vettore di ComplexNumber che si ottiene dal risultato della
+    *           operazione aritmetica specificata
+    */
     public ComplexNumber[] execute() throws Exception;
 
 }

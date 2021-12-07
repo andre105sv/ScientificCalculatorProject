@@ -17,6 +17,12 @@ public class ReversalSign implements ArithmeticalOperations{
     private ComplexNumber operand;
     private double decimals;
 
+    /**
+    * Costruisce un oggetto di tipo ReversalSign a partire da un numero 
+    * complesso e dalla sua precisione.
+    * @param    c       l'operando di tipo ComplexNumber
+    * @param    dec     la precisione in formato double
+    */
     public ReversalSign(ComplexNumber c, double dec){
         this.operand = c;
         this.decimals = dec;

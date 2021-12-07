@@ -211,7 +211,10 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println("Devi specificare le operazioni da associare al nuovo alias!");
             }
             else{
-                if(this.isOperation(tmpArray[1])){
+                if((this.isRealNumber(tmpArray[1])) || (this.isComplexNumber(tmpArray[1]))){
+                    System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
+                }
+                else if(this.isOperation(tmpArray[1])){
                     System.out.println("Quest'operazione esiste già!");
                 }
                 else{
@@ -239,11 +242,20 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println("Il nome di un'operazione personalizzata non deve contenere spazi!");
             }
             else{
-                if((this.isCustomizedOperation(tmpArray[1])) && (!this.isOperation(tmpArray[2]))){
-                    customizedOperations.renameCustomOperation(tmpArray[1], tmpArray[2]);
+                if((this.isRealNumber(tmpArray[2])) || (this.isComplexNumber(tmpArray[2]))){
+                    System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
+                }
+                else if(!this.isCustomizedOperation(tmpArray[1])){
+                    System.out.println("Quest'operazione personalizzata non è presente in memoria!");
+                }
+                else if(tmpArray[1].equalsIgnoreCase(tmpArray[2])){
+                    System.out.println("Il nuovo nome da attribuire all'operazione personalizzata dev'essere diverso dal precedente.");
+                }
+                else if(this.isOperation(tmpArray[2])){
+                    System.out.println("Il nuovo nome che vuoi attribuire esiste già!");
                 }
                 else{
-                    System.out.println("Quest'operazione non è presente in memoria oppure hai inserito un nome non valido!");
+                    customizedOperations.renameCustomOperation(tmpArray[1], tmpArray[2]);
                 }
             }
             System.out.println(customizedOperations.toString());

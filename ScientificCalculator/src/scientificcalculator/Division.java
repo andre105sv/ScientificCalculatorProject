@@ -18,6 +18,13 @@ public class Division implements ArithmeticalOperations{
     private ComplexNumber secondOp;
     private double decimals;
 
+    /**
+    * Costruisce un oggetto di tipo Division a partire da due numeri complessi
+    * e dalla loro precisione.
+    * @param    c1      il dividendo di tipo ComplexNumber 
+    * @param    c2      il divisore di tipo ComplexNumber
+    * @param    dec     la precisione in formato double
+    */
     public Division(ComplexNumber c1, ComplexNumber c2, double dec){
         this.firstOp = c1;
         this.secondOp = c2;
