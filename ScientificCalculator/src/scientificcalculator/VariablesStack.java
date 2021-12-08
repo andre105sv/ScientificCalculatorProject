@@ -54,9 +54,7 @@ public class VariablesStack {
         return variables;
     }
     
-    public String toString(){
-        return this.removeLast().toString();
-    }
+    
     
     
 }

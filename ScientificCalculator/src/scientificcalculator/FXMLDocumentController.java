@@ -40,7 +40,9 @@ public class FXMLDocumentController implements Initializable {
     private StackPrincipale stack;
     @FXML
     private Button insertBtn;
+    @FXML
     private Button deleteBtn;
+    @FXML
     private Button clearBtn;
     @FXML
     private ListView<ComplexNumber> elementiStack;
@@ -51,6 +53,7 @@ public class FXMLDocumentController implements Initializable {
     private DupCommand dup;// -- tutte le dup
     private SwapCommand swap;// -- tutte le swap
     private OverCommand over;// -- tutte le over
+    private PushVariablesCommand pushVariables;
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
@@ -58,6 +61,10 @@ public class FXMLDocumentController implements Initializable {
     private Checker checker;
     @FXML
     private ListView<String> listVariables;
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private Button restoreBtn;
 
     /**
     * Inserisce nello stack un numero indicato come reale o complesso.
@@ -346,16 +353,17 @@ public class FXMLDocumentController implements Initializable {
     
     private void saveVariables(String text){
          if(text.equalsIgnoreCase("save") && variables.getSize() > 0){
-            variablesStack.insertVariables(new Variables(variables.getVariablesMap())); //implementarlo con il pattern Command
+            //variablesStack.insertVariables(new Variables(variables.getVariablesMap()));
+            pushVariables.perform(new Variables(variables.getVariablesMap()));
          }
     }
     
     private void restoreVariables(String text){
         if(text.equalsIgnoreCase("restore") && variablesStack.getSize() > 0){
-            variables = variablesStack.removeLast();
+            //variables = variablesStack.removeLast();
+            variables = pushVariables.undo(null);
         }
     }
-    
 
     /**
      * Inizializza la controller class.
@@ -378,6 +386,7 @@ public class FXMLDocumentController implements Initializable {
         dup = new DupCommand(stack);
         swap = new SwapCommand(stack);
         over = new OverCommand(stack);
+        pushVariables = new PushVariablesCommand(variablesStack);
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
         obList.addAll(stack.getFirst12Elements());
@@ -425,6 +434,21 @@ public class FXMLDocumentController implements Initializable {
         obList.addAll(stack.getFirst12Elements());
         elementiStack.maxHeight(12);
         input.clear();
+    }
+
+    @FXML
+    private void saveVariables(ActionEvent event) {
+        if( variables.getSize() > 0){
+            pushVariables.perform(new Variables(variables.getVariablesMap()));
+         }
+    }
+
+    @FXML
+    private void restoreVariables(ActionEvent event) {
+        if( variablesStack.getSize() > 0){
+            variables = pushVariables.undo(null);
+            this.showVariables();
+        }
     }
 
 
