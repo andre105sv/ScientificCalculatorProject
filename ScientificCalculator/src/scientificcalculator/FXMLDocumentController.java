@@ -51,6 +51,7 @@ public class FXMLDocumentController implements Initializable {
     private DupCommand dup;// -- tutte le dup
     private SwapCommand swap;// -- tutte le swap
     private OverCommand over;// -- tutte le over
+    private PushVariablesCommand pushVariables;
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
@@ -433,13 +434,15 @@ public class FXMLDocumentController implements Initializable {
     
     private void saveVariables(String text){
          if(text.equalsIgnoreCase("save") && variables.getSize() > 0){
-            variablesStack.insertVariables(new Variables(variables.getVariablesMap())); //implementarlo con il pattern Command
+            //variablesStack.insertVariables(new Variables(variables.getVariablesMap()));
+            pushVariables.perform(new Variables(variables.getVariablesMap()));
          }
     }
     
     private void restoreVariables(String text){
         if(text.equalsIgnoreCase("restore") && variablesStack.getSize() > 0){
-            variables = variablesStack.removeLast();
+            //variables = variablesStack.removeLast();
+            variables = pushVariables.undo(null);
         }
     }
     
@@ -464,6 +467,7 @@ public class FXMLDocumentController implements Initializable {
         dup = new DupCommand(stack);
         swap = new SwapCommand(stack);
         over = new OverCommand(stack);
+        pushVariables = new PushVariablesCommand(variablesStack);
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
         obList.addAll(stack.getFirst12Elements());
