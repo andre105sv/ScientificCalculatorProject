@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package scientificcalculator;
+package exceptions;
 
 /**
  *
- * @author splas
+ * @author Andrea
  */
-public class CheckerOperationString {
+public class BlankSpaceStringException extends NotDefinedOperationException{
 
 }

@@ -59,6 +59,7 @@ public class FXMLDocumentController implements Initializable {
     private CustomizedOperationsMap customizedOperations;
     private OperationFactory factory;
     private Checker checker;
+    private CheckerCustomizedOperations checkCustomOperation;
     @FXML
     private ListView<String> listVariables;
     @FXML
@@ -227,106 +228,48 @@ public class FXMLDocumentController implements Initializable {
     *                       comando da eseguire
     */
     private void customOperation(String command){
-        if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("create"))){
-            String[] tmpArray = command.split("\\s+");
-            if(tmpArray.length == 1){
-                System.out.println("Devi specificare quale operazione personalizzata vuoi creare!");
+        try{
+            if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("create"))){
+                String[] customArray = checkCustomOperation.checkCreateOperation(customizedOperations, command);
+                customizedOperations.insertCustomOperation(customArray[0], Arrays.copyOfRange(customArray, 1, customArray.length));   
             }
-            else if(tmpArray.length == 2){
-                System.out.println("Devi specificare le operazioni da associare al nuovo alias!");
+            else if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("rename"))){
+                String[] customArray = checkCustomOperation.checkRenameOperation(customizedOperations, command);
+                customizedOperations.renameCustomOperation(customArray[0], customArray[1]);   
             }
-            else{
-                if((checker.isRealNumber(tmpArray[1])) || (checker.isComplexNumber(tmpArray[1]))){
-                    System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
-                }
-                else if(checker.isOperation(customizedOperations, tmpArray[1])){
-                    System.out.println("Quest'operazione esiste già!");
-                }
-                else{
-                    for(int k = 2; k < tmpArray.length; k++){
-                        if((!checker.isOperation(customizedOperations, tmpArray[k])) && (!checker.isRealNumber(tmpArray[k])) && (!checker.isComplexNumber(tmpArray[k]))){
-                            System.out.println("La stringa inserita non è un'operazione o un numero!");
-                            input.clear();
-                            return;
-                        }
-                    }
-                    customizedOperations.insertCustomOperation(tmpArray[1], Arrays.copyOfRange(tmpArray, 2, tmpArray.length));   
-                }
+            else if((command.length() > 2) && (command.toLowerCase().substring(0, 3).equals("set"))){
+                String[] customArray = checkCustomOperation.checkSetOperation(customizedOperations, command);
+                customizedOperations.insertCustomOperation(customArray[0], Arrays.copyOfRange(customArray, 1, customArray.length));   
+            }
+            else if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("delete"))){
+                String opToRemove = checkCustomOperation.checkDeleteOperation(customizedOperations, command);
+                customizedOperations.deleteCustomOperation(opToRemove);   
             }
             System.out.println(customizedOperations.toString());
         }
-        if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("rename"))){
-            String[] tmpArray = command.split("\\s+");
-            if(tmpArray.length == 1){
-                System.out.println("Devi specificare quale operazione personalizzata vuoi rinominare!");
-            }
-            else if(tmpArray.length == 2){
-                System.out.println("Devi specificare il nuovo nome dell'operazione personalizzata da rinominare!");
-            }
-            else if(tmpArray.length > 3){
-                System.out.println("Il nome di un'operazione personalizzata non deve contenere spazi!");
-            }
-            else{
-                if((checker.isRealNumber(tmpArray[2])) || (checker.isComplexNumber(tmpArray[2]))){
-                    System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
-                }
-                else if(!checker.isCustomizedOperation(customizedOperations, tmpArray[1])){
-                    System.out.println("Quest'operazione personalizzata non è presente in memoria!");
-                }
-                else if(tmpArray[1].equalsIgnoreCase(tmpArray[2])){
-                    System.out.println("Il nuovo nome da attribuire all'operazione personalizzata dev'essere diverso dal precedente.");
-                }
-                else if(checker.isOperation(customizedOperations, tmpArray[2])){
-                    System.out.println("Il nuovo nome che vuoi attribuire esiste già!");
-                }
-                else{
-                    customizedOperations.renameCustomOperation(tmpArray[1], tmpArray[2]);
-                }
-            }
-            System.out.println(customizedOperations.toString());
+        catch(NotDefinedNameOperationException ex1){
+            System.out.println("È necessario specificare il nome dell'operazione personalizzata. Per info clicca su HELP.");
         }
-        if((command.length() > 2) && (command.toLowerCase().substring(0, 3).equals("set"))){
-            String[] tmpArray = command.split("\\s+");
-            if(tmpArray.length == 1){
-                System.out.println("Devi specificare quale operazione personalizzata vuoi modificare!");
-            }
-            else if(tmpArray.length == 2){
-                System.out.println("Devi specificare il nome dell'operazione da modificare e la sua nuova espressione!");
-            }
-            else{
-                if(customizedOperations.getCustomizedOperationsMap().containsKey(tmpArray[1])){
-                    for(int k = 2; k < tmpArray.length; k++){
-                        if((!checker.isOperation(customizedOperations, tmpArray[k])) && (!checker.isRealNumber(tmpArray[k])) && (!checker.isComplexNumber(tmpArray[k]))){
-                            System.out.println("La stringa inserita non è un'operazione!");
-                            input.clear();
-                            return;
-                        }
-                    }
-                    customizedOperations.insertCustomOperation(tmpArray[1], Arrays.copyOfRange(tmpArray, 2, tmpArray.length));
-                }
-                else{
-                    System.out.println("L'operazione specificata non esiste perciò non può essere modificata!");
-                }
-            }
-            System.out.println(customizedOperations.toString());
+        catch(NotDefinedValueOperationException ex2){
+            System.out.println("È necessario definire tutti i campi dell'operazione personalizzata. Per info clicca su HELP.");
         }
-        if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("delete"))){
-            String[] tmpArray = command.split("\\s+");
-            if(tmpArray.length == 1){
-                System.out.println("Devi specificare quale operazione personalizzata vuoi cancellare!");
-            }
-            else if(tmpArray.length > 2){
-                System.out.println("Il nome di un'operazione personalizzata non deve contenere spazi!");
-            }
-            else{
-                if(customizedOperations.getCustomizedOperationsMap().containsKey(tmpArray[1])){
-                    customizedOperations.deleteCustomOperation(tmpArray[1]);
-                }
-                else{
-                    System.out.println("Quest'operazione non è presente in memoria!");
-                }
-            }
-            System.out.println(customizedOperations.toString());
+        catch(NumberAsNameOperationException ex3){
+            System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
+        }
+        catch(ExistentOperationException ex4){
+            System.out.println("Quest'operazione esiste già!");
+        }
+        catch(NotCorrectValueOperationException ex5){
+            System.out.println("La stringa inserita non è un'operazione o un numero!");
+        }
+        catch(BlankSpaceStringException ex6){
+            System.out.println("Il nome di un'operazione personalizzata non deve contenere spazi!");
+        }
+        catch(NotExistentOperationException ex7){
+            System.out.println("Quest'operazione personalizzata non è presente in memoria!");
+        }
+        catch(SameNameException ex8){
+            System.out.println("Il nuovo nome da attribuire all'operazione personalizzata dev'essere diverso dal precedente.");
         }
     }
 
@@ -376,6 +319,7 @@ public class FXMLDocumentController implements Initializable {
         customizedOperations = new CustomizedOperationsMap();
         checker = new Checker();
         checker.setDecimals(DECIMAL_NUMBERS);
+        checkCustomOperation = new CheckerCustomizedOperations();
         factory = new OperationFactory();
         input.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ENTER))

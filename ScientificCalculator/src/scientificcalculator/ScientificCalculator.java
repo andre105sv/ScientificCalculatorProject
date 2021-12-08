@@ -23,7 +23,7 @@ public class ScientificCalculator{
     public static void main(String[] args) throws Exception{
         
         System.out.println("Progetto: ScientificCalculator");
-        System.out.println("Versione: 2.1");
+        System.out.println("Versione: 2.2");
 
     }
 
