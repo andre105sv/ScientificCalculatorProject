@@ -6,7 +6,8 @@
 
 package scientificcalculator;
 
-import java.lang.Exception;
+import exceptions.DivisionByZeroException;
+import exceptions.NotDefinedArgumentException;
 
 /**
  *
@@ -17,6 +18,12 @@ public class SquareRoot implements ArithmeticalOperations{
     private ComplexNumber operand;
     private double decimals;
 
+    /**
+    * Costruisce un oggetto di tipo SquareRoot a partire da un numero 
+    * complesso e dalla sua precisione.
+    * @param    c       l'operando di tipo ComplexNumber
+    * @param    dec     la precisione in formato double
+    */
     public SquareRoot(ComplexNumber c, double dec){
         this.operand = c;
         this.decimals = dec;
@@ -24,12 +31,14 @@ public class SquareRoot implements ArithmeticalOperations{
 
     /**
     * Restituisce le radici quadrate di un nomero complesso o la radice quadrata
-    * di un numero reale.
+    * di un numero reale. 
+    * @throws   NotDefinedArgumentException   se viene calcolata la radice 
+    *                                         quadrata di 0
     * @return   un array di ComplexNumber contenente le due radici quadrate di
     *           un numero complesso o la radice quadrata di un numero reale
     */
     @Override
-    public ComplexNumber[] execute() throws Exception{
+    public ComplexNumber[] execute() throws DivisionByZeroException, NotDefinedArgumentException{
         double modulo = Math.sqrt(Math.pow(operand.getRealPart(), 2) + Math.pow(operand.getImmPart(), 2));
         double radModulo = Math.sqrt(modulo);
         double fase = 0.0;
@@ -43,7 +52,7 @@ public class SquareRoot implements ArithmeticalOperations{
             fase = -3.14 / 2;
         }
         if((operand.getRealPart() == 0) && (operand.getImmPart() == 0)){
-            throw (new Exception ("Fase di 0 non ammessa"));
+            throw new NotDefinedArgumentException();
         }
         if(operand.getRealPart() > 0){
             fase = Math.atan2(operand.getImmPart(), operand.getRealPart());

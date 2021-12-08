@@ -6,8 +6,6 @@
 
 package scientificcalculator;
 
-import java.lang.Exception;
-
 /**
  *
  * @author Andrea
@@ -18,6 +16,13 @@ public class Subtraction implements ArithmeticalOperations{
     private ComplexNumber secondOp;
     private double decimals;
 
+    /**
+    * Costruisce un oggetto di tipo Subtraction a partire da due numeri 
+    * complessi e dalla loro precisione.
+    * @param    c1      il minuendo di tipo ComplexNumber 
+    * @param    c2      il sottraendo di tipo ComplexNumber
+    * @param    dec     la precisione in formato double
+    */
     public Subtraction(ComplexNumber c1, ComplexNumber c2, double dec){
         this.firstOp = c1;
         this.secondOp = c2;
@@ -30,7 +35,7 @@ public class Subtraction implements ArithmeticalOperations{
     *           tra due numeri complessi o reali
     */
     @Override
-    public ComplexNumber[] execute() throws Exception{
+    public ComplexNumber[] execute(){
         double realSum = Math.round((firstOp.getRealPart() - secondOp.getRealPart()) * decimals) / decimals;
         double immSum = Math.round((firstOp.getImmPart() - secondOp.getImmPart()) * decimals) / decimals;
         return new ComplexNumber[]{new ComplexNumber(realSum, immSum)};

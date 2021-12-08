@@ -72,8 +72,7 @@ public class StackPrincipale{
     
     /**
     * Scambia di posto gli ultimi due elementi inseriti nello stack.
-    * Se lo stack ha meno di 2 elementi non esegue nessuna operazione
-    * @return   void
+    * Se lo stack ha meno di 2 elementi non esegue nessuna operazione.
     */
     public void swap(){
         if(this.getSize() > 1){
@@ -86,8 +85,7 @@ public class StackPrincipale{
     
      /**
     * Inserisce nello stack il penultimo elemento precedentemente inserito.
-    * Se lo stack ha meno di 2 element1 non esegue nessuna operazione
-    * @return   void
+    * Se lo stack ha meno di 2 element1 non esegue nessuna operazione.
     */
     public void over(){
         if(this.getSize() > 1){
@@ -101,8 +99,7 @@ public class StackPrincipale{
     
      /**
     * Reinserisce l'ultimo elemento inserito nello stack.
-    * Se lo stack ha meno di 1 elemento non esegue nessuna operazione
-    * @return   void
+    * Se lo stack ha meno di 1 elemento non esegue nessuna operazione.
     */
     public void dup(){
         if(this.getSize() > 0){
@@ -114,8 +111,7 @@ public class StackPrincipale{
 
     /**
     * Rimuove tutti gli elementi presenti nello stack.
-    * Lo stack sarà vuoto al termine dell'esecuzione del metodo
-    * @return   void
+    * Lo stack sarà vuoto al termine dell'esecuzione del metodo.
     */
     public void clear(){
         this.stack.clear();

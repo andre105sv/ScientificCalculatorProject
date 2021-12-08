@@ -6,8 +6,6 @@
 
 package scientificcalculator;
 
-import java.lang.Exception;
-
 /**
  *
  * @author Andrea
@@ -18,6 +16,13 @@ public class Addition implements ArithmeticalOperations{
     private ComplexNumber secondOp;
     private double decimals;
 
+    /**
+    * Costruisce un oggetto di tipo Addition a partire da due numeri complessi
+    * e dalla loro precisione.
+    * @param    c1      il primo addendo di tipo ComplexNumber 
+    * @param    c2      il secondo addendo di tipo ComplexNumber
+    * @param    dec     la precisione in formato double
+    */
     public Addition(ComplexNumber c1, ComplexNumber c2, double dec){
         this.firstOp = c1;
         this.secondOp = c2;
@@ -30,7 +35,7 @@ public class Addition implements ArithmeticalOperations{
     *           due numeri complessi o reali
     */
     @Override
-    public ComplexNumber[] execute() throws Exception{
+    public ComplexNumber[] execute(){
         double realSum = firstOp.getRealPart() + secondOp.getRealPart();
         double immSum = firstOp.getImmPart() + secondOp.getImmPart();
         return new ComplexNumber[]{new ComplexNumber(Math.round(realSum* decimals) / decimals, Math.round(immSum * decimals) / decimals)};

@@ -6,8 +6,6 @@
 
 package scientificcalculator;
 
-import java.lang.Exception;
-
 /**
  *
  * @author Andrea
@@ -17,6 +15,12 @@ public class ReversalSign implements ArithmeticalOperations{
     private ComplexNumber operand;
     private double decimals;
 
+    /**
+    * Costruisce un oggetto di tipo ReversalSign a partire da un numero 
+    * complesso e dalla sua precisione.
+    * @param    c       l'operando di tipo ComplexNumber
+    * @param    dec     la precisione in formato double
+    */
     public ReversalSign(ComplexNumber c, double dec){
         this.operand = c;
         this.decimals = dec;
@@ -28,7 +32,7 @@ public class ReversalSign implements ArithmeticalOperations{
     *           segno di un numero complesso o reale
     */
     @Override
-    public ComplexNumber[] execute() throws Exception{
+    public ComplexNumber[] execute(){
         return new ComplexNumber[]{new ComplexNumber(Math.round((-operand.getRealPart()) * decimals) / decimals, Math.round((-operand.getImmPart()) * decimals) / decimals)};
     }
 

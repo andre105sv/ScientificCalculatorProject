@@ -17,6 +17,11 @@ public class CheckerString{
     private String continue_checking;
     private double decimals;
     
+    /**
+    * Costruisce un oggetto di tipo CheckerString permettendo la verifica
+    * dell'inserimento o meno di un numero, a partire dalla sua precisione.
+    * @param    decimals    la precisione in formato double
+    */
     public CheckerString(double decimals) {
         this.complex_number = "COMPLEX__NUMBER";
         this.single_number = "SINGLENUMBER";
@@ -28,7 +33,7 @@ public class CheckerString{
     /**
     * Restituisce una stringa eliminando spazi bianchi ed eventuali segni "+" o
     * "-" inziali.
-    * @param    text    stringa da cui eliminare spazi bianchi
+    * @param    text    la stringa da cui eliminare spazi bianchi
     * @return   la stringa senza spazi bianchi e segni
     */
     public String clearString(String text){

@@ -6,6 +6,8 @@
 
 package scientificcalculator;
 
+import exceptions.DivisionByZeroException;
+import exceptions.NotDefinedArgumentException;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -19,37 +21,30 @@ public class AdditionTest{
     private double PRECISION = 0.0001;
     private OperationFactory factory;
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
     @Before
     public void setUp(){
         factory = new OperationFactory();
-    }
-
-    @After
-    public void tearDown() throws Exception {
     }
 
     /**
      * Test of execute method, of class Addition.
      */
     @Test
-    public void testExecute() throws Exception{
+    public void testExecute() throws DivisionByZeroException, NotDefinedArgumentException{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
-        ComplexNumber expResult = new ComplexNumber(-29.5 , +6.89);     
-        ArithmeticalOperations addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
-        ComplexNumber result[] = addition.execute();
-        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
-        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        ComplexNumber expResultAB = new ComplexNumber(-29.5, +6.89);     
+        ArithmeticalOperations additionAB = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
+        ComplexNumber resultAB[] = additionAB.execute();
+        assertEquals(expResultAB.getRealPart(), resultAB[0].getRealPart(),PRECISION);
+        assertEquals(expResultAB.getImmPart(), resultAB[0].getImmPart(), PRECISION);
+        ComplexNumber c = new ComplexNumber(1, +3);
+        ComplexNumber d = new ComplexNumber(+2.55555, -0.35);  
+        ComplexNumber expResultCD = new ComplexNumber(3.556, 2.65);     
+        ArithmeticalOperations additionCD = factory.getOperation("ADDITION", c, d, DECIMAL_NUMBERS);
+        ComplexNumber resultCD[] = additionCD.execute();
+        assertEquals(expResultCD.getRealPart(), resultCD[0].getRealPart(),PRECISION);
+        assertEquals(expResultCD.getImmPart(), resultCD[0].getImmPart(), PRECISION);
     }
-
     
-
 }

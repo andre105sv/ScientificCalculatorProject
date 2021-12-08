@@ -11,9 +11,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scientificcalculator.FXMLDocumentController">
     <children>
-        <Button fx:id="inserisci" layoutX="498.0" layoutY="58.0" onAction="#inserimento" prefHeight="33.0" prefWidth="78.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-background-color: lightblue; -fx-border-color: white; -fx-cursor: hand;" text="Inserisci" />
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <TextField fx:id="input" layoutX="48.0" layoutY="59.0" prefHeight="31.0" prefWidth="418.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px;" />
+        <Button fx:id="insertBtn" layoutX="52.0" layoutY="98.0" onAction="#insert" prefHeight="27.0" prefWidth="149.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-background-color: lightblue; -fx-border-color: white; -fx-cursor: hand;" text="Inserisci" />
+        <Label fx:id="label" layoutX="208.0" layoutY="129.0" minHeight="16" minWidth="69" text="lbl" />
+      <TextField fx:id="input" layoutX="52.0" layoutY="59.0" prefHeight="25.0" prefWidth="218.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px;" />
       <Label layoutX="63.0" layoutY="35.0" text="Operando / Operazione" />
       <ListView fx:id="elementiStack" layoutX="491.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
       <ListView fx:id="listVariables" layoutX="271.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
