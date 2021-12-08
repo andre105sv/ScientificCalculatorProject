@@ -40,4 +40,5 @@ public class Multiplication implements ArithmeticalOperations{
         double op2 = Math.round((firstOp.getRealPart() * secondOp.getImmPart() + firstOp.getImmPart() * secondOp.getRealPart()) * decimals) / decimals;
         return new ComplexNumber[]{new ComplexNumber(op1, op2)};
     }
+
 }

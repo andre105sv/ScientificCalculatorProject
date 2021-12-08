@@ -6,7 +6,6 @@
 
 package scientificcalculator;
 
-import exceptions.DivisionByZeroException;
 import exceptions.NotDefinedArgumentException;
 
 /**
@@ -38,7 +37,7 @@ public class SquareRoot implements ArithmeticalOperations{
     *           un numero complesso o la radice quadrata di un numero reale
     */
     @Override
-    public ComplexNumber[] execute() throws DivisionByZeroException, NotDefinedArgumentException{
+    public ComplexNumber[] execute() throws NotDefinedArgumentException{
         double modulo = Math.sqrt(Math.pow(operand.getRealPart(), 2) + Math.pow(operand.getImmPart(), 2));
         double radModulo = Math.sqrt(modulo);
         double fase = 0.0;
@@ -72,5 +71,4 @@ public class SquareRoot implements ArithmeticalOperations{
         return s;
     }
 
-    
 }

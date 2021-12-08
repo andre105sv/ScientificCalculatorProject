@@ -47,7 +47,4 @@ public class Division implements ArithmeticalOperations{
         return new ComplexNumber[]{new ComplexNumber(quoz, div)};
     }
 
-   
-
-
 }

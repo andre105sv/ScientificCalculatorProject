@@ -7,7 +7,7 @@
 package scientificcalculator;
 
 import exceptions.DivisionByZeroException;
-import exceptions.NotDefinedArgumentException;
+import exceptions.ArithmeticalException;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -30,7 +30,7 @@ public class DivisionTest{
      * Test of execute method, of class Division.
      */
     @Test(expected = DivisionByZeroException.class)
-    public void testExecute() throws DivisionByZeroException, NotDefinedArgumentException{
+    public void testExecute() throws ArithmeticalException{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResult = new ComplexNumber(-12.898 , +2.232);     

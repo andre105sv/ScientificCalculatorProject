@@ -6,7 +6,7 @@
 
 package scientificcalculator;
 
-import exceptions.DivisionByZeroException;
+import exceptions.ArithmeticalException;
 import exceptions.NotDefinedArgumentException;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -30,7 +30,7 @@ public class SquareRootTest{
      * Test of execute method, of class SquareRoot.
      */
     @Test(expected = NotDefinedArgumentException.class)
-    public void testExecute() throws DivisionByZeroException, NotDefinedArgumentException{
+    public void testExecute() throws ArithmeticalException{
         ComplexNumber a = new ComplexNumber(3, 6);
         ComplexNumber[] expResult = new ComplexNumber[2];
         expResult[0] = new ComplexNumber(1.158, 2.317);

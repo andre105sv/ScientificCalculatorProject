@@ -41,6 +41,4 @@ public class Subtraction implements ArithmeticalOperations{
         return new ComplexNumber[]{new ComplexNumber(realSum, immSum)};
     }
 
-    
-
 }

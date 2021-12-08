@@ -10,6 +10,6 @@ package exceptions;
  *
  * @author Andrea
  */
-public class DivisionByZeroException extends Exception{
+public class DivisionByZeroException extends ArithmeticalException{
 
 }

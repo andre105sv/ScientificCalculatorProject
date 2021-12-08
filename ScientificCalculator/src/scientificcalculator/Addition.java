@@ -41,6 +41,4 @@ public class Addition implements ArithmeticalOperations{
         return new ComplexNumber[]{new ComplexNumber(Math.round(realSum* decimals) / decimals, Math.round(immSum * decimals) / decimals)};
     }
 
-   
-
 }

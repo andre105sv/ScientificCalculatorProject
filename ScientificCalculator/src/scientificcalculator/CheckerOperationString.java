@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package exceptions;
+package scientificcalculator;
 
 /**
  *
- * @author Andrea
+ * @author splas
  */
-public class NotDefinedArgumentException extends ArithmeticalException{
+public class CheckerOperationString {
 
 }

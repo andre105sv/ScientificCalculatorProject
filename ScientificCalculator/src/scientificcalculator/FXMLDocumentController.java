@@ -55,102 +55,9 @@ public class FXMLDocumentController implements Initializable {
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
     private OperationFactory factory;
-    private CheckerString checker;
+    private Checker checker;
     @FXML
     private ListView<String> listVariables;
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un'operazione
-    * di tipo aritmetico ("+", "-", "*", "/", "sqrt", "+-").
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se l'operazione specificata in input è di tipo 
-    *                   aritmetico
-    */
-    private boolean isArithmeticalOperation(String op){
-        if((op.equals("+")) || (op.equals("-")) || (op.equals("*")) || (op.equals("/")) || (op.equals("+-"))){
-            return true;
-        }
-        if((op.equalsIgnoreCase("sqrt"))){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un'operazione
-    * che lavora sullo stack ("clear", "dup", "drop", "swap", "over").
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se l'operazione specificata in input lavora sullo 
-    *                   stack.
-    */
-    private boolean isStackOperation(String op){
-        if((op.equalsIgnoreCase("drop")) || (op.equalsIgnoreCase("dup")) || (op.equalsIgnoreCase("swap")) || (op.equalsIgnoreCase("over")) || (op.equalsIgnoreCase("clear"))){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un'operazione
-    * di tipo personalizzato.
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se l'operazione specificata in input è di tipo 
-    *                   personalizzato
-    */
-    private boolean isCustomizedOperation(String op){
-        if(customizedOperations.getCustomizedOperationsMap().containsKey(op)){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input è un'operazione.
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se la stringa specificata in input è un'operazione
-    */
-    private boolean isOperation(String operationString){
-        if(isArithmeticalOperation(operationString)){
-            return true;
-        }
-        if(isStackOperation(operationString)){
-            return true;
-        }
-        if(isCustomizedOperation(operationString)){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un numero
-    * reale.
-    * @param    number      la stringa che identifica il numero
-    * @return   true    se la stringa specificata in input è convertibile in un
-    *                   numero reale
-    */
-    private boolean isRealNumber(String number){
-        String checkResult = checker.checkString(number);
-        if(checkResult.equals("SINGLENUMBER")){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un numero
-    * complesso.
-    * @param    number      la stringa che identifica il numero
-    * @return   true    se la stringa specificata in input è convertibile in un
-    *                   numero complesso
-    */
-    private boolean isComplexNumber(String number){
-        String checkResult = checker.checkString(number);
-        if(checkResult.equals("COMPLEX__NUMBER")){
-            return true;
-        }
-        return false;
-    }
 
     /**
     * Inserisce nello stack un numero indicato come reale o complesso.
@@ -158,11 +65,11 @@ public class FXMLDocumentController implements Initializable {
     *                       reale da inserire nello stack
     */
     private void runPushOperation(String singleOp){
-        if(isComplexNumber(singleOp)){
+        if(checker.isComplexNumber(singleOp)){
             ComplexNumber zComplex = checker.createFromComplexNumber(singleOp);
             stack.insertNumber(zComplex);
         }
-        else if(isRealNumber(singleOp)){
+        else if(checker.isRealNumber(singleOp)){
             ComplexNumber zReal = checker.createFromSingleNumber(singleOp);
             stack.insertNumber(zReal);
         }
@@ -273,22 +180,27 @@ public class FXMLDocumentController implements Initializable {
     * @param    command     la stringa che identifica un comando che opera con
     *                       le variabili seguito dalla variabile
     */
-    private void runOperationOnVariables(String command) throws Exception{
-        if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            variables.insertVariable(command.charAt(1), stack.removeLastNumber());
+    private void runOperationOnVariables(String command){
+        try{
+            if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+                variables.insertVariable(command.charAt(1), stack.removeLastNumber());
+            }
+            if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+                stack.insertNumber(variables.getValueFromVariable(command.charAt(1)));
+            }
+            if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+                ArithmeticalOperations addition = factory.getOperation("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+                ComplexNumber[] result = addition.execute();
+                stack.insertNumber(result[0]); 
+            }
+            if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+                ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+                ComplexNumber[] result = subtraction.execute();
+                stack.insertNumber(result[0]); 
+            }
         }
-        if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            stack.insertNumber(variables.getValueFromVariable(command.charAt(1)));
-        }
-        if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            ArithmeticalOperations addition = factory.getOperation("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
-            ComplexNumber[] result = addition.execute();
-            stack.insertNumber(result[0]); 
-        }
-        if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
-            ComplexNumber[] result = subtraction.execute();
-            stack.insertNumber(result[0]); 
+        catch(ArithmeticalException exc){
+            System.out.println("Errore nell'esecuzione dell'operazione aritmetica.");
         }
     }
 
@@ -317,15 +229,15 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println("Devi specificare le operazioni da associare al nuovo alias!");
             }
             else{
-                if((this.isRealNumber(tmpArray[1])) || (this.isComplexNumber(tmpArray[1]))){
+                if((checker.isRealNumber(tmpArray[1])) || (checker.isComplexNumber(tmpArray[1]))){
                     System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
                 }
-                else if(this.isOperation(tmpArray[1])){
+                else if(checker.isOperation(customizedOperations, tmpArray[1])){
                     System.out.println("Quest'operazione esiste già!");
                 }
                 else{
                     for(int k = 2; k < tmpArray.length; k++){
-                        if((!this.isOperation(tmpArray[k])) && (!this.isRealNumber(tmpArray[k])) && (!this.isComplexNumber(tmpArray[k]))){
+                        if((!checker.isOperation(customizedOperations, tmpArray[k])) && (!checker.isRealNumber(tmpArray[k])) && (!checker.isComplexNumber(tmpArray[k]))){
                             System.out.println("La stringa inserita non è un'operazione o un numero!");
                             input.clear();
                             return;
@@ -348,16 +260,16 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println("Il nome di un'operazione personalizzata non deve contenere spazi!");
             }
             else{
-                if((this.isRealNumber(tmpArray[2])) || (this.isComplexNumber(tmpArray[2]))){
+                if((checker.isRealNumber(tmpArray[2])) || (checker.isComplexNumber(tmpArray[2]))){
                     System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
                 }
-                else if(!this.isCustomizedOperation(tmpArray[1])){
+                else if(!checker.isCustomizedOperation(customizedOperations, tmpArray[1])){
                     System.out.println("Quest'operazione personalizzata non è presente in memoria!");
                 }
                 else if(tmpArray[1].equalsIgnoreCase(tmpArray[2])){
                     System.out.println("Il nuovo nome da attribuire all'operazione personalizzata dev'essere diverso dal precedente.");
                 }
-                else if(this.isOperation(tmpArray[2])){
+                else if(checker.isOperation(customizedOperations, tmpArray[2])){
                     System.out.println("Il nuovo nome che vuoi attribuire esiste già!");
                 }
                 else{
@@ -377,7 +289,7 @@ public class FXMLDocumentController implements Initializable {
             else{
                 if(customizedOperations.getCustomizedOperationsMap().containsKey(tmpArray[1])){
                     for(int k = 2; k < tmpArray.length; k++){
-                        if((!this.isOperation(tmpArray[k])) && (!this.isRealNumber(tmpArray[k])) && (!this.isComplexNumber(tmpArray[k]))){
+                        if((!checker.isOperation(customizedOperations, tmpArray[k])) && (!checker.isRealNumber(tmpArray[k])) && (!checker.isComplexNumber(tmpArray[k]))){
                             System.out.println("La stringa inserita non è un'operazione!");
                             input.clear();
                             return;
@@ -426,6 +338,7 @@ public class FXMLDocumentController implements Initializable {
                     this.runPushOperation(operation);
                     this.runArithmeticalOperation(operation);
                     this.runStackOperation(operation);
+                    this.runOperationOnVariables(operation);
                 }
             }
         }
@@ -453,7 +366,8 @@ public class FXMLDocumentController implements Initializable {
         variables = new Variables();
         variablesStack = new VariablesStack();
         customizedOperations = new CustomizedOperationsMap();
-        checker = new CheckerString(DECIMAL_NUMBERS);
+        checker = new Checker();
+        checker.setDecimals(DECIMAL_NUMBERS);
         factory = new OperationFactory();
         input.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ENTER))

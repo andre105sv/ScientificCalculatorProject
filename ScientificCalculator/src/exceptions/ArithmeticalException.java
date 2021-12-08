@@ -10,6 +10,6 @@ package exceptions;
  *
  * @author Andrea
  */
-public class NotDefinedArgumentException extends ArithmeticalException{
+public class ArithmeticalException extends Exception{
 
 }

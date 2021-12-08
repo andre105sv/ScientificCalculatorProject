@@ -6,8 +6,7 @@
 
 package scientificcalculator;
 
-import exceptions.DivisionByZeroException;
-import exceptions.NotDefinedArgumentException;
+import exceptions.ArithmeticalException;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -30,7 +29,7 @@ public class AdditionTest{
      * Test of execute method, of class Addition.
      */
     @Test
-    public void testExecute() throws DivisionByZeroException, NotDefinedArgumentException{
+    public void testExecute() throws ArithmeticalException{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResultAB = new ComplexNumber(-29.5, +6.89);     

@@ -36,6 +36,4 @@ public class ReversalSign implements ArithmeticalOperations{
         return new ComplexNumber[]{new ComplexNumber(Math.round((-operand.getRealPart()) * decimals) / decimals, Math.round((-operand.getImmPart()) * decimals) / decimals)};
     }
 
-    
-
 }

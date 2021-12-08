@@ -6,8 +6,7 @@
 
 package scientificcalculator;
 
-import exceptions.DivisionByZeroException;
-import exceptions.NotDefinedArgumentException;
+import exceptions.ArithmeticalException;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -30,7 +29,7 @@ public class ReversalSignTest{
      * Test of execute method, of class ReversalSign.
      */
     @Test
-    public void testExecute() throws DivisionByZeroException, NotDefinedArgumentException{
+    public void testExecute() throws ArithmeticalException{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber expResult = new ComplexNumber(32, -7);     
         ArithmeticalOperations reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
