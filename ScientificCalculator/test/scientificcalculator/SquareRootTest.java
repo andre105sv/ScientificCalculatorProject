@@ -6,6 +6,8 @@
 
 package scientificcalculator;
 
+import exceptions.DivisionByZeroException;
+import exceptions.NotDefinedArgumentException;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -27,18 +29,21 @@ public class SquareRootTest{
     /**
      * Test of execute method, of class SquareRoot.
      */
-    @Test
-    public void testExecute() throws Exception{
+    @Test(expected = NotDefinedArgumentException.class)
+    public void testExecute() throws DivisionByZeroException, NotDefinedArgumentException{
         ComplexNumber a = new ComplexNumber(3, 6);
         ComplexNumber[] expResult = new ComplexNumber[2];
-        expResult[0] = new ComplexNumber(1.1583, 2.3166);
-        expResult[1] = new ComplexNumber(-2.2054, -1.3581);
+        expResult[0] = new ComplexNumber(1.158, 2.317);
+        expResult[1] = new ComplexNumber(-2.205, -1.358);
         ArithmeticalOperations sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         ComplexNumber[] result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), PRECISION);
         assertEquals(expResult[1].getRealPart(), result[1].getRealPart(), PRECISION);
         assertEquals(expResult[1].getImmPart(), result[1].getImmPart(), PRECISION);
+        ComplexNumber zero = new ComplexNumber(0, 0);
+        ArithmeticalOperations sqrtOfZero = factory.getOperation("SQUARE_ROOT", zero, DECIMAL_NUMBERS);
+        ComplexNumber[] resultSqrtOfZero = sqrtOfZero.execute();
     }
 
 }

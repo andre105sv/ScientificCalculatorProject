@@ -6,7 +6,7 @@
 
 package scientificcalculator;
 
-import java.lang.Exception;
+import exceptions.DivisionByZeroException;
 
 /**
  *
@@ -33,17 +33,17 @@ public class Division implements ArithmeticalOperations{
 
     /**
     * Restituisce il rapporto di due nomeri complessi o reali.
+    * @throws   DivisionByZeroException   se viene diviso un numero per 0
     * @return   l'oggetto di tipo ComplexNumber che si ottiene dal rapporto tra 
     *           due numeri complessi o reali
     */
     @Override
-    public ComplexNumber[] execute() throws Exception{
+    public ComplexNumber[] execute() throws DivisionByZeroException{
         if((secondOp.getRealPart() == 0) && (secondOp.getImmPart() == 0)){
-            throw new Exception("Divisione per 0 non amessa");
+            throw new DivisionByZeroException();
         }
         double quoz = Math.round(((firstOp.getRealPart() * secondOp.getRealPart() + firstOp.getImmPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(), 2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals;
-        double div =  Math.round(((firstOp.getImmPart() * secondOp.getRealPart() - firstOp.getRealPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(),2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals;
-        
+        double div =  Math.round(((firstOp.getImmPart() * secondOp.getRealPart() - firstOp.getRealPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(),2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals;     
         return new ComplexNumber[]{new ComplexNumber(quoz, div)};
     }
 

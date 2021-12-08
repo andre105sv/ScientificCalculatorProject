@@ -6,8 +6,6 @@
 
 package scientificcalculator;
 
-import java.lang.Exception;
-
 /**
  *
  * @author Andrea
@@ -34,7 +32,7 @@ public class ReversalSign implements ArithmeticalOperations{
     *           segno di un numero complesso o reale
     */
     @Override
-    public ComplexNumber[] execute() throws Exception{
+    public ComplexNumber[] execute(){
         return new ComplexNumber[]{new ComplexNumber(Math.round((-operand.getRealPart()) * decimals) / decimals, Math.round((-operand.getImmPart()) * decimals) / decimals)};
     }
 

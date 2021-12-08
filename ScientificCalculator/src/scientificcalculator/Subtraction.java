@@ -6,8 +6,6 @@
 
 package scientificcalculator;
 
-import java.lang.Exception;
-
 /**
  *
  * @author Andrea
@@ -37,7 +35,7 @@ public class Subtraction implements ArithmeticalOperations{
     *           tra due numeri complessi o reali
     */
     @Override
-    public ComplexNumber[] execute() throws Exception{
+    public ComplexNumber[] execute(){
         double realSum = Math.round((firstOp.getRealPart() - secondOp.getRealPart()) * decimals) / decimals;
         double immSum = Math.round((firstOp.getImmPart() - secondOp.getImmPart()) * decimals) / decimals;
         return new ComplexNumber[]{new ComplexNumber(realSum, immSum)};
