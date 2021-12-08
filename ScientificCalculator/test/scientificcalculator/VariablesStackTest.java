@@ -18,8 +18,8 @@ import static org.junit.Assert.*;
  */
 public class VariablesStackTest {
     
-    VariablesStack instance;
-    Variables variables;
+    private VariablesStack instance;
+    private Variables variables;
     
     
     
@@ -65,8 +65,11 @@ public class VariablesStackTest {
         Variables expResult = variables;
         variables.insertVariable('a', new ComplexNumber(2,3));
         instance.insertVariables(variables);
+        int prevSize = instance.getSize();
         Variables result = instance.removeLast();
+        int actualSize =  instance.getSize();
         assertEquals(expResult, result);
+        assertEquals(prevSize - 1, actualSize);
     }
 
     

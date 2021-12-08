@@ -40,7 +40,9 @@ public class FXMLDocumentController implements Initializable {
     private StackPrincipale stack;
     @FXML
     private Button insertBtn;
+    @FXML
     private Button deleteBtn;
+    @FXML
     private Button clearBtn;
     @FXML
     private ListView<ComplexNumber> elementiStack;
@@ -59,6 +61,10 @@ public class FXMLDocumentController implements Initializable {
     private CheckerString checker;
     @FXML
     private ListView<String> listVariables;
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private Button restoreBtn;
 
     /**
     * Restituisce "true" se la stringa specificata in input indica un'operazione
@@ -445,7 +451,6 @@ public class FXMLDocumentController implements Initializable {
             variables = pushVariables.undo(null);
         }
     }
-    
 
     /**
      * Inizializza la controller class.
@@ -515,6 +520,21 @@ public class FXMLDocumentController implements Initializable {
         obList.addAll(stack.getFirst12Elements());
         elementiStack.maxHeight(12);
         input.clear();
+    }
+
+    @FXML
+    private void saveVariables(ActionEvent event) {
+        if( variables.getSize() > 0){
+            pushVariables.perform(new Variables(variables.getVariablesMap()));
+         }
+    }
+
+    @FXML
+    private void restoreVariables(ActionEvent event) {
+        if( variablesStack.getSize() > 0){
+            variables = pushVariables.undo(null);
+            this.showVariables();
+        }
     }
 
 
