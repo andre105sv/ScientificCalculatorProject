@@ -37,7 +37,7 @@ public class ModuloTest {
         
         ComplexNumber c = new ComplexNumber(4,5);
         ComplexNumber expResult = new ComplexNumber(6.403,0);
-        ArithmeticalOperations modulo = factory.getOperation("MODULO", c, DECIMAL_NUMBERS);
+        TranscendentalOperations modulo = factory.getTranscendentalOperations("MODULO", c, DECIMAL_NUMBERS);
         ComplexNumber result[] = modulo.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);

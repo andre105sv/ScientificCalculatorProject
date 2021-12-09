@@ -62,6 +62,7 @@ public class FXMLDocumentController implements Initializable {
     private DupCommand dup;// -- tutte le dup
     private SwapCommand swap;// -- tutte le swap
     private OverCommand over;// -- tutte le over
+    private PushVariablesCommand pushVariables;
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
@@ -69,6 +70,10 @@ public class FXMLDocumentController implements Initializable {
     private CheckerString checker;
     @FXML
     private ListView<String> listVariables;
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private Button restoreBtn;
 
     /**
     * Restituisce "true" se la stringa specificata in input indica un'operazione
@@ -190,40 +195,40 @@ public class FXMLDocumentController implements Initializable {
         try{
             if(stack.getSize() > 0){
                 if(singleOp.equals("sqrt")){
-                    ArithmeticalOperations squareRoot = factory.getOperation("SQUARE_ROOT", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations squareRoot = factory.getArithmeticalOperations("SQUARE_ROOT", stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = squareRoot.execute(); 
                     for(ComplexNumber c : result)
                         stack.insertNumber(c);
                 }
                 else if(singleOp.equals("+-")){
-                    ArithmeticalOperations reverse = factory.getOperation("REVERSAL_SIGN", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = reverse.execute();
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("mod")){
-                    ArithmeticalOperations modulo = factory.getOperation("MODULO", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    TranscendentalOperations modulo = factory.getTranscendentalOperations("MODULO", stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = modulo.execute();
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("arg")){
-                    ArithmeticalOperations fase = factory.getOperation("FASE", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    TranscendentalOperations fase = factory.getTranscendentalOperations("FASE", stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = fase.execute();
                     stack.insertNumber(result[0]);
                 }
             }
             if(stack.getSize() > 1){
                 if(singleOp.equals("+")){
-                    ArithmeticalOperations addition = factory.getOperation("ADDITION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = addition.execute();
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("-")){
-                    ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = subtraction.execute();
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("*")){
-                    ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations multiplication = factory.getArithmeticalOperations("MULTIPLICATION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = multiplication.execute();
                     stack.insertNumber(result[0]);
                 }
@@ -234,7 +239,7 @@ public class FXMLDocumentController implements Initializable {
                         stack.insertNumber(op2);
                         stack.insertNumber(op1);
                     }
-                    ArithmeticalOperations division = factory.getOperation("DIVISION", op1, op2, DECIMAL_NUMBERS);
+                    ArithmeticalOperations division = factory.getArithmeticalOperations("DIVISION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = division.execute();
                     stack.insertNumber(result[0]);
                 }
@@ -307,14 +312,15 @@ public class FXMLDocumentController implements Initializable {
         }
         if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
             stack.insertNumber(variables.getValueFromVariable(command.charAt(1)));
+            variables.getVariablesMap().remove(command.charAt(1));
         }
         if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            ArithmeticalOperations addition = factory.getOperation("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+            ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
             ComplexNumber[] result = addition.execute();
             stack.insertNumber(result[0]); 
         }
         if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+            ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
             ComplexNumber[] result = subtraction.execute();
             stack.insertNumber(result[0]); 
         }
@@ -461,16 +467,17 @@ public class FXMLDocumentController implements Initializable {
     
     private void saveVariables(String text){
          if(text.equalsIgnoreCase("save") && variables.getSize() > 0){
-            variablesStack.insertVariables(new Variables(variables.getVariablesMap())); //implementarlo con il pattern Command
+            //variablesStack.insertVariables(new Variables(variables.getVariablesMap()));
+            pushVariables.perform(new Variables(variables.getVariablesMap()));
          }
     }
     
     private void restoreVariables(String text){
         if(text.equalsIgnoreCase("restore") && variablesStack.getSize() > 0){
-            variables = variablesStack.removeLast();
+            //variables = variablesStack.removeLast();
+            variables = pushVariables.undo(null);
         }
     }
-    
 
     /**
      * Inizializza la controller class.
@@ -492,6 +499,7 @@ public class FXMLDocumentController implements Initializable {
         dup = new DupCommand(stack);
         swap = new SwapCommand(stack);
         over = new OverCommand(stack);
+        pushVariables = new PushVariablesCommand(variablesStack);
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
         obList.addAll(stack.getFirst12Elements());
@@ -571,7 +579,20 @@ public class FXMLDocumentController implements Initializable {
             }                  
             customizedOperations.insertCustomOperation(linea[0].trim(), values);
             System.out.println(customizedOperations.toString());
-            
+        }
+    } 
+    @FXML
+    private void saveVariables(ActionEvent event) {
+        if( variables.getSize() > 0){
+            pushVariables.perform(new Variables(variables.getVariablesMap()));
+         }
+    }
+
+    @FXML
+    private void restoreVariables(ActionEvent event) {
+        if( variablesStack.getSize() > 0){
+            variables = pushVariables.undo(null);
+            this.showVariables();
         }
     }
 

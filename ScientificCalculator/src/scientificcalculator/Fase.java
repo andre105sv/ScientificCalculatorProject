@@ -11,7 +11,7 @@ import exceptions.NotDefinedArgumentException;
  *
  * @author filso
  */
-public class Fase implements ArithmeticalOperations{
+public class Fase implements TranscendentalOperations{
     
     private ComplexNumber operand;
     private double decimals; 
@@ -29,6 +29,7 @@ public class Fase implements ArithmeticalOperations{
     /**
     * Restituisce la fase di un numero complesso. 
     * @return   un array di ComplexNumber contenente la fase del numero complesso.
+     * @throws exceptions.NotDefinedArgumentException
     */
     @Override
     public ComplexNumber[] execute() throws NotDefinedArgumentException{

@@ -33,7 +33,7 @@ public class FaseTest {
     public void testExecute() throws Exception {
         ComplexNumber c = new ComplexNumber(4,5);
         ComplexNumber expResult = new ComplexNumber(0.896,0);
-        ArithmeticalOperations fase = factory.getOperation("FASE", c, DECIMAL_NUMBERS);
+        TranscendentalOperations fase = factory.getTranscendentalOperations("FASE", c, DECIMAL_NUMBERS);
         ComplexNumber result[] = fase.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);

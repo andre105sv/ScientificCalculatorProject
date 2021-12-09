@@ -10,7 +10,7 @@ package scientificcalculator;
  *
  * @author filso
  */
-public class Modulo implements ArithmeticalOperations{
+public class Modulo implements TranscendentalOperations{
     
     private ComplexNumber operand;
     private double decimals;
