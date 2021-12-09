@@ -21,12 +21,97 @@ import java.util.Arrays;
  *
  * @author Andrea
  */
-public class CheckerCustomizedOperations {
+public class CheckerOperation{
 
-    private Checker checkerOperation;
+    private CheckerComplexNumber checker;
 
-    public CheckerCustomizedOperations(){
-        checkerOperation = new Checker();
+    public CheckerOperation(){
+        checker = new CheckerComplexNumber();
+    }
+
+    /**
+    * Restituisce "true" se la stringa specificata in input indica un'operazione
+    * di tipo aritmetico ("+", "-", "*", "/", "sqrt", "+-").
+    * @param    op      la stringa che identifica l'operazione
+    * @return   true    se l'operazione specificata in input è di tipo 
+    *                   aritmetico
+    */
+    private boolean isArithmeticalOperation(String op){
+        if((op.equals("+")) || (op.equals("-")) || (op.equals("*")) || (op.equals("/")) || (op.equals("+-"))){
+            return true;
+        }
+        if((op.equalsIgnoreCase("sqrt"))){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * Restituisce "true" se la stringa specificata in input indica un'operazione
+    * che lavora sullo stack ("clear", "dup", "drop", "swap", "over").
+    * @param    op      la stringa che identifica l'operazione
+    * @return   true    se l'operazione specificata in input lavora sullo 
+    *                   stack.
+    */
+    private boolean isStackOperation(String op){
+        if((op.equalsIgnoreCase("drop")) || (op.equalsIgnoreCase("dup")) || (op.equalsIgnoreCase("swap")) || (op.equalsIgnoreCase("over")) || (op.equalsIgnoreCase("clear"))){
+            return true;
+        }
+        if((op.equalsIgnoreCase("save") || (op.equalsIgnoreCase("restore")))){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isOperationWithVariables(String op){
+        if((op.length() == 2) && (op.charAt(0) == '>') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
+            return true;
+        }
+        if((op.length() == 2) && (op.charAt(0) == '<') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
+            return true;
+        }
+        if((op.length() == 2) && (op.charAt(0) == '+') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
+            return true;
+        }
+        if((op.length() == 2) && (op.charAt(0) == '-') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * Restituisce "true" se la stringa specificata in input indica un'operazione
+    * di tipo personalizzato.
+    * @param    op      la stringa che identifica l'operazione
+    * @return   true    se l'operazione specificata in input è di tipo 
+    *                   personalizzato
+    */
+    public boolean isCustomizedOperation(CustomizedOperationsMap customOperation, String op){
+        if(customOperation.getCustomizedOperationsMap().containsKey(op)){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * Restituisce "true" se la stringa specificata in input è un'operazione.
+    * @param    op      la stringa che identifica l'operazione
+    * @return   true    se la stringa specificata in input è un'operazione
+    */
+    public boolean isOperation(CustomizedOperationsMap customOperation, String operationString){
+        if(this.isArithmeticalOperation(operationString)){
+            return true;
+        }
+        if(this.isStackOperation(operationString)){
+            return true;
+        }
+        if(this.isCustomizedOperation(customOperation, operationString)){
+            return true;
+        }
+        if(this.isOperationWithVariables(operationString)){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -51,15 +136,15 @@ public class CheckerCustomizedOperations {
             throw new NotDefinedValueOperationException();
         }
         else{
-            if((checkerOperation.isRealNumber(tmpArray[1])) || (checkerOperation.isComplexNumber(tmpArray[1]))){
+            if((checker.isSingleNumber(tmpArray[1])) || (checker.isCartesianComplexNumber(tmpArray[1]))){
                 throw new NumberAsNameOperationException();
             }
-            else if(checkerOperation.isOperation(customOperation, tmpArray[1])){
+            else if(this.isOperation(customOperation, tmpArray[1])){
                 throw new ExistentOperationException();
             }
             else{
                 for(int k = 2; k < tmpArray.length; k++){
-                    if((!checkerOperation.isOperation(customOperation, tmpArray[k])) && (!checkerOperation.isRealNumber(tmpArray[k])) && (!checkerOperation.isComplexNumber(tmpArray[k]))){
+                    if((!this.isOperation(customOperation, tmpArray[k])) && (!checker.isSingleNumber(tmpArray[k])) && (!checker.isCartesianComplexNumber(tmpArray[k]))){
                         throw new NotCorrectValueOperationException();
                     }
                 }
@@ -93,16 +178,16 @@ public class CheckerCustomizedOperations {
             throw new BlankSpaceStringException();
         }
         else{
-            if((checkerOperation.isRealNumber(tmpArray[2])) || (checkerOperation.isComplexNumber(tmpArray[2]))){
+            if((checker.isSingleNumber(tmpArray[2])) || (checker.isCartesianComplexNumber(tmpArray[2]))){
                 throw new NumberAsNameOperationException();
             }
-            else if(!checkerOperation.isCustomizedOperation(customOperation, tmpArray[1])){
+            else if(!this.isCustomizedOperation(customOperation, tmpArray[1])){
                 throw new NotExistentOperationException();
             }
             else if(tmpArray[1].equalsIgnoreCase(tmpArray[2])){
                 throw new SameNameException();
             }
-            else if(checkerOperation.isOperation(customOperation, tmpArray[2])){
+            else if(this.isOperation(customOperation, tmpArray[2])){
                 throw new ExistentOperationException();
             }
             else{
@@ -138,7 +223,7 @@ public class CheckerCustomizedOperations {
             }
             else{
                 for(int k = 2; k < tmpArray.length; k++){
-                    if((!checkerOperation.isOperation(customOperation, tmpArray[k])) && (!checkerOperation.isRealNumber(tmpArray[k])) && (!checkerOperation.isComplexNumber(tmpArray[k]))){
+                    if((!this.isOperation(customOperation, tmpArray[k])) && (!checker.isSingleNumber(tmpArray[k])) && (!checker.isCartesianComplexNumber(tmpArray[k]))){
                         throw new NotCorrectValueOperationException();
                     }
                 }

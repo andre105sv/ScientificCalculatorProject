@@ -6,11 +6,13 @@
 
 package scientificcalculator;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Andrea, Filippo
  */
-public class Checker{
+public class CheckerComplexNumber{
 
     private String complex_number = "COMPLEX__NUMBER";
     private String single_number = "SINGLENUMBER";
@@ -18,7 +20,7 @@ public class Checker{
     private String continue_checking = "CHECKING";
     private double decimals;
 
-    public Checker(){
+    public CheckerComplexNumber(){
     
     }
 
@@ -101,7 +103,7 @@ public class Checker{
     * Controlla se la stringa è un numero complesso, un inserimento invalido o
     * se deve continuare il check.
     * @param   text    la stringa da verificare
-    * @return   la stringa"COMPLEX_NUMBER" se trova un numero complesso, 
+    * @return   la stringa "COMPLEX_NUMBER" se trova un numero complesso, 
     *           "INVALID" se l'inserimento non è valido, "CHECKING" negli altri 
     *           casi
     */
@@ -109,7 +111,7 @@ public class Checker{
         if((text.contains("+")) || (text.contains("-"))){
             String replaceAll = text.replaceAll(" ", "");
             String[] scanner = replaceAll.split("\\+|\\-");
-            if(scanner.length > 2){
+            if((scanner.length == 1) || (scanner.length > 2)){
                 return invalid_insert;
             }
             if(this.checkPossibleRealPart(scanner[0])){
@@ -242,7 +244,7 @@ public class Checker{
     * @return   true    se la stringa specificata in input è convertibile in un
     *                   numero reale
     */
-    public boolean isRealNumber(String number){
+    public boolean isSingleNumber(String number){
         String checkResult = this.checkString(number);
         if(checkResult.equals("SINGLENUMBER")){
             return true;
@@ -255,96 +257,11 @@ public class Checker{
     * complesso.
     * @param    number      la stringa che identifica il numero
     * @return   true    se la stringa specificata in input è convertibile in un
-    *                   numero complesso
+    *                   numero complesso in notazione cartesiana
     */
-    public boolean isComplexNumber(String number){
+    public boolean isCartesianComplexNumber(String number){
         String checkResult = this.checkString(number);
         if(checkResult.equals("COMPLEX__NUMBER")){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un'operazione
-    * di tipo aritmetico ("+", "-", "*", "/", "sqrt", "+-").
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se l'operazione specificata in input è di tipo 
-    *                   aritmetico
-    */
-    private boolean isArithmeticalOperation(String op){
-        if((op.equals("+")) || (op.equals("-")) || (op.equals("*")) || (op.equals("/")) || (op.equals("+-"))){
-            return true;
-        }
-        if((op.equalsIgnoreCase("sqrt"))){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un'operazione
-    * che lavora sullo stack ("clear", "dup", "drop", "swap", "over").
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se l'operazione specificata in input lavora sullo 
-    *                   stack.
-    */
-    private boolean isStackOperation(String op){
-        if((op.equalsIgnoreCase("drop")) || (op.equalsIgnoreCase("dup")) || (op.equalsIgnoreCase("swap")) || (op.equalsIgnoreCase("over")) || (op.equalsIgnoreCase("clear"))){
-            return true;
-        }
-        if((op.equalsIgnoreCase("save") || (op.equalsIgnoreCase("restore")))){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isOperationWithVariables(String op){
-        if((op.length() == 2) && (op.charAt(0) == '>') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
-            return true;
-        }
-        if((op.length() == 2) && (op.charAt(0) == '<') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
-            return true;
-        }
-        if((op.length() == 2) && (op.charAt(0) == '+') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
-            return true;
-        }
-        if((op.length() == 2) && (op.charAt(0) == '-') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input indica un'operazione
-    * di tipo personalizzato.
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se l'operazione specificata in input è di tipo 
-    *                   personalizzato
-    */
-    public boolean isCustomizedOperation(CustomizedOperationsMap customOperation, String op){
-        if(customOperation.getCustomizedOperationsMap().containsKey(op)){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-    * Restituisce "true" se la stringa specificata in input è un'operazione.
-    * @param    op      la stringa che identifica l'operazione
-    * @return   true    se la stringa specificata in input è un'operazione
-    */
-    public boolean isOperation(CustomizedOperationsMap customOperation, String operationString){
-        if(this.isArithmeticalOperation(operationString)){
-            return true;
-        }
-        if(this.isStackOperation(operationString)){
-            return true;
-        }
-        if(this.isCustomizedOperation(customOperation, operationString)){
-            return true;
-        }
-        if(this.isOperationWithVariables(operationString)){
             return true;
         }
         return false;

@@ -31,11 +31,13 @@ import javafx.scene.input.KeyEvent;
  */
 public class FXMLDocumentController implements Initializable {
 
+    //@FXML
+    //private Label label;
     @FXML
-    private Label label;
+    private Label noticeLbl;
     @FXML
     private TextField input;
-    private final double DECIMAL_NUMBERS = 1000.0;
+    private final double DECIMAL_NUMBERS = 1000;
     private final int MAX_VIEW_SIZE = 12;
     private StackPrincipale stack;
     @FXML
@@ -58,8 +60,8 @@ public class FXMLDocumentController implements Initializable {
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
     private OperationFactory factory;
-    private Checker checker;
-    private CheckerCustomizedOperations checkCustomOperation;
+    private CheckerComplexNumber checkerNumber;
+    private CheckerOperation checkerOperation;
     @FXML
     private ListView<String> listVariables;
     @FXML
@@ -73,12 +75,12 @@ public class FXMLDocumentController implements Initializable {
     *                       reale da inserire nello stack
     */
     private void runPushOperation(String singleOp){
-        if(checker.isComplexNumber(singleOp)){
-            ComplexNumber zComplex = checker.createFromComplexNumber(singleOp);
+        if(checkerNumber.isCartesianComplexNumber(singleOp)){
+            ComplexNumber zComplex = checkerNumber.createFromComplexNumber(singleOp);
             stack.insertNumber(zComplex);
         }
-        else if(checker.isRealNumber(singleOp)){
-            ComplexNumber zReal = checker.createFromSingleNumber(singleOp);
+        else if(checkerNumber.isSingleNumber(singleOp)){
+            ComplexNumber zReal = checkerNumber.createFromSingleNumber(singleOp);
             stack.insertNumber(zReal);
         }
     }
@@ -128,11 +130,11 @@ public class FXMLDocumentController implements Initializable {
                 }
             }
         }
-        catch(DivisionByZeroException ex){
-            System.out.println("Non è possibile dividere un numero per zero.");
+        catch(DivisionByZeroException ex1){
+            noticeLbl.setText("Non è possibile dividere un numero per zero.");
         }
-        catch(NotDefinedArgumentException ex){
-            System.out.println("La radice quadrata di 0 non è definita.");
+        catch(NotDefinedArgumentException ex2){
+            noticeLbl.setText("La radice quadrata di 0 non è definita.");
         }
     }
 
@@ -163,7 +165,10 @@ public class FXMLDocumentController implements Initializable {
             }
         }
     }
-    
+    /**
+    * Permette la visualizzazione delle variabili all'interno della 
+    * Observable List.
+    */
     private void showVariables(){
         obVariables.clear();
         String s = variables.toString();
@@ -171,7 +176,6 @@ public class FXMLDocumentController implements Initializable {
         for(String x : tmp)
             obVariables.add(x);
     }
-    
 
     /**
     * Esegue l'operazione sulle variabili specificata in input.
@@ -207,8 +211,8 @@ public class FXMLDocumentController implements Initializable {
                 stack.insertNumber(result[0]); 
             }
         }
-        catch(ArithmeticalException exc){
-            System.out.println("Errore nell'esecuzione dell'operazione aritmetica.");
+        catch(ArithmeticalException ex){
+            noticeLbl.setText("Errore nell'esecuzione dell'operazione aritmetica.");
         }
     }
 
@@ -230,46 +234,46 @@ public class FXMLDocumentController implements Initializable {
     private void customOperation(String command){
         try{
             if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("create"))){
-                String[] customArray = checkCustomOperation.checkCreateOperation(customizedOperations, command);
+                String[] customArray = checkerOperation.checkCreateOperation(customizedOperations, command);
                 customizedOperations.insertCustomOperation(customArray[0], Arrays.copyOfRange(customArray, 1, customArray.length));   
             }
             else if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("rename"))){
-                String[] customArray = checkCustomOperation.checkRenameOperation(customizedOperations, command);
+                String[] customArray = checkerOperation.checkRenameOperation(customizedOperations, command);
                 customizedOperations.renameCustomOperation(customArray[0], customArray[1]);   
             }
             else if((command.length() > 2) && (command.toLowerCase().substring(0, 3).equals("set"))){
-                String[] customArray = checkCustomOperation.checkSetOperation(customizedOperations, command);
+                String[] customArray = checkerOperation.checkSetOperation(customizedOperations, command);
                 customizedOperations.insertCustomOperation(customArray[0], Arrays.copyOfRange(customArray, 1, customArray.length));   
             }
             else if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("delete"))){
-                String opToRemove = checkCustomOperation.checkDeleteOperation(customizedOperations, command);
+                String opToRemove = checkerOperation.checkDeleteOperation(customizedOperations, command);
                 customizedOperations.deleteCustomOperation(opToRemove);   
             }
             System.out.println(customizedOperations.toString());
         }
         catch(NotDefinedNameOperationException ex1){
-            System.out.println("È necessario specificare il nome dell'operazione personalizzata. Per info clicca su HELP.");
+            noticeLbl.setText("È necessario specificare il nome dell'operazione personalizzata.\nPer info clicca su HELP.");
         }
         catch(NotDefinedValueOperationException ex2){
-            System.out.println("È necessario definire tutti i campi dell'operazione personalizzata. Per info clicca su HELP.");
+            noticeLbl.setText("È necessario definire tutti i campi dell'operazione personalizzata.\nPer info clicca su HELP.");
         }
         catch(NumberAsNameOperationException ex3){
-            System.out.println("Non puoi usare un numero come nome di un'operazione personalizzata!");
+            noticeLbl.setText("Non puoi usare un numero come nome di un'operazione personalizzata!");
         }
         catch(ExistentOperationException ex4){
-            System.out.println("Quest'operazione esiste già!");
+            noticeLbl.setText("Quest'operazione esiste già!");
         }
         catch(NotCorrectValueOperationException ex5){
-            System.out.println("La stringa inserita non è un'operazione o un numero!");
+            noticeLbl.setText("La stringa inserita non è un'operazione o un numero!");
         }
         catch(BlankSpaceStringException ex6){
-            System.out.println("Il nome di un'operazione personalizzata non deve contenere spazi!");
+            noticeLbl.setText("Il nome di un'operazione personalizzata non deve contenere spazi!");
         }
         catch(NotExistentOperationException ex7){
-            System.out.println("Quest'operazione personalizzata non è presente in memoria!");
+            noticeLbl.setText("Quest'operazione personalizzata non è presente in memoria!");
         }
         catch(SameNameException ex8){
-            System.out.println("Il nuovo nome da attribuire all'operazione personalizzata dev'essere diverso dal precedente.");
+            noticeLbl.setText("Il nuovo nome da attribuire all'operazione personalizzata dev'essere diverso dal precedente.");
         }
     }
 
@@ -289,11 +293,18 @@ public class FXMLDocumentController implements Initializable {
                     this.runArithmeticalOperation(operation);
                     this.runStackOperation(operation);
                     this.runOperationOnVariables(operation);
+                    this.saveVariables(operation);
+                    this.restoreVariables(operation);
                 }
             }
         }
     }
-    
+
+    /**
+    * Esegue l'operazione di salvataggio di tutte le variabili in una struttura 
+    * dati VariablesStack in modo da poterle recuperare in seguito.
+    * @param    text    la stringa che identifica il comando in input
+    */
     private void saveVariables(String text){
          if(text.equalsIgnoreCase("save") && variables.getSize() > 0){
             //variablesStack.insertVariables(new Variables(variables.getVariablesMap()));
@@ -301,6 +312,11 @@ public class FXMLDocumentController implements Initializable {
          }
     }
     
+    /**
+    * Esegue l'operazione di ripristino delle variabili dalla struttura dati
+    * VariablesStack in cui esse erano memorizzate.
+    * @param    text    la stringa che identifica il comando in input
+    */
     private void restoreVariables(String text){
         if(text.equalsIgnoreCase("restore") && variablesStack.getSize() > 0){
             //variables = variablesStack.removeLast();
@@ -317,9 +333,9 @@ public class FXMLDocumentController implements Initializable {
         variables = new Variables();
         variablesStack = new VariablesStack();
         customizedOperations = new CustomizedOperationsMap();
-        checker = new Checker();
-        checker.setDecimals(DECIMAL_NUMBERS);
-        checkCustomOperation = new CheckerCustomizedOperations();
+        checkerNumber = new CheckerComplexNumber();
+        checkerNumber.setDecimals(DECIMAL_NUMBERS);
+        checkerOperation = new CheckerOperation();
         factory = new OperationFactory();
         input.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ENTER))
@@ -330,12 +346,12 @@ public class FXMLDocumentController implements Initializable {
         dup = new DupCommand(stack);
         swap = new SwapCommand(stack);
         over = new OverCommand(stack);
+        noticeLbl.setText("");
         pushVariables = new PushVariablesCommand(variablesStack);
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
-        obList.addAll(stack.getFirst12Elements());
         listVariables.setItems(obVariables);
-        elementiStack.setItems(obList);  
+        elementiStack.setItems(obList);
     }    
 
     /**
@@ -363,6 +379,7 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     private void insert(ActionEvent event) throws Exception{
+        noticeLbl.setText("");
         String text = input.getText();
         this.runPushOperation(text);
         this.runArithmeticalOperation(text);
@@ -371,8 +388,7 @@ public class FXMLDocumentController implements Initializable {
         this.runOperationOnVariables(text);
         this.runCustomizedOperation(text);
         this.saveVariables(text);
-        this.restoreVariables(text);
-        
+        this.restoreVariables(text);        
         this.showVariables();
         obList.clear(); 
         obList.addAll(stack.getFirst12Elements());
@@ -394,6 +410,5 @@ public class FXMLDocumentController implements Initializable {
             this.showVariables();
         }
     }
-
 
 }
