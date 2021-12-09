@@ -33,13 +33,13 @@ public class ReversalSignTest{
     public void testExecute() throws DivisionByZeroException, NotDefinedArgumentException{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber expResult = new ComplexNumber(32, -7);     
-        ArithmeticalOperations reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        ArithmeticalOperations reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         ComplexNumber result[] = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
         ComplexNumber realValue = new ComplexNumber(15, 0);
         ComplexNumber expRealResult = new ComplexNumber(-15, 0);     
-        ArithmeticalOperations reverseReal = factory.getOperation("REVERSAL_SIGN", realValue, DECIMAL_NUMBERS);
+        ArithmeticalOperations reverseReal = factory.getArithmeticalOperations("REVERSAL_SIGN", realValue, DECIMAL_NUMBERS);
         ComplexNumber resultReal[] = reverseReal.execute();
         assertEquals(expRealResult.getRealPart(), resultReal[0].getRealPart(), PRECISION);
         assertEquals(expRealResult.getImmPart(), resultReal[0].getImmPart(), PRECISION);

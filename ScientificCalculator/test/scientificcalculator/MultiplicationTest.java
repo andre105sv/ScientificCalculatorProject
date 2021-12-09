@@ -34,14 +34,14 @@ public class MultiplicationTest{
         ComplexNumber a = new ComplexNumber(-32, +7);
         ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
         ComplexNumber expResultAB = new ComplexNumber(-79.23, +21.02);     
-        ArithmeticalOperations multiplicationAB = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        ArithmeticalOperations multiplicationAB = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         ComplexNumber resultAB[] = multiplicationAB.execute();
         assertEquals(expResultAB.getRealPart(), resultAB[0].getRealPart(), PRECISION);
         assertEquals(expResultAB.getImmPart(), resultAB[0].getImmPart(), PRECISION);
         ComplexNumber c = new ComplexNumber(-2.56, +3);
         ComplexNumber d = new ComplexNumber(+4.8951, -11.56);  
         ComplexNumber expResultCD = new ComplexNumber(22.149, 44.279);     
-        ArithmeticalOperations multiplicationCD = factory.getOperation("MULTIPLICATION", c, d, DECIMAL_NUMBERS);
+        ArithmeticalOperations multiplicationCD = factory.getArithmeticalOperations("MULTIPLICATION", c, d, DECIMAL_NUMBERS);
         ComplexNumber resultCD[] = multiplicationCD.execute();
         assertEquals(expResultCD.getRealPart(), resultCD[0].getRealPart(), PRECISION);
         assertEquals(expResultCD.getImmPart(), resultCD[0].getImmPart(), PRECISION);

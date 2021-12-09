@@ -13,16 +13,27 @@ import exceptions.NotDefinedArgumentException;
  *
  * @author anton
  */
-public class Exponential implements ArithmeticalOperations{
+public class Exponential implements TranscendentalOperations{
     private ComplexNumber operand;
-
-    public Exponential(ComplexNumber operand){
+    private double decimals;
+    
+    /**
+    * Costruisce un oggetto di tipo Exponential a partire da un numero 
+    * complesso e dalla sua precisione.
+    * @param    operand       l'operando di tipo ComplexNumber
+    * @param    decimals     la precisione in formato double
+    */
+    public Exponential(ComplexNumber operand, double decimals){
         this.operand = operand;
-        
+        this.decimals = decimals;
     }
 
+    /**
+    * Restituisce l'esponenziale di un numero complesso. 
+    * @return   un array di ComplexNumber contenente l'esponenziale del numero complesso.
+    */
     @Override
-    public ComplexNumber[] execute() throws DivisionByZeroException, NotDefinedArgumentException{
+    public ComplexNumber[] execute(){
        double realPart = Math.exp(operand.getRealPart()) * Math.cos(operand.getImmPart());
        double immPart = Math.exp(operand.getRealPart()) * Math.sin(operand.getImmPart());
        ComplexNumber[] result = new ComplexNumber[1];

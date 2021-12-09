@@ -6,10 +6,18 @@
 package scientificcalculator;
 
 import exceptions.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +30,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 
 
 /**
@@ -186,38 +195,60 @@ public class FXMLDocumentController implements Initializable {
         try{
             if(stack.getSize() > 0){
                 if(singleOp.equals("sqrt")){
-                    ArithmeticalOperations squareRoot = factory.getOperation("SQUARE_ROOT", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations squareRoot = factory.getArithmeticalOperations("SQUARE_ROOT", stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = squareRoot.execute(); 
                     for(ComplexNumber c : result)
                         stack.insertNumber(c);
                 }
                 else if(singleOp.equals("+-")){
-                    ArithmeticalOperations reverse = factory.getOperation("REVERSAL_SIGN", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = reverse.execute();
+                    stack.insertNumber(result[0]);
+                }
+                else if(singleOp.equals("mod")){
+                    TranscendentalOperations modulo = factory.getTranscendentalOperations("MODULO", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber[] result = modulo.execute();
+                    stack.insertNumber(result[0]);
+                }
+                else if(singleOp.equals("arg")){
+                    TranscendentalOperations fase = factory.getTranscendentalOperations("FASE", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber[] result = fase.execute();
+                    stack.insertNumber(result[0]);
+                }
+                else if(singleOp.equals("exp")){
+                    TranscendentalOperations exp = factory.getTranscendentalOperations("EXPONENTIAL", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber[] result = exp.execute();
                     stack.insertNumber(result[0]);
                 }
             }
             if(stack.getSize() > 1){
                 if(singleOp.equals("+")){
-                    ArithmeticalOperations addition = factory.getOperation("ADDITION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = addition.execute();
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("-")){
-                    ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = subtraction.execute();
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("*")){
-                    ArithmeticalOperations multiplication = factory.getOperation("MULTIPLICATION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ArithmeticalOperations multiplication = factory.getArithmeticalOperations("MULTIPLICATION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
                     ComplexNumber[] result = multiplication.execute();
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("/")){
-                    ArithmeticalOperations division = factory.getOperation("DIVISION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber op1 = stack.removeLastNumber();
+                    ComplexNumber op2 = stack.removeLastNumber();
+                    if(op2.getRealPart() == 0 && op2.getImmPart() == 0){
+                        stack.insertNumber(op2);
+                        stack.insertNumber(op1);
+                    }
+                    ArithmeticalOperations division = factory.getArithmeticalOperations("DIVISION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = division.execute();
                     stack.insertNumber(result[0]);
                 }
+                
             }
         }
         catch(DivisionByZeroException ex){
@@ -286,14 +317,15 @@ public class FXMLDocumentController implements Initializable {
         }
         if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
             stack.insertNumber(variables.getValueFromVariable(command.charAt(1)));
+            variables.getVariablesMap().remove(command.charAt(1));
         }
         if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            ArithmeticalOperations addition = factory.getOperation("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+            ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
             ComplexNumber[] result = addition.execute();
             stack.insertNumber(result[0]); 
         }
         if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            ArithmeticalOperations subtraction = factory.getOperation("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+            ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
             ComplexNumber[] result = subtraction.execute();
             stack.insertNumber(result[0]); 
         }
@@ -426,7 +458,7 @@ public class FXMLDocumentController implements Initializable {
     private void runCustomizedOperation(String stringOp){
         if(customizedOperations.getCustomizedOperationsMap().containsKey(stringOp)){
             for(String operation : customizedOperations.getCustomizedOperationsMap().get(stringOp)){
-                if(customizedOperations.getCustomizedOperationsMap().containsKey(operation)){
+                if(customizedOperations.getCustomizedOperationsMap().containsKey(operation)){                   
                     this.runCustomizedOperation(operation);
                 }
                 else{
@@ -522,6 +554,38 @@ public class FXMLDocumentController implements Initializable {
         input.clear();
     }
 
+    @FXML
+    private void saveFile(ActionEvent event) throws FileNotFoundException, IOException {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File ("C:\\Users\\filso\\OneDrive\\Documenti\\NetBeansProjects"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
+        File selectedFile = fc.showSaveDialog(null);
+        
+        PrintWriter printWriter = new PrintWriter(selectedFile);
+        printWriter.write(customizedOperations.toString());
+        printWriter.close(); 
+        
+    }
+    
+    @FXML
+    private void openFile(ActionEvent event) throws FileNotFoundException {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File ("C:\\Users\\filso\\OneDrive\\Documenti\\NetBeansProjects"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
+        File selectedFile = fc.showOpenDialog(null);
+        Scanner scanner = new Scanner(selectedFile);
+        customizedOperations.getCustomizedOperationsMap().clear();
+        String[] linea = null;
+        while (scanner.hasNextLine()){
+            linea = scanner.nextLine().replace("[", "").replace("]", "").trim().split("=");
+            String[] values = linea[1].split(",");
+            for(int k = 0; k < values.length; k++){
+                values[k] = values[k].trim();
+            }                  
+            customizedOperations.insertCustomOperation(linea[0].trim(), values);
+            System.out.println(customizedOperations.toString());
+        }
+    } 
     @FXML
     private void saveVariables(ActionEvent event) {
         if( variables.getSize() > 0){

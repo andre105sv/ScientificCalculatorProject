@@ -23,7 +23,7 @@ public class OperationFactory{
     * @return   un oggetto di tipo ArithmeticalOperations su cui eseguire la
     *           operazione specificata
     */
-    public ArithmeticalOperations getOperation(String operation, ComplexNumber firstOp, ComplexNumber secondOp, double decimals){
+    public ArithmeticalOperations getArithmeticalOperations(String operation, ComplexNumber firstOp, ComplexNumber secondOp, double decimals){
         if(operation == null){
             return null;
         }
@@ -39,6 +39,7 @@ public class OperationFactory{
         else if(operation.equalsIgnoreCase("DIVISION")){
             return new Division(firstOp, secondOp, decimals);
         }
+        
         else{
             return null;
         }
@@ -54,7 +55,7 @@ public class OperationFactory{
     * @return   un oggetto di tipo ArithmeticalOperations su cui eseguire la
     *           operazione specificata
     */
-    public ArithmeticalOperations getOperation(String operation, ComplexNumber operand, double decimals){
+    public ArithmeticalOperations getArithmeticalOperations(String operation, ComplexNumber operand, double decimals){
         if(operation == null){
             return null;
         }
@@ -67,6 +68,19 @@ public class OperationFactory{
         else{
             return null;
         }
+    }
+    public TranscendentalOperations getTranscendentalOperations(String operation, ComplexNumber operand, double decimals){
+        if(operation.equalsIgnoreCase("MODULO")){
+            return new Modulo(operand, decimals);
+        }
+        else if(operation.equalsIgnoreCase("FASE")){
+            return new Fase(operand, decimals);
+        }
+        else if(operation.equalsIgnoreCase("EXPONENTIAL")){
+            return new Exponential(operand, decimals);
+        }
+        else 
+            return null;
     }
 
 }
