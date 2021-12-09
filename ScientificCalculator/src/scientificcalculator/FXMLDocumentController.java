@@ -6,10 +6,18 @@
 package scientificcalculator;
 
 import exceptions.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +30,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 
 
 /**
@@ -40,7 +49,9 @@ public class FXMLDocumentController implements Initializable {
     private StackPrincipale stack;
     @FXML
     private Button insertBtn;
+    @FXML
     private Button deleteBtn;
+    @FXML
     private Button clearBtn;
     @FXML
     private ListView<ComplexNumber> elementiStack;
@@ -189,6 +200,16 @@ public class FXMLDocumentController implements Initializable {
                     ComplexNumber[] result = reverse.execute();
                     stack.insertNumber(result[0]);
                 }
+                else if(singleOp.equals("mod")){
+                    ArithmeticalOperations modulo = factory.getOperation("MODULO", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber[] result = modulo.execute();
+                    stack.insertNumber(result[0]);
+                }
+                else if(singleOp.equals("arg")){
+                    ArithmeticalOperations fase = factory.getOperation("FASE", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber[] result = fase.execute();
+                    stack.insertNumber(result[0]);
+                }
             }
             if(stack.getSize() > 1){
                 if(singleOp.equals("+")){
@@ -207,10 +228,17 @@ public class FXMLDocumentController implements Initializable {
                     stack.insertNumber(result[0]);
                 }
                 else if(singleOp.equals("/")){
-                    ArithmeticalOperations division = factory.getOperation("DIVISION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber op1 = stack.removeLastNumber();
+                    ComplexNumber op2 = stack.removeLastNumber();
+                    if(op2.getRealPart() == 0 && op2.getImmPart() == 0){
+                        stack.insertNumber(op2);
+                        stack.insertNumber(op1);
+                    }
+                    ArithmeticalOperations division = factory.getOperation("DIVISION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = division.execute();
                     stack.insertNumber(result[0]);
                 }
+                
             }
         }
         catch(DivisionByZeroException ex){
@@ -419,7 +447,7 @@ public class FXMLDocumentController implements Initializable {
     private void runCustomizedOperation(String stringOp){
         if(customizedOperations.getCustomizedOperationsMap().containsKey(stringOp)){
             for(String operation : customizedOperations.getCustomizedOperationsMap().get(stringOp)){
-                if(customizedOperations.getCustomizedOperationsMap().containsKey(operation)){
+                if(customizedOperations.getCustomizedOperationsMap().containsKey(operation)){                   
                     this.runCustomizedOperation(operation);
                 }
                 else{
@@ -511,6 +539,40 @@ public class FXMLDocumentController implements Initializable {
         obList.addAll(stack.getFirst12Elements());
         elementiStack.maxHeight(12);
         input.clear();
+    }
+
+    @FXML
+    private void saveFile(ActionEvent event) throws FileNotFoundException, IOException {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File ("C:\\Users\\filso\\OneDrive\\Documenti\\NetBeansProjects"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
+        File selectedFile = fc.showSaveDialog(null);
+        
+        PrintWriter printWriter = new PrintWriter(selectedFile);
+        printWriter.write(customizedOperations.toString());
+        printWriter.close(); 
+        
+    }
+    
+    @FXML
+    private void openFile(ActionEvent event) throws FileNotFoundException {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File ("C:\\Users\\filso\\OneDrive\\Documenti\\NetBeansProjects"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
+        File selectedFile = fc.showOpenDialog(null);
+        Scanner scanner = new Scanner(selectedFile);
+        customizedOperations.getCustomizedOperationsMap().clear();
+        String[] linea = null;
+        while (scanner.hasNextLine()){
+            linea = scanner.nextLine().replace("[", "").replace("]", "").trim().split("=");
+            String[] values = linea[1].split(",");
+            for(int k = 0; k < values.length; k++){
+                values[k] = values[k].trim();
+            }                  
+            customizedOperations.insertCustomOperation(linea[0].trim(), values);
+            System.out.println(customizedOperations.toString());
+            
+        }
     }
 
 

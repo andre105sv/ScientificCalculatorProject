@@ -39,6 +39,7 @@ public class OperationFactory{
         else if(operation.equalsIgnoreCase("DIVISION")){
             return new Division(firstOp, secondOp, decimals);
         }
+        
         else{
             return null;
         }
@@ -63,6 +64,12 @@ public class OperationFactory{
         }
         else if(operation.equalsIgnoreCase("REVERSAL_SIGN")){
             return new ReversalSign(operand, decimals);
+        }
+        else if(operation.equalsIgnoreCase("MODULO")){
+            return new Modulo(operand, decimals);
+        }
+        else if(operation.equalsIgnoreCase("FASE")){
+            return new Fase(operand, decimals);
         }
         else{
             return null;
