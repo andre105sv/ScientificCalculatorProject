@@ -34,10 +34,10 @@ public class Exponential implements TranscendentalOperations{
     */
     @Override
     public ComplexNumber[] execute(){
-       double realPart = Math.exp(operand.getRealPart()) * Math.cos(operand.getImmPart());
-       double immPart = Math.exp(operand.getRealPart()) * Math.sin(operand.getImmPart());
-       ComplexNumber[] result = new ComplexNumber[1];
-       result[0] = new ComplexNumber(realPart, immPart);
-       return result;
+        double realPart = Math.round((Math.exp(operand.getRealPart()) * Math.cos(operand.getImmPart())) * decimals) / decimals;
+        double immPart = Math.round((Math.exp(operand.getRealPart()) * Math.sin(operand.getImmPart())) * decimals) / decimals;
+        ComplexNumber[] result = new ComplexNumber[1];
+        result[0] = new ComplexNumber(realPart, immPart);
+        return result;
     }
 }

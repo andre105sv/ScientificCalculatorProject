@@ -90,10 +90,12 @@ public class FXMLDocumentController implements Initializable {
         if(checkerNumber.isCartesianComplexNumber(singleOp)){
             ComplexNumber zComplex = checkerNumber.createFromComplexNumber(singleOp);
             stack.insertNumber(zComplex);
+            noticeLbl.setText("Last: " + zComplex.toString() + " added as operand.");
         }
         else if(checkerNumber.isSingleNumber(singleOp)){
             ComplexNumber zReal = checkerNumber.createFromSingleNumber(singleOp);
             stack.insertNumber(zReal);
+            noticeLbl.setText("Last: " + zReal.toString() + " added as operand.");
         }
     }
 
@@ -108,60 +110,83 @@ public class FXMLDocumentController implements Initializable {
         try{
             if(stack.getSize() > 0){
                 if(singleOp.equals("sqrt")){
-                    ArithmeticalOperations squareRoot = factory.getArithmeticalOperations("SQUARE_ROOT", stack.removeLastNumber(), DECIMAL_NUMBERS);
-                    ComplexNumber[] result = squareRoot.execute(); 
-                    for(ComplexNumber c : result)
+                    ComplexNumber selected = stack.removeLastNumber();
+                    if((selected.getRealPart() == 0) && (selected.getImmPart() == 0)){
+                        stack.insertNumber(selected);
+                    }
+                    ArithmeticalOperations squareRoot = factory.getArithmeticalOperations("SQUARE_ROOT", selected, DECIMAL_NUMBERS);
+                    ComplexNumber[] result = squareRoot.execute();
+                    for(ComplexNumber c : result){
                         stack.insertNumber(c);
+                    }
+                    noticeLbl.setText("Last: SQRT of " + selected.toString());
                 }
                 else if(singleOp.equals("+-")){
-                    ArithmeticalOperations reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber selected = stack.removeLastNumber();
+                    ArithmeticalOperations reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = reverse.execute();
                     stack.insertNumber(result[0]);
+                    noticeLbl.setText("Last: REVERSAL_SIGN of " + selected.toString());
                 }
                 else if(singleOp.equals("mod")){
-                    TranscendentalOperations modulus = factory.getTranscendentalOperations("MODULUS", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber selected = stack.removeLastNumber();
+                    TranscendentalOperations modulus = factory.getTranscendentalOperations("MODULUS", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = modulus.execute();
                     stack.insertNumber(result[0]);
+                    noticeLbl.setText("Last: MODULUS of " + selected.toString());
                 }
                 else if(singleOp.equals("arg")){
-                    TranscendentalOperations phase = factory.getTranscendentalOperations("PHASE", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber selected = stack.removeLastNumber();
+                    TranscendentalOperations phase = factory.getTranscendentalOperations("PHASE", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = phase.execute();
                     stack.insertNumber(result[0]);
+                    noticeLbl.setText("Last: ARGUMENT / PHASE of " + selected.toString());
                 }
                 else if(singleOp.equals("exp")){
-                    TranscendentalOperations exp = factory.getTranscendentalOperations("EXPONENTIAL", stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber selected = stack.removeLastNumber();
+                    TranscendentalOperations exp = factory.getTranscendentalOperations("EXPONENTIAL", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = exp.execute();
                     stack.insertNumber(result[0]);
+                    noticeLbl.setText("Last: EXPONENTIAL of " + selected.toString());
                 }
             }
             if(stack.getSize() > 1){
                 if(singleOp.equals("+")){
-                    ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber op1 = stack.removeLastNumber();
+                    ComplexNumber op2 = stack.removeLastNumber();
+                    ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = addition.execute();
                     stack.insertNumber(result[0]);
+                    noticeLbl.setText("Last: ADDITION of " + op1.toString() + " and " + op2.toString());
                 }
                 else if(singleOp.equals("-")){
-                    ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber op1 = stack.removeLastNumber();
+                    ComplexNumber op2 = stack.removeLastNumber();
+                    ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = subtraction.execute();
                     stack.insertNumber(result[0]);
+                    noticeLbl.setText("Last: SUBTRACTION of " + op2.toString() + " from " + op1.toString());
                 }
                 else if(singleOp.equals("*")){
-                    ArithmeticalOperations multiplication = factory.getArithmeticalOperations("MULTIPLICATION", stack.removeLastNumber(), stack.removeLastNumber(), DECIMAL_NUMBERS);
+                    ComplexNumber op1 = stack.removeLastNumber();
+                    ComplexNumber op2 = stack.removeLastNumber();
+                    ArithmeticalOperations multiplication = factory.getArithmeticalOperations("MULTIPLICATION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = multiplication.execute();
                     stack.insertNumber(result[0]);
+                    noticeLbl.setText("Last: MULTIPLICATION of " + op1.toString() + " and " + op2.toString());
                 }
                 else if(singleOp.equals("/")){
                     ComplexNumber op1 = stack.removeLastNumber();
                     ComplexNumber op2 = stack.removeLastNumber();
-                    if(op2.getRealPart() == 0 && op2.getImmPart() == 0){
+                    if((op2.getRealPart() == 0) && (op2.getImmPart() == 0)){
                         stack.insertNumber(op2);
                         stack.insertNumber(op1);
                     }
                     ArithmeticalOperations division = factory.getArithmeticalOperations("DIVISION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = division.execute();
                     stack.insertNumber(result[0]);
-                }
-                
+                    noticeLbl.setText("Last: DIVISION between " + op1.toString() + " and " + op2.toString());
+                }            
             }
         }
         catch(DivisionByZeroException ex1){
@@ -181,21 +206,26 @@ public class FXMLDocumentController implements Initializable {
     private void runStackOperation(String singleOp){
         if(singleOp.equalsIgnoreCase("clear")){
             clear.perform();
+            noticeLbl.setText("Last: all the elements have been removed from the stack.");
         }
         if(stack.getSize() > 0){
             if(singleOp.equalsIgnoreCase("dup")){
                 dup.perform();
+                noticeLbl.setText("Last: pushed a copy of the last element onto the stack.");
             }
             else if(singleOp.equalsIgnoreCase("drop")){
                 drop.perform();
+                noticeLbl.setText("Last: the top of the stack has been removed.");
             }
         }
         if(stack.getSize() > 1){
             if(singleOp.equalsIgnoreCase("swap")){
                 swap.perform();
+                noticeLbl.setText("Last: exchanged the last two element in the stack.");
             }
             else if(singleOp.equalsIgnoreCase("over")){
                 over.perform();
+                noticeLbl.setText("Last: pushed a copy of the second last element onto the stack.");
             }
         }
     }
@@ -217,22 +247,26 @@ public class FXMLDocumentController implements Initializable {
     */
     private void runOperationOnVariables(String command){
         try{
-            if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+            if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0)){
                 variables.insertVariable(command.charAt(1), stack.removeLastNumber());
+                noticeLbl.setText("Last: removed the top of the stack and saved into the variable '" + command.charAt(1) + "'.");
             }
-            if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+            if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (variables.getValueFromVariable(command.charAt(1)) != null)){
                 stack.insertNumber(variables.getValueFromVariable(command.charAt(1)));
                 variables.getVariablesMap().remove(command.charAt(1));
+                noticeLbl.setText("Last: pushed the value of the variable '" + command.charAt(1) + "' onto the stack.");
             }
-            if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+            if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0) && (variables.getValueFromVariable(command.charAt(1)) != null)){
                 ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
                 ComplexNumber[] result = addition.execute();
                 stack.insertNumber(result[0]); 
+                noticeLbl.setText("Last: added the top of the stack to the value of the variable '" + command.charAt(1) + "'.");
             }
-            if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+            if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0) && (variables.getValueFromVariable(command.charAt(1)) != null)){
                 ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
                 ComplexNumber[] result = subtraction.execute();
-                stack.insertNumber(result[0]); 
+                stack.insertNumber(result[0]);
+                noticeLbl.setText("Last: subtracted the top of the stack from the value of the variable '" + command.charAt(1) + "'.");
             }
         }
         catch(ArithmeticalException ex){
@@ -260,43 +294,47 @@ public class FXMLDocumentController implements Initializable {
             if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("create"))){
                 String[] customArray = checkerOperation.checkCreateOperation(customizedOperations, command);
                 customizedOperations.insertCustomOperation(customArray[0], Arrays.copyOfRange(customArray, 1, customArray.length));   
+                noticeLbl.setText("Last: Operation '"+  customArray[0] + "' created.");
             }
             else if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("rename"))){
                 String[] customArray = checkerOperation.checkRenameOperation(customizedOperations, command);
-                customizedOperations.renameCustomOperation(customArray[0], customArray[1]);   
+                customizedOperations.renameCustomOperation(customArray[0], customArray[1]);
+                noticeLbl.setText("Last: Operation '"+  customArray[0] + "' renamed in '" + customArray[1] + "'.");
             }
             else if((command.length() > 2) && (command.toLowerCase().substring(0, 3).equals("set"))){
                 String[] customArray = checkerOperation.checkSetOperation(customizedOperations, command);
                 customizedOperations.insertCustomOperation(customArray[0], Arrays.copyOfRange(customArray, 1, customArray.length));   
+                noticeLbl.setText("Last: Operation '"+  customArray[0] + "' set.");
             }
             else if((command.length() > 5) && (command.toLowerCase().substring(0, 6).equals("delete"))){
                 String opToRemove = checkerOperation.checkDeleteOperation(customizedOperations, command);
-                customizedOperations.deleteCustomOperation(opToRemove);   
+                customizedOperations.deleteCustomOperation(opToRemove);
+                noticeLbl.setText("Last: Operation '"+  opToRemove + "' deleted.");
             }
         }
         catch(NotDefinedNameOperationException ex1){
-            noticeLbl.setText("È necessario specificare il nome dell'operazione personalizzata.\nPer info clicca su HELP.");
+            noticeLbl.setText("It's necessary to define the name of the user-defined operation.\nClick 'Help' for more information.");
         }
         catch(NotDefinedValueOperationException ex2){
-            noticeLbl.setText("È necessario definire tutti i campi dell'operazione personalizzata.\nPer info clicca su HELP.");
+            noticeLbl.setText("It's necessary to define each parameter of the user-defined operation.\nClick 'Help' for more information.");
         }
         catch(NumberAsNameOperationException ex3){
-            noticeLbl.setText("Non puoi usare un numero come nome di un'operazione personalizzata!");
+            noticeLbl.setText("It's not allowed to use a real number or a complex number as the name of an user-defined operation.");
         }
         catch(ExistentOperationException ex4){
-            noticeLbl.setText("Quest'operazione esiste già!");
+            noticeLbl.setText("The user-defined operation specified as input already exists.");
         }
         catch(NotCorrectValueOperationException ex5){
-            noticeLbl.setText("La stringa inserita non è un'operazione o un numero!");
+            noticeLbl.setText("The operations associated with the user-defined operation aren't correct.\nCheck the available user-defined operations in the first list on the left and the standard operations clicking on 'Help'.");
         }
         catch(BlankSpaceStringException ex6){
-            noticeLbl.setText("Il nome di un'operazione personalizzata non deve contenere spazi!");
+            noticeLbl.setText("The name of an user-defined operation can't contains blank spaces.");
         }
         catch(NotExistentOperationException ex7){
-            noticeLbl.setText("Quest'operazione personalizzata non è presente in memoria!");
+            noticeLbl.setText("The user-defined operation specified as input doesn't exist.");
         }
         catch(SameNameException ex8){
-            noticeLbl.setText("Il nuovo nome da attribuire all'operazione personalizzata dev'essere diverso dal precedente.");
+            noticeLbl.setText("The new name of the user-defined operation must be different from the old one.");
         }
     }
 
@@ -329,9 +367,9 @@ public class FXMLDocumentController implements Initializable {
     * @param    text    la stringa che identifica il comando in input
     */
     private void saveVariables(String text){
-         if(text.equalsIgnoreCase("save") && variables.getSize() > 0){
-            //variablesStack.insertVariables(new Variables(variables.getVariablesMap()));
+         if((text.equalsIgnoreCase("save")) && (variables.getSize() > 0)){
             pushVariables.perform(new Variables(variables.getVariablesMap()));
+            noticeLbl.setText("Last: All the variables have been saved.");
          }
     }
     
@@ -341,9 +379,9 @@ public class FXMLDocumentController implements Initializable {
     * @param    text    la stringa che identifica il comando in input
     */
     private void restoreVariables(String text){
-        if(text.equalsIgnoreCase("restore") && variablesStack.getSize() > 0){
-            //variables = variablesStack.removeLast();
+        if((text.equalsIgnoreCase("restore")) && (variablesStack.getSize() > 0)){
             variables = pushVariables.undo(null);
+            noticeLbl.setText("Last: All the variables have been restored.");
         }
     }
 
@@ -355,6 +393,18 @@ public class FXMLDocumentController implements Initializable {
         obVariables.clear();
         String s = variables.toString();
         String[] tmp = s.split("\n");
+        if((tmp.length <= 1) && (tmp[0] == "")){
+            saveBtn.setDisable(true);
+        }
+        else{
+            saveBtn.setDisable(false);
+        }
+        if(variablesStack.getSize() == 0){
+            restoreBtn.setDisable(true);
+        }
+        else{
+            restoreBtn.setDisable(false);
+        }
         for(String x : tmp){
             obVariables.add(x);
         }
@@ -404,6 +454,9 @@ public class FXMLDocumentController implements Initializable {
         variablesList.setItems(obVariables);
         operationsList.setItems(obOperations);
         elementsList.setItems(obList);
+        saveBtn.setDisable(true);
+        restoreBtn.setDisable(true);
+        clearBtn.setDisable(true);
     }    
 
     /**
@@ -413,6 +466,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void deleteText(ActionEvent event){
         inputTxt.setText("");
+        noticeLbl.setText("");
+        inputTxt.requestFocus();
     }
 
     /**
@@ -423,6 +478,9 @@ public class FXMLDocumentController implements Initializable {
     private void clearStack(ActionEvent event){
         clear.perform();
         obList.clear();
+        clearBtn.setDisable(true);
+        noticeLbl.setText("Last: all the elements have been removed from the stack.");
+        inputTxt.requestFocus();
     }
 
     /**
@@ -443,10 +501,17 @@ public class FXMLDocumentController implements Initializable {
         this.restoreVariables(text);        
         this.showVariables();
         this.showOperations();
-        obList.clear(); 
-        obList.addAll(stack.getFirst12Elements());
+        obList.clear();
+        if(stack.getSize() == 0){
+            clearBtn.setDisable(true);
+        }
+        else{
+            obList.addAll(stack.getFirst12Elements());
+            clearBtn.setDisable(false);
+        }
         elementsList.maxHeight(12);
         inputTxt.clear();
+        inputTxt.requestFocus();
     }
 
     /**
@@ -461,7 +526,9 @@ public class FXMLDocumentController implements Initializable {
         File selectedFile = fc.showSaveDialog(null);
         PrintWriter printWriter = new PrintWriter(selectedFile);
         printWriter.write(customizedOperations.toString());
-        printWriter.close(); 
+        printWriter.close();
+        noticeLbl.setText("Last: the user-defined operations have been saved into '" + selectedFile.getName() + "'.");
+        inputTxt.requestFocus();
     }
     
     /**
@@ -486,6 +553,8 @@ public class FXMLDocumentController implements Initializable {
             customizedOperations.insertCustomOperation(linea[0].trim(), values);
             this.showOperations();
         }
+        noticeLbl.setText("Last: the user-defined operations into '" + selectedFile.getName() + "' have been restored.");
+        inputTxt.requestFocus();
     }
     
     /**
@@ -495,9 +564,12 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     private void saveVariables(ActionEvent event) {
-        if( variables.getSize() > 0){
+        if(variables.getSize() > 0){
             pushVariables.perform(new Variables(variables.getVariablesMap()));
-         }
+        }
+        restoreBtn.setDisable(false);
+        noticeLbl.setText("Last: All the variables have been saved.");
+        inputTxt.requestFocus();
     }
 
     /**
@@ -510,6 +582,8 @@ public class FXMLDocumentController implements Initializable {
             variables = pushVariables.undo(null);
             this.showVariables();
         }
+        noticeLbl.setText("Last: All the variables have been restored.");
+        inputTxt.requestFocus();
     }
 
 }

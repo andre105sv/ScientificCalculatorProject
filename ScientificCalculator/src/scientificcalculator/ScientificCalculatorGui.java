@@ -23,6 +23,7 @@ public class ScientificCalculatorGui extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("./CalculatorStyleSheet.css").toExternalForm());
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
