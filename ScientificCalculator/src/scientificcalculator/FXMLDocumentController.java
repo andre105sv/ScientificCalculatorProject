@@ -449,10 +449,14 @@ public class FXMLDocumentController implements Initializable {
         inputTxt.clear();
     }
 
+    /**
+    * Permette di salvare in un file di testo (scelto dall'utente)
+    * le operazioni personalizzate definite.
+    */
     @FXML
     private void saveFile(ActionEvent event) throws FileNotFoundException, IOException {
         FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File ("C:\\Users\\filso\\OneDrive\\Documenti\\NetBeansProjects"));
+        fc.setInitialDirectory(new File ("../"));
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
         File selectedFile = fc.showSaveDialog(null);
         PrintWriter printWriter = new PrintWriter(selectedFile);
@@ -460,10 +464,14 @@ public class FXMLDocumentController implements Initializable {
         printWriter.close(); 
     }
     
+    /**
+    * Permette di caricare le operazioni personalizzate salvate in un file di testo
+    * Effettua il conseguente aggiornamento della ListView che mostra le operazioni personalizzate.
+    */
     @FXML
     private void openFile(ActionEvent event) throws FileNotFoundException {
         FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File ("C:\\Users\\filso\\OneDrive\\Documenti\\NetBeansProjects"));
+        fc.setInitialDirectory(new File ("../"));
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
         File selectedFile = fc.showOpenDialog(null);
         Scanner scanner = new Scanner(selectedFile);
@@ -476,9 +484,15 @@ public class FXMLDocumentController implements Initializable {
                 values[k] = values[k].trim();
             }                  
             customizedOperations.insertCustomOperation(linea[0].trim(), values);
-            System.out.println(customizedOperations.toString());
+            this.showOperations();
         }
-    } 
+    }
+    
+    /**
+    * Permette di salvare lo stato corrente delle variabili definite, 
+    * in uno stack ausiliario (che si distrugge al momento della chiusura
+    * dell'applicazione).
+    */
     @FXML
     private void saveVariables(ActionEvent event) {
         if( variables.getSize() > 0){
@@ -486,6 +500,10 @@ public class FXMLDocumentController implements Initializable {
          }
     }
 
+    /**
+    * Permette di ripristinare il precedente salvataggio delle variabili, 
+    * prelevandolo dallo stack ausiliario.
+    */
     @FXML
     private void restoreVariables(ActionEvent event) {
         if(variablesStack.getSize() > 0){

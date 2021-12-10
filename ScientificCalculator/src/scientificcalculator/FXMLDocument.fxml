@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scientificcalculator.FXMLDocumentController">
@@ -25,7 +26,6 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Label>
-       <!--
       <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="729.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -41,7 +41,6 @@
           </Menu>
         </menus>
       </MenuBar>
-            -->
       <Button fx:id="saveBtn" layoutX="271.0" layoutY="432.0" mnemonicParsing="false" onAction="#saveVariables" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: lightblue; -fx-background-radius: 16px; -fx-border-radius: 16px; -fx-cursor: hand;" text="Salva" />
       <Button fx:id="restoreBtn" layoutX="372.0" layoutY="432.0" mnemonicParsing="false" onAction="#restoreVariables" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: lightblue; -fx-background-radius: 16px; -fx-border-radius: 16px; -fx-cursor: hand;" text="Ripristina" />
     </children>
