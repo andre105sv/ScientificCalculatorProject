@@ -31,21 +31,88 @@ public class DivisionTest{
      */
     @Test(expected = DivisionByZeroException.class)
     public void testExecute() throws ArithmeticalException{
-        ComplexNumber a = new ComplexNumber(-32, +7);
-        ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
-        ComplexNumber expResult = new ComplexNumber(-12.898 , +2.232);     
-        ArithmeticalOperations division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
-        ComplexNumber result[] = division.execute();
+        System.out.println("division");
+        // Definitions
+        ComplexNumber a;
+        ComplexNumber b;
+        ComplexNumber expResult;
+        ComplexNumber[] result;
+        ArithmeticalOperations division;
+        /**
+        * Test 1.
+        * Rapporto tra un numero complesso (con parte reale positiva e parte 
+        * immaginaria positiva) e un numero reale positivo
+        */
+        a = new ComplexNumber(4, 5);
+        b = new ComplexNumber(4, 0);
+        expResult = new ComplexNumber(1, 1.25);     
+        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        result = division.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
-        ComplexNumber a1 = new ComplexNumber(-45.2, 0);
-        ComplexNumber b1 = new ComplexNumber(0, 0);
-        ArithmeticalOperations division1 = factory.getOperation("DIVISION", a1, b1, DECIMAL_NUMBERS);
-        ComplexNumber result1[] = division1.execute();
-        ComplexNumber a2 = new ComplexNumber(-32, +7.12);
-        ComplexNumber b2 = new ComplexNumber(0, 0);
-        ArithmeticalOperations division2 = factory.getOperation("DIVISION", a2, b2, DECIMAL_NUMBERS);
-        ComplexNumber result2[] = division2.execute();
+        /**
+        * Test 2.
+        * Rapporto tra due numeri complessi uguali
+        */
+        a = new ComplexNumber(-4, 5);
+        b = new ComplexNumber(-4, 5);
+        expResult = new ComplexNumber(1, 0);     
+        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        result = division.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 2.
+        * Rapporto tra due numeri complessi a parte reale positiva e parte
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(4, -5);
+        b = new ComplexNumber(4, -52);
+        expResult = new ComplexNumber(0.101, 0.069);     
+        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        result = division.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 3.
+        * Rapporto tra due numeri complessi a parte reale negativa e parte
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(-4, -5);
+        b = new ComplexNumber(-4, -53);
+        expResult = new ComplexNumber(0.099, -0.068);     
+        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        result = division.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 4.
+        * Rapporto tra due numeri complessi con un numero di cifre dopo la 
+        * virgola inferiore o uguale a log(DECIMAL_NUMBERS, 10)
+        */
+        a = new ComplexNumber(-32, +7);
+        b = new ComplexNumber(+2.5, -0.11);  
+        expResult = new ComplexNumber(-12.898 , +2.232);     
+        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        result = division.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 5.
+        * Rapporto tra un numero reale e 0 (DivisionByZeroException)
+        */
+        a = new ComplexNumber(-45.2, 0);
+        b = new ComplexNumber(0, 0);
+        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        result = division.execute();
+        /**
+        * Test 6.
+        * Rapporto tra un numero complesso e 0 (DivisionByZeroException)
+        */
+        a = new ComplexNumber(-32, +7.12);
+        b = new ComplexNumber(0, 0);
+        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        result = division.execute();
     }
 
 }

@@ -6,14 +6,23 @@
     -fx-background-color:white;
 }
 
+.list-view .scroll-bar:horizontal{
+    -fx-background-color:white;
+}
 
-.list-view .increment-button ,.list-view .decrement-button {
+.list-view .increment-button, .list-view .decrement-button {
     -fx-background-color:transparent;
     -fx-border-color:transparent;
     -fx-text-fill: transparent;
 }
 
 .list-view .scroll-bar:vertical .thumb {
+    -fx-background-color:lightblue;
+    -fx-background-insets: 5, 5, 5;
+    -fx-background-radius: 5;
+}
+
+.list-view .scroll-bar:horizontal .thumb {
     -fx-background-color:lightblue;
     -fx-background-insets: 5, 5, 5;
     -fx-background-radius: 5;

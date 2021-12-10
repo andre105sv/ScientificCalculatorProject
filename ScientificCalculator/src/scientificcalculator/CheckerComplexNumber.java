@@ -18,7 +18,7 @@ public class CheckerComplexNumber{
     private String single_number = "SINGLENUMBER";
     private String invalid_insert = "INVALID";
     private String continue_checking = "CHECKING";
-    private double decimals;
+    private double decimals = 1000;
 
     public CheckerComplexNumber(){
     

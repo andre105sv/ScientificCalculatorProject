@@ -30,20 +30,96 @@ public class AdditionTest{
      */
     @Test
     public void testExecute() throws ArithmeticalException{
-        ComplexNumber a = new ComplexNumber(-32, +7);
-        ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
-        ComplexNumber expResultAB = new ComplexNumber(-29.5, +6.89);     
-        ArithmeticalOperations additionAB = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
-        ComplexNumber resultAB[] = additionAB.execute();
-        assertEquals(expResultAB.getRealPart(), resultAB[0].getRealPart(),PRECISION);
-        assertEquals(expResultAB.getImmPart(), resultAB[0].getImmPart(), PRECISION);
-        ComplexNumber c = new ComplexNumber(1, +3);
-        ComplexNumber d = new ComplexNumber(+2.55555, -0.35);  
-        ComplexNumber expResultCD = new ComplexNumber(3.556, 2.65);     
-        ArithmeticalOperations additionCD = factory.getOperation("ADDITION", c, d, DECIMAL_NUMBERS);
-        ComplexNumber resultCD[] = additionCD.execute();
-        assertEquals(expResultCD.getRealPart(), resultCD[0].getRealPart(),PRECISION);
-        assertEquals(expResultCD.getImmPart(), resultCD[0].getImmPart(), PRECISION);
+        System.out.println("addition");
+        // Definitions
+        ComplexNumber a;
+        ComplexNumber b;
+        ComplexNumber expResult;
+        ComplexNumber[] result;
+        ArithmeticalOperations addition;
+        /**
+        * Test 1.
+        * Somma di due numeri complessi a parte reale positiva e parte 
+        * immaginaria positiva
+        */
+        a = new ComplexNumber(4, 5);
+        b = new ComplexNumber(3, 7);
+        expResult = new ComplexNumber(7, 12);
+        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        result = addition.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 2.
+        * Somma di due numeri complessi a parte reale negativa e parte 
+        * immaginaria positiva
+        */
+        a = new ComplexNumber(-4, 5);
+        b = new ComplexNumber(-3, 7);
+        expResult = new ComplexNumber(-7, 12);
+        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        result = addition.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 3.
+        * Somma di due numeri complessi a parte reale positiva e parte 
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(4, -5);
+        b = new ComplexNumber(3, -7);
+        expResult = new ComplexNumber(7, -12);
+        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        result = addition.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 4.
+        * Somma di due numeri complessi a parte reale negativa e parte 
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(-4, -5);
+        b = new ComplexNumber(-3, -7);
+        expResult = new ComplexNumber(-7, -12);
+        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        result = addition.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 5.
+        * Somma di due numeri complessi opposti
+        */
+        a = new ComplexNumber(-4, -5);
+        b = new ComplexNumber(4, 5);
+        expResult = new ComplexNumber(0, 0);
+        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        result = addition.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 6.
+        * Somma di due numeri complessi con un numero di cifre dopo la virgola
+        * inferiore o uguale a log(DECIMAL_NUMBERS, 10)
+        */
+        a = new ComplexNumber(-32, +7);
+        b = new ComplexNumber(+2.5, -0.11);  
+        expResult = new ComplexNumber(-29.5, +6.89);     
+        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        result = addition.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 7.
+        * Somma di due numeri complessi con un numero di cifre dopo la virgola
+        * maggiore di log(DECIMAL_NUMBERS, 10)
+        */
+        a = new ComplexNumber(1, +3);
+        b = new ComplexNumber(+2.55555, -0.35);  
+        expResult = new ComplexNumber(3.556, 2.65);     
+        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        result = addition.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
     }
     
 }

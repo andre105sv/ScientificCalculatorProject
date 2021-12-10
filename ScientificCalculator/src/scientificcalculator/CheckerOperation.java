@@ -86,7 +86,7 @@ public class CheckerOperation{
     * @return   true    se l'operazione specificata in input è di tipo 
     *                   personalizzato
     */
-    public boolean isCustomizedOperation(CustomizedOperationsMap customOperation, String op){
+    private boolean isCustomizedOperation(CustomizedOperationsMap customOperation, String op){
         if(customOperation.getCustomizedOperationsMap().containsKey(op)){
             return true;
         }
@@ -98,7 +98,7 @@ public class CheckerOperation{
     * @param    op      la stringa che identifica l'operazione
     * @return   true    se la stringa specificata in input è un'operazione
     */
-    public boolean isOperation(CustomizedOperationsMap customOperation, String operationString){
+    private boolean isOperation(CustomizedOperationsMap customOperation, String operationString){
         if(this.isArithmeticalOperation(operationString)){
             return true;
         }

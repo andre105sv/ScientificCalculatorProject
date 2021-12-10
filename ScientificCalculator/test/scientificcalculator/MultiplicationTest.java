@@ -30,20 +30,85 @@ public class MultiplicationTest{
      */
     @Test
     public void testExecute() throws ArithmeticalException{
-        ComplexNumber a = new ComplexNumber(-32, +7);
-        ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
-        ComplexNumber expResultAB = new ComplexNumber(-79.23, +21.02);     
-        ArithmeticalOperations multiplicationAB = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
-        ComplexNumber resultAB[] = multiplicationAB.execute();
-        assertEquals(expResultAB.getRealPart(), resultAB[0].getRealPart(), PRECISION);
-        assertEquals(expResultAB.getImmPart(), resultAB[0].getImmPart(), PRECISION);
-        ComplexNumber c = new ComplexNumber(-2.56, +3);
-        ComplexNumber d = new ComplexNumber(+4.8951, -11.56);  
-        ComplexNumber expResultCD = new ComplexNumber(22.149, 44.279);     
-        ArithmeticalOperations multiplicationCD = factory.getOperation("MULTIPLICATION", c, d, DECIMAL_NUMBERS);
-        ComplexNumber resultCD[] = multiplicationCD.execute();
-        assertEquals(expResultCD.getRealPart(), resultCD[0].getRealPart(), PRECISION);
-        assertEquals(expResultCD.getImmPart(), resultCD[0].getImmPart(), PRECISION);
+        System.out.println("multiplication");
+        // Definitions
+        ComplexNumber a;
+        ComplexNumber b;
+        ComplexNumber expResult;
+        ComplexNumber[] result;
+        ArithmeticalOperations multiplication;
+        /**
+        * Test 1.
+        * Prodotto tra un numero reale positivo e un numero complesso a parte 
+        * reale positiva e parte immaginaria positiva
+        */
+        a = new ComplexNumber(4, 5);
+        b = new ComplexNumber(4, 0);
+        expResult = new ComplexNumber(16, 20);     
+        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        result = multiplication.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 2.
+        * Prodotto tra due numeri complessi a parte reale negativa e parte 
+        * immaginaria positiva
+        */
+        a = new ComplexNumber(-4, 5);
+        b = new ComplexNumber(-4, 5);
+        expResult = new ComplexNumber(-9, -40);     
+        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        result = multiplication.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 3.
+        * Prodotto tra due numeri complessi a parte reale positiva e parte 
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(4, -5);
+        b = new ComplexNumber(4, -5);
+        expResult = new ComplexNumber(-9, -40);     
+        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        result = multiplication.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 4.
+        * Prodotto tra due numeri complessi a parte reale negativa e parte 
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(-4, -5);
+        b = new ComplexNumber(-4, -5);
+        expResult = new ComplexNumber(-9, 40);
+        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        result = multiplication.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 5.
+        * Prodotto tra due numeri complessi con un numero di cifre dopo la 
+        * virgola inferiore o uguale a log(DECIMAL_NUMBERS, 10)
+        */
+        a = new ComplexNumber(-32, +7);
+        b = new ComplexNumber(+2.5, -0.11);  
+        expResult = new ComplexNumber(-79.23, +21.02);
+        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        result = multiplication.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 6.
+        * Prodotto tra due numeri complessi con un numero di cifre dopo la 
+        * virgola maggiore di log(DECIMAL_NUMBERS, 10)
+        */
+        a = new ComplexNumber(-2.56, +3);
+        b = new ComplexNumber(+4.8951, -11.56);  
+        expResult = new ComplexNumber(22.149, 44.279);
+        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        result = multiplication.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
     }
 
 }

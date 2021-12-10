@@ -9,23 +9,40 @@
 
 <AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scientificcalculator.FXMLDocumentController">
     <children>
-        <Button fx:id="insertBtn" layoutX="507.0" layoutY="58.0" onAction="#insert" prefHeight="33.0" prefWidth="78.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-background-color: lightblue; -fx-border-color: transparent; -fx-cursor: hand;" text="Inserisci" />
-        <Label fx:id="label" layoutX="74.0" layoutY="148.0" minHeight="16" minWidth="69" text="Operazioni personalizzate" />
-      <TextField fx:id="input" layoutX="52.0" layoutY="59.0" prefHeight="31.0" prefWidth="430.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px;" />
-      <Label layoutX="63.0" layoutY="35.0" text="Operando / Operazione" />
-      <ListView fx:id="elementiStack" layoutX="491.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
-      <ListView fx:id="listVariables" layoutX="271.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
-      <Label layoutX="531.0" layoutY="148.0" text="Operandi disponibili" />
-      <Label layoutX="322.0" layoutY="148.0" text="Variabili definite" />
-      <Button fx:id="deleteBtn" layoutX="597.0" layoutY="58.0" onAction="#deleteText" prefHeight="33.0" prefWidth="78.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-background-color: lightblue; -fx-border-color: transparent; -fx-cursor: hand;" text="Cancella" />
+        <Button fx:id="insertBtn" layoutX="499.0" layoutY="58.0" onAction="#insert" prefHeight="33.0" prefWidth="86.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-background-color: lightblue; -fx-border-color: transparent; -fx-cursor: hand;" text="Inserisci" />
+        <Label layoutX="74.0" layoutY="148.0" minHeight="16" minWidth="69" text="Operazioni personalizzate" />
+      <TextField fx:id="inputTxt" layoutX="49.0" layoutY="59.0" prefHeight="31.0" prefWidth="430.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px;" />
+      <Label layoutX="55.0" layoutY="37.0" text="Operando / Operazione" />
+      <ListView fx:id="elementsList" layoutX="491.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
+      <ListView fx:id="variablesList" layoutX="271.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
+      <Label layoutX="517.0" layoutY="148.0" text="Operandi disponibili" />
+      <Label layoutX="311.0" layoutY="148.0" text="Variabili definite" />
+      <Button fx:id="deleteBtn" layoutX="596.0" layoutY="58.0" onAction="#deleteText" prefHeight="33.0" prefWidth="86.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-background-color: lightblue; -fx-border-color: transparent; -fx-cursor: hand;" text="Cancella" />
       <Button fx:id="clearBtn" layoutX="497.0" layoutY="434.0" onAction="#clearStack" prefHeight="27.0" prefWidth="175.0" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-background-color: lightblue; -fx-border-color: white; -fx-cursor: hand;" text="Svuota" />
-      <ListView layoutX="49.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
-      <Button fx:id="saveBtn" layoutX="279.0" layoutY="435.0" mnemonicParsing="false" onAction="#saveVariables" prefHeight="31.0" prefWidth="78.0" style="-fx-background-color: lightblue; -fx-background-radius: 16px; -fx-border-radius: 16px;" text="Salva" />
-      <Button fx:id="restoreBtn" layoutX="380.0" layoutY="435.0" mnemonicParsing="false" onAction="#restoreVariables" prefHeight="31.0" prefWidth="78.0" style="-fx-background-color: lightblue; -fx-background-radius: 16px; -fx-border-radius: 16px;" text="Restore" />
+      <ListView fx:id="operationsList" layoutX="49.0" layoutY="178.0" prefHeight="248.0" prefWidth="187.0" />
       <Label fx:id="noticeLbl" alignment="TOP_LEFT" layoutX="52.0" layoutY="97.0" prefHeight="33.0" prefWidth="430.0">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Label>
+       <!--
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="729.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save as" />
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open..." />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+            -->
+      <Button fx:id="saveBtn" layoutX="271.0" layoutY="432.0" mnemonicParsing="false" onAction="#saveVariables" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: lightblue; -fx-background-radius: 16px; -fx-border-radius: 16px; -fx-cursor: hand;" text="Salva" />
+      <Button fx:id="restoreBtn" layoutX="372.0" layoutY="432.0" mnemonicParsing="false" onAction="#restoreVariables" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: lightblue; -fx-background-radius: 16px; -fx-border-radius: 16px; -fx-cursor: hand;" text="Ripristina" />
     </children>
 </AnchorPane>

@@ -30,20 +30,96 @@ public class SubtractionTest{
      */
     @Test
     public void testExecute() throws ArithmeticalException{
-        ComplexNumber a = new ComplexNumber(-32, +7);
-        ComplexNumber b = new ComplexNumber(+2.5, -0.11);  
-        ComplexNumber expResultAB = new ComplexNumber(-34.5, +7.11);     
-        ArithmeticalOperations subtractionAB = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
-        ComplexNumber resultAB[] = subtractionAB.execute();
-        assertEquals(expResultAB.getRealPart(), resultAB[0].getRealPart(), PRECISION);
-        assertEquals(expResultAB.getImmPart(), resultAB[0].getImmPart(), PRECISION);
-        ComplexNumber c = new ComplexNumber(-50, 12);
-        ComplexNumber d = new ComplexNumber(-0.0001, -0.0000000001);  
-        ComplexNumber expResultCD = new ComplexNumber(-50, 12);     
-        ArithmeticalOperations subtractionCD = factory.getOperation("SUBTRACTION", c, d, DECIMAL_NUMBERS);
-        ComplexNumber resultCD[] = subtractionCD.execute();
-        assertEquals(expResultCD.getRealPart(), resultCD[0].getRealPart(), PRECISION);
-        assertEquals(expResultCD.getImmPart(), resultCD[0].getImmPart(), PRECISION);
+        System.out.println("subtraction");
+        // Definitions
+        ComplexNumber a;
+        ComplexNumber b;
+        ComplexNumber expResult;
+        ComplexNumber[] result;
+        ArithmeticalOperations subtraction;
+        /**
+        * Test 1.
+        * Differenza tra due numeri complessi a parte reale positiva e parte 
+        * immaginaria positiva
+        */
+        a = new ComplexNumber(4, 5);
+        b = new ComplexNumber(3, 7);
+        expResult = new ComplexNumber(1, -2);
+        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        result = subtraction.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 2.
+        * Differenza tra due numeri complessi a parte reale negativa e parte 
+        * immaginaria positiva
+        */
+        a = new ComplexNumber(-4, 5);
+        b = new ComplexNumber(-3, 7);
+        expResult = new ComplexNumber(-1, -2);
+        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        result = subtraction.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 3.
+        * Somma di due numeri complessi a parte reale positiva e parte 
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(4, -5);
+        b = new ComplexNumber(3, -7);
+        expResult = new ComplexNumber(1, 2);
+        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        result = subtraction.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 4.
+        * Somma di due numeri complessi a parte reale negativa e parte 
+        * immaginaria negativa
+        */
+        a = new ComplexNumber(-4, -5);
+        b = new ComplexNumber(-3, -7);
+        expResult = new ComplexNumber(-1, 2);
+        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        result = subtraction.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 5.
+        * Differenza tra due numeri complessi a parte reale positiva uguali
+        */
+        a = new ComplexNumber(4, 5);
+        b = new ComplexNumber(4, 5);
+        expResult = new ComplexNumber(0, 0);
+        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        result = subtraction.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 6.
+        * Differenza tra due numeri complessi con un numero di cifre dopo la 
+        * virgola inferiore a log(DECIMAL_NUMBERS, 10)
+        */
+        a = new ComplexNumber(-32, +7);
+        b = new ComplexNumber(+2.5, -0.11);  
+        expResult = new ComplexNumber(-34.5, +7.11); 
+        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        result = subtraction.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        /**
+        * Test 7.
+        * Differenza tra due numeri complessi con un numero di cifre dopo la 
+        * virgola maggiore di log(DECIMAL_NUMBERS, 10)
+        */
+        a = new ComplexNumber(-50, 12);
+        b = new ComplexNumber(-0.0001, -0.0000000001);  
+        expResult = new ComplexNumber(-50, 12);
+        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        result = subtraction.execute();
+        assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
+        assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
     }
 
 }

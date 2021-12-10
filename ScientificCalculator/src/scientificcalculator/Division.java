@@ -10,7 +10,7 @@ import exceptions.DivisionByZeroException;
 
 /**
  *
- * @author splas
+ * @author Andrea
  */
 public class Division implements ArithmeticalOperations{
 
@@ -40,7 +40,7 @@ public class Division implements ArithmeticalOperations{
     @Override
     public ComplexNumber[] execute() throws DivisionByZeroException{
         if((secondOp.getRealPart() == 0) && (secondOp.getImmPart() == 0)){
-            throw new DivisionByZeroException();
+            throw new DivisionByZeroException();           
         }
         double quoz = Math.round(((firstOp.getRealPart() * secondOp.getRealPart() + firstOp.getImmPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(), 2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals;
         double div =  Math.round(((firstOp.getImmPart() * secondOp.getRealPart() - firstOp.getRealPart() * secondOp.getImmPart()) / (Math.pow(secondOp.getRealPart(),2) + Math.pow(secondOp.getImmPart(), 2))) * decimals) / decimals;     

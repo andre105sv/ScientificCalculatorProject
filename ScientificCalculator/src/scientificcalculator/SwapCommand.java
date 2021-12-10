@@ -11,7 +11,7 @@ package scientificcalculator;
  */
 public class SwapCommand extends StackPrincipaleCommand{
     
-     /**
+    /**
     * Crea un oggetto della classe SwapCommand, che permette di effettuare l'operazione di swap sullo stack che gli viene passato.
     * Setta l'attributo stackPrincipale 
     * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
@@ -19,6 +19,7 @@ public class SwapCommand extends StackPrincipaleCommand{
     public SwapCommand(StackPrincipale stackPrincipale){
         super(stackPrincipale);
     }
+
     /**
     * Esegue l'azione di swap sullo stack
     * @return   null
