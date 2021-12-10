@@ -307,19 +307,20 @@ public class FXMLDocumentController implements Initializable {
     *                       le variabili seguito dalla variabile
     */
     private void runOperationOnVariables(String command) throws Exception{
-        if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
-            variables.insertVariable(command.charAt(1), stack.removeLastNumber());
+        if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && stack.getSize() > 0){
+                variables.insertVariable(command.charAt(1), stack.removeLastNumber());
         }
-        if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+        if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && variables.getValueFromVariable(command.charAt(1)) != null){
             stack.insertNumber(variables.getValueFromVariable(command.charAt(1)));
             variables.getVariablesMap().remove(command.charAt(1));
+
         }
-        if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+        if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && stack.getSize() > 0 && variables.getValueFromVariable(command.charAt(1)) != null){
             ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
             ComplexNumber[] result = addition.execute();
             stack.insertNumber(result[0]); 
         }
-        if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123)){
+        if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && stack.getSize() > 0 && variables.getValueFromVariable(command.charAt(1)) != null){
             ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
             ComplexNumber[] result = subtraction.execute();
             stack.insertNumber(result[0]); 
