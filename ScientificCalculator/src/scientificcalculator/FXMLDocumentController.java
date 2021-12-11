@@ -54,7 +54,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button clearBtn;
     @FXML
+    private Button saveBtn;
+    @FXML
+    private Button restoreBtn;
+    @FXML
     private ListView<ComplexNumber> elementsList;
+    @FXML
+    private ListView<String> variablesList;
+    @FXML
+    private ListView<String> operationsList;
     private ObservableList<ComplexNumber> obList; 
     private ObservableList<String> obVariables;
     private ObservableList<String> obOperations;
@@ -63,7 +71,6 @@ public class FXMLDocumentController implements Initializable {
     private DupCommand dup;// -- tutte le dup
     private SwapCommand swap;// -- tutte le swap
     private OverCommand over;// -- tutte le over
-    //private PushVariablesCommand pushVariables;
     private CommandExecutor executor;
     private Variables variables;
     private VariablesStack variablesStack;
@@ -71,14 +78,8 @@ public class FXMLDocumentController implements Initializable {
     private AbstractFactory arithmeticalFactory, transcendentalFactory;
     private CheckerComplexNumber checkerNumber;
     private CheckerOperation checkerOperation;
-    @FXML
-    private ListView<String> variablesList;
-    @FXML
-    private ListView<String> operationsList;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button restoreBtn;
+
+
 
     /**
     * Inserisce nello stack un numero indicato come reale o complesso.
@@ -382,7 +383,6 @@ public class FXMLDocumentController implements Initializable {
     private void restoreVariables(String text){
         if((text.equalsIgnoreCase("restore")) && (variablesStack.getSize() > 0)){
             variables = executor.undoLast();
-            //variables = pushVariables.undo(null);
             noticeLbl.setText("Last: All the variables have been restored.");
         }
     }

@@ -19,11 +19,11 @@ public class SquareRootTest{
 
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;
-    private OperationFactory factory;
+    private AbstractFactory factory;
 
     @Before
     public void setUp(){
-        factory = new OperationFactory();
+        factory = FactoryProducer.getFactory(true);
     }
 
     /**
@@ -38,7 +38,7 @@ public class SquareRootTest{
         ComplexNumber exp2;
         ComplexNumber[] expResult;
         ComplexNumber[] result;
-        ArithmeticalOperations sqrt;
+        Operation sqrt;
         /**
         * Test 1.
         * Radice quadrata di un numero complesso a parte reale positiva e parte 
@@ -48,7 +48,7 @@ public class SquareRootTest{
         exp1 = new ComplexNumber(1.581, 1.976);
         exp2 = new ComplexNumber(-2.282, -1.093);
         expResult = new ComplexNumber[]{exp1, exp2};
-        sqrt = factory.getArithmeticalOperations("SQUARE_ROOT", a, DECIMAL_NUMBERS);
+        sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), PRECISION);
@@ -60,7 +60,7 @@ public class SquareRootTest{
         */
         a = new ComplexNumber(4, 0);
         expResult = new ComplexNumber[]{new ComplexNumber(2, 0)};
-        sqrt = factory.getArithmeticalOperations("SQUARE_ROOT", a, DECIMAL_NUMBERS);
+        sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), PRECISION);
@@ -73,7 +73,7 @@ public class SquareRootTest{
         exp1 = new ComplexNumber(0.002, 2);
         exp2 = new ComplexNumber(-1.417, -1.411);
         expResult = new ComplexNumber[]{exp1, exp2};
-        sqrt = factory.getArithmeticalOperations("SQUARE_ROOT", a, DECIMAL_NUMBERS);
+        sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), PRECISION);
@@ -85,7 +85,7 @@ public class SquareRootTest{
         */
         a = new ComplexNumber(-4, 0);
         expResult = new ComplexNumber[]{new ComplexNumber(0, 2)};
-        sqrt = factory.getArithmeticalOperations("SQUARE_ROOT", a, DECIMAL_NUMBERS);
+        sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), PRECISION);
@@ -98,7 +98,7 @@ public class SquareRootTest{
         exp1 = new ComplexNumber(1.187, 1.191);
         exp2 = new ComplexNumber(1.554, 0.642);
         expResult = new ComplexNumber[]{exp1, exp2};
-        sqrt = factory.getArithmeticalOperations("SQUARE_ROOT", a, DECIMAL_NUMBERS);
+        sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), PRECISION);
@@ -113,7 +113,7 @@ public class SquareRootTest{
         exp1 = new ComplexNumber(1.187, -1.191);
         exp2 = new ComplexNumber(1.552, -0.647);
         expResult = new ComplexNumber[]{exp1, exp2};
-        sqrt = factory.getArithmeticalOperations("SQUARE_ROOT", a, DECIMAL_NUMBERS);
+        sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         result = sqrt.execute();
         assertEquals(expResult[0].getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult[0].getImmPart(), result[0].getImmPart(), PRECISION);
@@ -124,7 +124,7 @@ public class SquareRootTest{
         * Radice quadrata di zero (NotDefinedArgumentException)
         */
         a = new ComplexNumber(0, 0);
-        sqrt = factory.getArithmeticalOperations("SQUARE_ROOT", a, DECIMAL_NUMBERS);
+        sqrt = factory.getOperation("SQUARE_ROOT", a, DECIMAL_NUMBERS);
         result = sqrt.execute();
     }
 

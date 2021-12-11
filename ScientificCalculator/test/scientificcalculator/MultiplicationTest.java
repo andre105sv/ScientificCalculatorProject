@@ -18,11 +18,11 @@ public class MultiplicationTest{
 
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;
-    private OperationFactory factory;
+    private AbstractFactory factory;
 
     @Before
     public void setUp(){
-        factory = new OperationFactory();
+        factory = FactoryProducer.getFactory(true);
     }
 
     /**
@@ -36,7 +36,7 @@ public class MultiplicationTest{
         ComplexNumber b;
         ComplexNumber expResult;
         ComplexNumber[] result;
-        ArithmeticalOperations multiplication;
+        Operation multiplication;
         /**
         * Test 1.
         * Prodotto tra un numero reale positivo e un numero complesso a parte 
@@ -45,7 +45,7 @@ public class MultiplicationTest{
         a = new ComplexNumber(4, 5);
         b = new ComplexNumber(4, 0);
         expResult = new ComplexNumber(16, 20);     
-        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        multiplication = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         result = multiplication.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -57,7 +57,7 @@ public class MultiplicationTest{
         a = new ComplexNumber(-4, 5);
         b = new ComplexNumber(-4, 5);
         expResult = new ComplexNumber(-9, -40);     
-        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        multiplication = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         result = multiplication.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -69,7 +69,7 @@ public class MultiplicationTest{
         a = new ComplexNumber(4, -5);
         b = new ComplexNumber(4, -5);
         expResult = new ComplexNumber(-9, -40);     
-        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        multiplication = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         result = multiplication.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -81,7 +81,7 @@ public class MultiplicationTest{
         a = new ComplexNumber(-4, -5);
         b = new ComplexNumber(-4, -5);
         expResult = new ComplexNumber(-9, 40);
-        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        multiplication = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         result = multiplication.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -93,7 +93,7 @@ public class MultiplicationTest{
         a = new ComplexNumber(-32, +7);
         b = new ComplexNumber(+2.5, -0.11);  
         expResult = new ComplexNumber(-79.23, +21.02);
-        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        multiplication = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         result = multiplication.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -105,7 +105,7 @@ public class MultiplicationTest{
         a = new ComplexNumber(-2.56, +3);
         b = new ComplexNumber(+4.8951, -11.56);  
         expResult = new ComplexNumber(22.149, 44.279);
-        multiplication = factory.getArithmeticalOperations("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
+        multiplication = factory.getOperation("MULTIPLICATION", a, b, DECIMAL_NUMBERS);
         result = multiplication.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);

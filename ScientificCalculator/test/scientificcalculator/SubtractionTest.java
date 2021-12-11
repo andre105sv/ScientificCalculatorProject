@@ -18,11 +18,11 @@ public class SubtractionTest{
 
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;
-    private OperationFactory factory;
+    private AbstractFactory factory;
 
     @Before
     public void setUp(){
-        factory = new OperationFactory();
+        factory = FactoryProducer.getFactory(true);
     }
 
     /**
@@ -36,7 +36,7 @@ public class SubtractionTest{
         ComplexNumber b;
         ComplexNumber expResult;
         ComplexNumber[] result;
-        ArithmeticalOperations subtraction;
+        Operation subtraction;
         /**
         * Test 1.
         * Differenza tra due numeri complessi a parte reale positiva e parte 
@@ -45,7 +45,7 @@ public class SubtractionTest{
         a = new ComplexNumber(4, 5);
         b = new ComplexNumber(3, 7);
         expResult = new ComplexNumber(1, -2);
-        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -57,7 +57,7 @@ public class SubtractionTest{
         a = new ComplexNumber(-4, 5);
         b = new ComplexNumber(-3, 7);
         expResult = new ComplexNumber(-1, -2);
-        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -69,7 +69,7 @@ public class SubtractionTest{
         a = new ComplexNumber(4, -5);
         b = new ComplexNumber(3, -7);
         expResult = new ComplexNumber(1, 2);
-        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -81,7 +81,7 @@ public class SubtractionTest{
         a = new ComplexNumber(-4, -5);
         b = new ComplexNumber(-3, -7);
         expResult = new ComplexNumber(-1, 2);
-        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -92,7 +92,7 @@ public class SubtractionTest{
         a = new ComplexNumber(4, 5);
         b = new ComplexNumber(4, 5);
         expResult = new ComplexNumber(0, 0);
-        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -104,7 +104,7 @@ public class SubtractionTest{
         a = new ComplexNumber(-32, +7);
         b = new ComplexNumber(+2.5, -0.11);  
         expResult = new ComplexNumber(-34.5, +7.11); 
-        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -116,7 +116,7 @@ public class SubtractionTest{
         a = new ComplexNumber(-50, 12);
         b = new ComplexNumber(-0.0001, -0.0000000001);  
         expResult = new ComplexNumber(-50, 12);
-        subtraction = factory.getArithmeticalOperations("SUBTRACTION", a, b, DECIMAL_NUMBERS);
+        subtraction = factory.getOperation("SUBTRACTION", a, b, DECIMAL_NUMBERS);
         result = subtraction.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);

@@ -6,6 +6,7 @@
 package scientificcalculator;
 
 import exceptions.NotDefinedArgumentException;
+import exceptions.ArithmeticalException;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -17,25 +18,30 @@ public class ModulusTest {
     
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;
-    private OperationFactory factory;
+    private AbstractFactory factory;
 
     @Before
     public void setUp(){
-        factory = new OperationFactory();
+        factory = FactoryProducer.getFactory(false);
     }
 
     /**
-     * Test of execute method, of class Modulo.
+     * Test of execute method, of class Modulus.
      */
-    @Test
-    public void testExecute() throws NotDefinedArgumentException{
-        ComplexNumber c = new ComplexNumber(4, 5);
+    @Test(expected = NotDefinedArgumentException.class)
+    public void testExecute() throws ArithmeticalException{
+        ComplexNumber c;
+        ComplexNumber result[];
+        c = new ComplexNumber(4, 5);
+        Operation modulus;
         ComplexNumber expResult = new ComplexNumber(6.403, 0);
-        TranscendentalOperations modulus = factory.getTranscendentalOperations("MODULUS", c, DECIMAL_NUMBERS);
-        ComplexNumber result[] = modulus.execute();
+        modulus = factory.getOperation("MODULUS", c, DECIMAL_NUMBERS);
+        result = modulus.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
+        c = new ComplexNumber(0, 0);
+        modulus = factory.getOperation("MODULUS", c, DECIMAL_NUMBERS);
+        result = modulus.execute();
     }
     
 }
-

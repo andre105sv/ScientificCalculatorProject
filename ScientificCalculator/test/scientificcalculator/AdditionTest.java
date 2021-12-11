@@ -18,11 +18,11 @@ public class AdditionTest{
 
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;
-    private OperationFactory factory;
+    private AbstractFactory factory;
 
     @Before
     public void setUp(){
-        factory = new OperationFactory();
+        factory = FactoryProducer.getFactory(true);
     }
 
     /**
@@ -36,7 +36,7 @@ public class AdditionTest{
         ComplexNumber b;
         ComplexNumber expResult;
         ComplexNumber[] result;
-        ArithmeticalOperations addition;
+        Operation addition;
         /**
         * Test 1.
         * Somma di due numeri complessi a parte reale positiva e parte 
@@ -45,7 +45,7 @@ public class AdditionTest{
         a = new ComplexNumber(4, 5);
         b = new ComplexNumber(3, 7);
         expResult = new ComplexNumber(7, 12);
-        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
         result = addition.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -57,7 +57,7 @@ public class AdditionTest{
         a = new ComplexNumber(-4, 5);
         b = new ComplexNumber(-3, 7);
         expResult = new ComplexNumber(-7, 12);
-        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
         result = addition.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -69,7 +69,7 @@ public class AdditionTest{
         a = new ComplexNumber(4, -5);
         b = new ComplexNumber(3, -7);
         expResult = new ComplexNumber(7, -12);
-        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
         result = addition.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -81,7 +81,7 @@ public class AdditionTest{
         a = new ComplexNumber(-4, -5);
         b = new ComplexNumber(-3, -7);
         expResult = new ComplexNumber(-7, -12);
-        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
         result = addition.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -92,7 +92,7 @@ public class AdditionTest{
         a = new ComplexNumber(-4, -5);
         b = new ComplexNumber(4, 5);
         expResult = new ComplexNumber(0, 0);
-        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
         result = addition.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -104,7 +104,7 @@ public class AdditionTest{
         a = new ComplexNumber(-32, +7);
         b = new ComplexNumber(+2.5, -0.11);  
         expResult = new ComplexNumber(-29.5, +6.89);     
-        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
         result = addition.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -116,7 +116,7 @@ public class AdditionTest{
         a = new ComplexNumber(1, +3);
         b = new ComplexNumber(+2.55555, -0.35);  
         expResult = new ComplexNumber(3.556, 2.65);     
-        addition = factory.getArithmeticalOperations("ADDITION", a, b, DECIMAL_NUMBERS);
+        addition = factory.getOperation("ADDITION", a, b, DECIMAL_NUMBERS);
         result = addition.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(),PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);

@@ -18,11 +18,11 @@ public class ReversalSignTest{
 
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;
-    private OperationFactory factory;
+    private AbstractFactory factory;
 
     @Before
     public void setUp(){
-        factory = new OperationFactory();
+        factory = FactoryProducer.getFactory(true);
     }
 
     /**
@@ -35,7 +35,7 @@ public class ReversalSignTest{
         ComplexNumber a;
         ComplexNumber expResult;
         ComplexNumber[] result;
-        ArithmeticalOperations reverse;
+        Operation reverse;
         /**
         * Test 1.
         * Opposto di un numero complesso a parte reale negativa e parte 
@@ -43,7 +43,7 @@ public class ReversalSignTest{
         */
         a = new ComplexNumber(-4, -5);
         expResult = new ComplexNumber(4, 5);    
-        reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         result = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -54,7 +54,7 @@ public class ReversalSignTest{
         */
         a = new ComplexNumber(4, 5);
         expResult = new ComplexNumber(-4, -5);    
-        reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         result = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -65,7 +65,7 @@ public class ReversalSignTest{
         */
         a = new ComplexNumber(-4, 5);
         expResult = new ComplexNumber(4, -5);    
-        reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         result = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -76,7 +76,7 @@ public class ReversalSignTest{
         */
         a = new ComplexNumber(4, -5);
         expResult = new ComplexNumber(-4, 5);    
-        reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         result = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -87,7 +87,7 @@ public class ReversalSignTest{
         */
         a = new ComplexNumber(-32.12, +7.3);
         expResult = new ComplexNumber(32.12, -7.3);     
-        reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         result = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -98,7 +98,7 @@ public class ReversalSignTest{
         */
         a = new ComplexNumber(-32.125887, +7.31212);
         expResult = new ComplexNumber(32.126, -7.312);     
-        reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         result = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -108,7 +108,7 @@ public class ReversalSignTest{
         */
         a = new ComplexNumber(15, 0);
         expResult = new ComplexNumber(-15, 0);     
-        reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
+        reverse = factory.getOperation("REVERSAL_SIGN", a, DECIMAL_NUMBERS);
         result = reverse.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);

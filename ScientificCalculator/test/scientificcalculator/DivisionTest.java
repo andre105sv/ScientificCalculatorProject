@@ -19,11 +19,11 @@ public class DivisionTest{
 
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;
-    private OperationFactory factory;
+    private AbstractFactory factory;
 
     @Before
     public void setUp(){
-        factory = new OperationFactory();
+        factory = FactoryProducer.getFactory(true);
     }
 
     /**
@@ -37,7 +37,7 @@ public class DivisionTest{
         ComplexNumber b;
         ComplexNumber expResult;
         ComplexNumber[] result;
-        ArithmeticalOperations division;
+        Operation division;
         /**
         * Test 1.
         * Rapporto tra un numero complesso (con parte reale positiva e parte 
@@ -46,7 +46,7 @@ public class DivisionTest{
         a = new ComplexNumber(4, 5);
         b = new ComplexNumber(4, 0);
         expResult = new ComplexNumber(1, 1.25);     
-        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         result = division.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -57,7 +57,7 @@ public class DivisionTest{
         a = new ComplexNumber(-4, 5);
         b = new ComplexNumber(-4, 5);
         expResult = new ComplexNumber(1, 0);     
-        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         result = division.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -69,7 +69,7 @@ public class DivisionTest{
         a = new ComplexNumber(4, -5);
         b = new ComplexNumber(4, -52);
         expResult = new ComplexNumber(0.101, 0.069);     
-        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         result = division.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -81,7 +81,7 @@ public class DivisionTest{
         a = new ComplexNumber(-4, -5);
         b = new ComplexNumber(-4, -53);
         expResult = new ComplexNumber(0.099, -0.068);     
-        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         result = division.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -93,7 +93,7 @@ public class DivisionTest{
         a = new ComplexNumber(-32, +7);
         b = new ComplexNumber(+2.5, -0.11);  
         expResult = new ComplexNumber(-12.898 , +2.232);     
-        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         result = division.execute();
         assertEquals(expResult.getRealPart(), result[0].getRealPart(), PRECISION);
         assertEquals(expResult.getImmPart(), result[0].getImmPart(), PRECISION);
@@ -103,7 +103,7 @@ public class DivisionTest{
         */
         a = new ComplexNumber(-45.2, 0);
         b = new ComplexNumber(0, 0);
-        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         result = division.execute();
         /**
         * Test 6.
@@ -111,7 +111,7 @@ public class DivisionTest{
         */
         a = new ComplexNumber(-32, +7.12);
         b = new ComplexNumber(0, 0);
-        division = factory.getArithmeticalOperations("DIVISION", a, b, DECIMAL_NUMBERS);
+        division = factory.getOperation("DIVISION", a, b, DECIMAL_NUMBERS);
         result = division.execute();
     }
 

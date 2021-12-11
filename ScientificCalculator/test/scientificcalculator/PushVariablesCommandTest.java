@@ -5,10 +5,7 @@
  */
 package scientificcalculator;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -22,28 +19,18 @@ public class PushVariablesCommandTest {
     private VariablesStack variablesStack;
     private Variables variables;
     
-    public PushVariablesCommandTest() {
+    public PushVariablesCommandTest(){
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
         variables = new Variables();
+        variables.insertVariable('a', new ComplexNumber(2, 3));
         variablesStack = new VariablesStack();
-        instance = new PushVariablesCommand(variablesStack);
+        instance = new PushVariablesCommand(variablesStack, variables);
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of perform method, of class PushVariablesCommand.
      */
@@ -51,8 +38,7 @@ public class PushVariablesCommandTest {
     public void testPerform() {
         System.out.println("perform");
         int prevSize = variablesStack.getSize();
-        variables.insertVariable('a', new ComplexNumber(2,3));
-        instance.perform(variables);
+        instance.perform();
         int result = variablesStack.getSize();
         assertEquals(prevSize + 1, result);
     }
@@ -63,10 +49,9 @@ public class PushVariablesCommandTest {
     @Test
     public void testUndo() {
         System.out.println("undo");
-        variables.insertVariable('a', new ComplexNumber(2,3));
-        instance.perform(variables);
+        instance.perform();
         int prevSize = variablesStack.getSize();
-        Variables result = instance.undo(null);
+        Variables result = instance.undo();
         assertEquals(prevSize - 1, variablesStack.getSize());
         assertEquals(variables, result);
     }
