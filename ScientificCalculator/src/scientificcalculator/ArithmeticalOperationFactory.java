@@ -13,15 +13,15 @@ package scientificcalculator;
 public class ArithmeticalOperationFactory extends AbstractFactory{
     
     /**
-    * Restituisce un oggetto di tipo ArithmeticalOperations su cui poter 
-    * effettuare l'operazione specificata in input.
+    * Restituisce un oggetto di tipo Operation su cui poter effettuare 
+    * l'operazione specificata in input.
     * @param    operation   la stringa che indica l'operazione da effettuare
     * @param    firstOp     il primo operando di tipo ComplexNumber
     * @param    secondOp    il secondo operando di tipo ComplexNumber
     * @param    decimals    il parametro di tipo double che indica la precisione
     *                       da utilizzare 
-    * @return   un oggetto di tipo ArithmeticalOperations su cui eseguire la
-    *           operazione specificata
+    * @return   un oggetto di tipo Operation su cui eseguire l'operazione 
+    *           specificata
     */
     @Override
     public Operation getOperation(String operation, ComplexNumber firstOp, ComplexNumber secondOp, double decimals){
@@ -46,14 +46,14 @@ public class ArithmeticalOperationFactory extends AbstractFactory{
     }
 
     /**
-    * Restituisce un oggetto di tipo ArithmeticalOperations su cui poter 
-    * effettuare l'operazione specificata in input.
+    * Restituisce un oggetto di tipo Operation su cui poter effettuare 
+    * l'operazione specificata in input.
     * @param    operation   la stringa che indica l'operazione da effettuare
     * @param    operand     il primo operando di tipo ComplexNumber
     * @param    decimals    il parametro di tipo double che indica la precisione
     *                       da utilizzare 
-    * @return   un oggetto di tipo ArithmeticalOperations su cui eseguire la
-    *           operazione specificata
+    * @return   un oggetto di tipo Operation su cui eseguire l'operazione 
+    *           specificata
     */
     @Override
     public Operation getOperation(String operation, ComplexNumber operand, double decimals){

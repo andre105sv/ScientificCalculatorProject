@@ -17,8 +17,8 @@ public class Phase implements Operation{
     private double decimals; 
 
     /**
-    * Costruisce un oggetto di tipo Phase a partire da un numero 
-    * complesso e dalla sua precisione.
+    * Costruisce un oggetto di tipo Phase a partire da un numero complesso e 
+    * dalla sua precisione.
     * @param    operand         l'operando di tipo ComplexNumber
     * @param    decimals        la precisione in formato double
     */
@@ -29,8 +29,9 @@ public class Phase implements Operation{
 
     /**
     * Restituisce la fase di un numero complesso.
-    * @throws NotDefinedArgumentException   se si calcola la fase di 0
-    * @return   un array di ComplexNumber contenente la fase del numero complesso.
+    * @throws   NotDefinedArgumentException     se si calcola la fase di 0
+    * @return   un array di ComplexNumber contenente la fase del numero 
+    *           complesso.
     */
     @Override
     public ComplexNumber[] execute() throws NotDefinedArgumentException{

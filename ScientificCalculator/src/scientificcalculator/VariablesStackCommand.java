@@ -10,30 +10,35 @@ package scientificcalculator;
  *
  * @author anton
  */
-public abstract class VariablesStackCommand{
+//public abstract class VariablesStackCommand{
+public interface VariablesStackCommand{
 
-    protected VariablesStack variablesStack;
+    //protected VariablesStack variablesStack;
     
     /**
     * Costruttore della classe astratta VariablesStackCommand.
-    * Setta l'attributo variablesStack 
-    * @param    variablesStack    l'istanza di VariablesStack su cui il comando opera
+    * Imposta l'attributo variablesStack.
+    * @param    variablesStack  l'istanza di VariablesStack su cui il comando 
+    *                           opera
     */
-    public VariablesStackCommand(VariablesStack variablesStack) {
+    /*
+    public VariablesStackCommand(VariablesStack variablesStack){
         this.variablesStack = variablesStack;
     }
-    
+    */
     /**
     * Esegue una certa azione sullo stack.
-    * @param    variables       un'istanza di Variables 
+    * @param    variables   un'istanza di Variables 
     * @return   un'istanza di Variables o null
     */
-    public abstract Variables perform(Variables variables);
+    //public abstract Variables perform(Variables variables);
+    public void perform();
     
     /**
     * Esegue l'azione duale della perform() sullo stack.
     * @return   un'istanza di Variables o null
     */
-    public abstract Variables undo(Variables variables);
+    //public abstract Variables undo(Variables variables);
+    public Variables undo();
 
 }

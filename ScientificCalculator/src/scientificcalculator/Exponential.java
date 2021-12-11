@@ -6,9 +6,6 @@
 
 package scientificcalculator;
 
-import exceptions.DivisionByZeroException;
-import exceptions.NotDefinedArgumentException;
-
 /**
  *
  * @author anton
@@ -19,8 +16,8 @@ public class Exponential implements Operation{
     private double decimals;
     
     /**
-    * Costruisce un oggetto di tipo Exponential a partire da un numero 
-    * complesso e dalla sua precisione.
+    * Costruisce un oggetto di tipo Exponential a partire da un numero complesso
+    * e dalla sua precisione.
     * @param    operand       l'operando di tipo ComplexNumber
     * @param    decimals     la precisione in formato double
     */
@@ -31,7 +28,8 @@ public class Exponential implements Operation{
 
     /**
     * Restituisce l'esponenziale di un numero complesso. 
-    * @return   un array di ComplexNumber contenente l'esponenziale del numero complesso.
+    * @return   un array di ComplexNumber contenente l'esponenziale del numero 
+    *           complesso.
     */
     @Override
     public ComplexNumber[] execute(){

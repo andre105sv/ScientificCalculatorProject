@@ -25,8 +25,8 @@ public class CheckerOperation{
 
     private CheckerComplexNumber checker;
 
-    public CheckerOperation(){
-        checker = new CheckerComplexNumber();
+    public CheckerOperation(double dec){
+        checker = new CheckerComplexNumber(dec);
     }
 
     /**
@@ -48,10 +48,24 @@ public class CheckerOperation{
 
     /**
     * Restituisce "true" se la stringa specificata in input indica un'operazione
+    * di tipo trascendentale ("mod", "arg", "exp").
+    * @param    op      la stringa che identifica l'operazione
+    * @return   true    se l'operazione specificata in input è di tipo 
+    *                   trascendentale
+    */
+    private boolean isTranscendentalOperation(String op){
+        if((op.equals("mod")) || (op.equals("arg")) || (op.equals("exp"))){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * Restituisce "true" se la stringa specificata in input indica un'operazione
     * che lavora sullo stack ("clear", "dup", "drop", "swap", "over").
     * @param    op      la stringa che identifica l'operazione
     * @return   true    se l'operazione specificata in input lavora sullo 
-    *                   stack.
+    *                   stack
     */
     private boolean isStackOperation(String op){
         if((op.equalsIgnoreCase("drop")) || (op.equalsIgnoreCase("dup")) || (op.equalsIgnoreCase("swap")) || (op.equalsIgnoreCase("over")) || (op.equalsIgnoreCase("clear"))){
@@ -63,6 +77,13 @@ public class CheckerOperation{
         return false;
     }
 
+    /**
+    * Restituisce "true" se la stringa specificata in input indica un'operazione
+    * che lavora con le variabili (">a", "<a", "+a", "-a").
+    * @param    op      la stringa che identifica l'operazione
+    * @return   true    se l'operazione specificata in input lavora con le 
+    *                   variabili
+    */
     private boolean isOperationWithVariables(String op){
         if((op.length() == 2) && (op.charAt(0) == '>') && ((int)op.charAt(1) > 96) && ((int)op.charAt(1) < 123)){
             return true;
@@ -109,6 +130,9 @@ public class CheckerOperation{
             return true;
         }
         if(this.isOperationWithVariables(operationString)){
+            return true;
+        }
+        if(this.isTranscendentalOperation(operationString)){
             return true;
         }
         return false;

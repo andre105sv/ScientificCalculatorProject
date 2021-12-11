@@ -40,15 +40,13 @@ import javafx.stage.FileChooser;
  */
 public class FXMLDocumentController implements Initializable {
 
-    //@FXML
-    //private Label label;
     @FXML
     private Label noticeLbl;
     @FXML
     private TextField inputTxt;
     private final double DECIMAL_NUMBERS = 1000;
     private final int MAX_VIEW_SIZE = 12;
-    private StackPrincipale stack;
+    private ElementsStack stack;
     @FXML
     private Button insertBtn;
     @FXML
@@ -60,12 +58,13 @@ public class FXMLDocumentController implements Initializable {
     private ObservableList<ComplexNumber> obList; 
     private ObservableList<String> obVariables;
     private ObservableList<String> obOperations;
-    private DropCommand drop; //oggetto che esegue tutte le drop su stackPrincipale
+    private DropCommand drop; //oggetto che esegue tutte le drop su ElementsStack
     private ClearCommand clear;// -- tutte le clear
     private DupCommand dup;// -- tutte le dup
     private SwapCommand swap;// -- tutte le swap
     private OverCommand over;// -- tutte le over
-    private PushVariablesCommand pushVariables;
+    //private PushVariablesCommand pushVariables;
+    private CommandExecutor executor;
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
@@ -106,7 +105,7 @@ public class FXMLDocumentController implements Initializable {
     * @param    singleOp    la stringa che identifica l'operazione aritmetica
     *                       da eseguire
     */
-    private void runArithmeticalOperation(String singleOp){
+    private void runArithmeticalOrTranscendentalOperation(String singleOp){
         try{
             if(stack.getSize() > 0){
                 if(singleOp.equals("sqrt")){
@@ -351,7 +350,7 @@ public class FXMLDocumentController implements Initializable {
                 }
                 else{
                     this.runPushOperation(operation);
-                    this.runArithmeticalOperation(operation);
+                    this.runArithmeticalOrTranscendentalOperation(operation);
                     this.runStackOperation(operation);
                     this.runOperationOnVariables(operation);
                     this.saveVariables(operation);
@@ -368,7 +367,8 @@ public class FXMLDocumentController implements Initializable {
     */
     private void saveVariables(String text){
         if((text.equalsIgnoreCase("save")) && (variables.getSize() > 0)){
-            pushVariables.perform(new Variables(variables.getVariablesMap()));
+            VariablesStackCommand command = new PushVariablesCommand(variablesStack, new Variables(variables.getVariablesMap()));
+            executor.perform(command);
             variables.deleteVariables();
             noticeLbl.setText("Last: All the variables have been saved.");
         }
@@ -381,7 +381,8 @@ public class FXMLDocumentController implements Initializable {
     */
     private void restoreVariables(String text){
         if((text.equalsIgnoreCase("restore")) && (variablesStack.getSize() > 0)){
-            variables = pushVariables.undo(null);
+            variables = executor.undoLast();
+            //variables = pushVariables.undo(null);
             noticeLbl.setText("Last: All the variables have been restored.");
         }
     }
@@ -392,22 +393,22 @@ public class FXMLDocumentController implements Initializable {
     */
     private void showVariables(){
         obVariables.clear();
-        String s = variables.toString();
-        String[] tmp = s.split("\n");
-        if((tmp.length <= 1) && (tmp[0] == "")){
-            saveBtn.setDisable(true);
+        if(variables.getSize() != 0){
+            String s = variables.toString();
+            String[] tmp = s.split("\n");
+            saveBtn.setDisable(false);     
+            for(String x : tmp){
+                obVariables.add(x);
+            }
         }
         else{
-            saveBtn.setDisable(false);
+            saveBtn.setDisable(true);
         }
         if(variablesStack.getSize() == 0){
             restoreBtn.setDisable(true);
         }
         else{
             restoreBtn.setDisable(false);
-        }
-        for(String x : tmp){
-            obVariables.add(x);
         }
     }
 
@@ -430,13 +431,12 @@ public class FXMLDocumentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        stack = new StackPrincipale();
+        stack = new ElementsStack();
         variables = new Variables();
         variablesStack = new VariablesStack();
         customizedOperations = new CustomizedOperationsMap();
-        checkerNumber = new CheckerComplexNumber();
-        checkerNumber.setDecimals(DECIMAL_NUMBERS);
-        checkerOperation = new CheckerOperation();
+        checkerNumber = new CheckerComplexNumber(DECIMAL_NUMBERS);
+        checkerOperation = new CheckerOperation(DECIMAL_NUMBERS);
         arithmeticalFactory = FactoryProducer.getFactory(true);
         transcendentalFactory = FactoryProducer.getFactory(false);
         inputTxt.setOnKeyPressed((KeyEvent event) -> {
@@ -448,8 +448,8 @@ public class FXMLDocumentController implements Initializable {
         dup = new DupCommand(stack);
         swap = new SwapCommand(stack);
         over = new OverCommand(stack);
+        executor = new CommandExecutor();
         noticeLbl.setText("");
-        pushVariables = new PushVariablesCommand(variablesStack);
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
         obOperations = FXCollections.observableArrayList();
@@ -494,7 +494,7 @@ public class FXMLDocumentController implements Initializable {
         noticeLbl.setText("");
         String text = inputTxt.getText();
         this.runPushOperation(text);
-        this.runArithmeticalOperation(text);
+        this.runArithmeticalOrTranscendentalOperation(text);
         this.runStackOperation(text);
         this.customOperation(text);
         this.runOperationOnVariables(text);
@@ -567,7 +567,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void saveVariables(ActionEvent event) {
         if(variables.getSize() > 0){
-            pushVariables.perform(new Variables(variables.getVariablesMap()));
+            VariablesStackCommand command = new PushVariablesCommand(variablesStack, new Variables(variables.getVariablesMap()));
+            executor.perform(command);
             variables.deleteVariables();
             this.showVariables();
             restoreBtn.setDisable(false);
@@ -581,9 +582,9 @@ public class FXMLDocumentController implements Initializable {
     * prelevandolo dallo stack ausiliario.
     */
     @FXML
-    private void restoreVariables(ActionEvent event) {
+    private void restoreVariables(ActionEvent event){
         if(variablesStack.getSize() > 0){
-            variables = pushVariables.undo(null);
+            variables = executor.undoLast();
             this.showVariables();
             noticeLbl.setText("Last: All the variables have been restored.");
         }  

@@ -13,16 +13,17 @@ import javafx.collections.ObservableList;
  *
  * @author anton
  */
-public class StackPrincipale{
+public class ElementsStack{
 
     private List<ComplexNumber> stack;
     private int size;
     
     /**
-    * Costruisce un oggetto di tipo StackPrincipale inizializzando i suoi 
-    * attributi. Lo stack è implementato con una LinkedList.
+    * Costruisce un oggetto di tipo ElementsStack inizializzando i suoi 
+    * attributi. 
+    * Lo stack è implementato con una LinkedList.
     */
-    public StackPrincipale(){
+    public ElementsStack(){
         this.stack = new LinkedList<>();
         this.size = this.stack.size();
     }
@@ -83,7 +84,7 @@ public class StackPrincipale{
         }
     }
     
-     /**
+    /**
     * Inserisce nello stack il penultimo elemento precedentemente inserito.
     * Se lo stack ha meno di 2 element1 non esegue nessuna operazione.
     */
@@ -97,7 +98,7 @@ public class StackPrincipale{
         }
     }
     
-     /**
+    /**
     * Reinserisce l'ultimo elemento inserito nello stack.
     * Se lo stack ha meno di 1 elemento non esegue nessuna operazione.
     */

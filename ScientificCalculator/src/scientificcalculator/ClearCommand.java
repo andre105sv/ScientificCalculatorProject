@@ -9,24 +9,26 @@ package scientificcalculator;
  *
  * @author anton
  */
-public class ClearCommand extends StackPrincipaleCommand{
+public class ClearCommand extends ElementsStackCommand{
     
     /**
-    * Crea un oggetto della classe ClearCommand, che permette di effettuare l'operazione di clear sullo stack che gli viene passato.
-    * Setta l'attributo stackPrincipale 
-    * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
+    * Crea un oggetto della classe ClearCommand, che permette di effettuare 
+    * l'operazione di clear sullo stack che gli viene passato.
+    * Imposta l'attributo elementsStack. 
+    * @param    elementsStack   l'istanza di ElementsStack su cui il comando 
+    *                           opera
     */
-    public ClearCommand(StackPrincipale stackPrincipale){
-        super(stackPrincipale);
+    public ClearCommand(ElementsStack elementsStack){
+        super(elementsStack);
     }
 
     /**
-    * Esegue l'azione di clear sullo stack
+    * Esegue l'azione di clear sullo stack.
     * @return   null
     */
     @Override
     public ComplexNumber perform(){
-        stackPrincipale.clear();
+        elementsStack.clear();
         return null;
     }
     

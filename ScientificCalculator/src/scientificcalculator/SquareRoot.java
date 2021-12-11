@@ -18,8 +18,8 @@ public class SquareRoot implements Operation{
     private double decimals;
 
     /**
-    * Costruisce un oggetto di tipo SquareRoot a partire da un numero 
-    * complesso e dalla sua precisione.
+    * Costruisce un oggetto di tipo SquareRoot a partire da un numero complesso 
+    * e dalla sua precisione.
     * @param    c       l'operando di tipo ComplexNumber
     * @param    dec     la precisione in formato double
     */

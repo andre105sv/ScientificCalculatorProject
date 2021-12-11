@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author Andrea, Filippo
+ * @author filso
  */
 public class CheckerComplexNumber{
 
@@ -20,12 +20,8 @@ public class CheckerComplexNumber{
     private String continue_checking = "CHECKING";
     private double decimals = 1000;
 
-    public CheckerComplexNumber(){
-    
-    }
-
-    public void setDecimals(double decimalNumbers){
-        this.decimals = decimalNumbers;
+    public CheckerComplexNumber(double dec){
+        this.decimals = dec;
     }
 
     /**
@@ -239,10 +235,10 @@ public class CheckerComplexNumber{
 
     /**
     * Restituisce "true" se la stringa specificata in input indica un numero
-    * reale.
+    * senza parte reale o senza parte immaginaria.
     * @param    number      la stringa che identifica il numero
-    * @return   true    se la stringa specificata in input è convertibile in un
-    *                   numero reale
+    * @return   true    se la stringa specificata in input indica un numero
+    *                   reale o un numero complesso a parte reale nulla
     */
     public boolean isSingleNumber(String number){
         String checkResult = this.checkString(number);
@@ -254,10 +250,10 @@ public class CheckerComplexNumber{
 
     /**
     * Restituisce "true" se la stringa specificata in input indica un numero
-    * complesso.
+    * complesso in notazione cartesiana.
     * @param    number      la stringa che identifica il numero
-    * @return   true    se la stringa specificata in input è convertibile in un
-    *                   numero complesso in notazione cartesiana
+    * @return   true    se la stringa specificata in input indica un numero 
+    *                   complesso espresso in notazione cartesiana
     */
     public boolean isCartesianComplexNumber(String number){
         String checkResult = this.checkString(number);

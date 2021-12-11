@@ -9,23 +9,26 @@ package scientificcalculator;
  *
  * @author anton
  */
-public class DupCommand extends StackPrincipaleCommand{
+public class DupCommand extends ElementsStackCommand{
 
-     /**
-    * Crea un oggetto della classe DupCommand, che permette di effettuare l'operazione di dup sullo stack che gli viene passato.
-    * Setta l'attributo stackPrincipale 
-    * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
-    */
-    public DupCommand(StackPrincipale stackPrincipale){
-        super(stackPrincipale);
-    }
     /**
-    * Esegue l'azione di dup sullo stack
+    * Crea un oggetto della classe DupCommand, che permette di effettuare 
+    * l'operazione di dup sullo stack che gli viene passato.
+    * Imposta l'attributo elementsStack. 
+    * @param    elementsStack   l'istanza di elementsStack su cui il comando 
+    *                           opera
+    */
+    public DupCommand(ElementsStack elementsStack){
+        super(elementsStack);
+    }
+
+    /**
+    * Esegue l'azione di dup sullo stack.
     * @return   null
     */
     @Override
     public ComplexNumber perform(){
-        stackPrincipale.dup();
+        elementsStack.dup();
         return null;
     }
     

@@ -30,10 +30,11 @@ public class Variables{
     
     /**
     * Costruisce un oggetto di tipo Variables a partire da una HashMap.
-    * Inizializza l'attributo variablesMap con una HashMap che è la copia di quella passata come parametro.
-    * @param map la HashMap usata per l'inizializzazione
+    * Inizializza l'attributo variablesMap con una HashMap che è la copia di 
+    * quella passata come parametro.
+    * @param    map     la HashMap usata per l'inizializzazione
     */
-    public Variables( HashMap<Character,ComplexNumber> map){
+    public Variables(HashMap<Character,ComplexNumber> map){
         this.variablesMap = new HashMap<>();
         for(Character key : map.keySet())
             this.variablesMap.put(key, map.get(key));

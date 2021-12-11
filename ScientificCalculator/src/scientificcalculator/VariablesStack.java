@@ -12,18 +12,19 @@ import java.util.List;
  *
  * @author anton
  */
-public class VariablesStack {
+public class VariablesStack{
+
     private List<Variables> stack;
     private int size;
     
-    
     /**
     * Costruisce un oggetto di tipo VariablesStack inizializzando i suoi 
-    * attributi. Lo stack è implementato con una LinkedList.
+    * attributi. 
+    * Lo stack è implementato con una LinkedList.
     */
     public VariablesStack(){
         this.stack = new LinkedList<>();
-        this.size = this.stack.size();
+        this.size = 0;
     }
     
     /**
@@ -53,8 +54,5 @@ public class VariablesStack {
         this.size = this.stack.size();
         return variables;
     }
-    
-    
-    
-    
+
 }

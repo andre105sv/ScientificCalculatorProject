@@ -12,6 +12,12 @@ package scientificcalculator;
  */
 public class FactoryProducer{
 
+    /**
+    * Restituisce la somma di due nomeri complessi o reali.
+    * @param    isArithmetical      true se l'operazione che si desidera 
+    *                               effettuale è di tipo aritmetico
+    * @return   un oggetto della classe astratta AbstractFactory
+    */
     public static AbstractFactory getFactory(boolean isArithmetical){
         if(isArithmetical){
             return new ArithmeticalOperationFactory();

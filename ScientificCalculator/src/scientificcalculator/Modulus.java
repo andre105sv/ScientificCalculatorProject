@@ -15,8 +15,8 @@ public class Modulus implements Operation{
     private double decimals;
 
     /**
-    * Costruisce un oggetto di tipo Modulus a partire da un numero 
-    * complesso e dalla sua precisione.
+    * Costruisce un oggetto di tipo Modulus a partire da un numero complesso e 
+    * dalla sua precisione.
     * @param    operand         l'operando di tipo ComplexNumber
     * @param    decimals        la precisione in formato double
     */

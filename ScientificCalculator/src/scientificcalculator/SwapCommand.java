@@ -9,24 +9,26 @@ package scientificcalculator;
  *
  * @author anton
  */
-public class SwapCommand extends StackPrincipaleCommand{
+public class SwapCommand extends ElementsStackCommand{
     
     /**
-    * Crea un oggetto della classe SwapCommand, che permette di effettuare l'operazione di swap sullo stack che gli viene passato.
-    * Setta l'attributo stackPrincipale 
-    * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
+    * Crea un oggetto della classe ElementsStackCommand, che permette di 
+    * effettuare l'operazione di swap sullo stack che gli viene passato.
+    * Imposta l'attributo elementsStack.
+    * @param    elementsStack   l'istanza di elementsStack su cui il comando 
+    *                           opera
     */
-    public SwapCommand(StackPrincipale stackPrincipale){
-        super(stackPrincipale);
+    public SwapCommand(ElementsStack elementsStack){
+        super(elementsStack);
     }
 
     /**
-    * Esegue l'azione di swap sullo stack
+    * Esegue l'azione di swap sullo stack.
     * @return   null
     */
     @Override
     public ComplexNumber perform(){
-        this.stackPrincipale.swap();
+        this.elementsStack.swap();
         return null;
     }
     

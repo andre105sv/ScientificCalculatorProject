@@ -9,23 +9,26 @@ package scientificcalculator;
  *
  * @author anton
  */
-public class OverCommand extends StackPrincipaleCommand{
+public class OverCommand extends ElementsStackCommand{
     
-     /**
-    * Crea un oggetto della classe OverCommand, che permette di effettuare l'operazione di over sullo stack che gli viene passato.
-    * Setta l'attributo stackPrincipale 
-    * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
-    */
-    public OverCommand(StackPrincipale stackPrincipale){
-        super(stackPrincipale);
-    }
     /**
-    * Esegue l'azione di over sullo stack
+    * Crea un oggetto della classe OverCommand, che permette di effettuare 
+    * l'operazione di over sullo stack che gli viene passato.
+    * Imposta l'attributo elementsStack.
+    * @param    elementsStack   l'istanza di ElementsStack su cui il comando 
+    *                           opera
+    */
+    public OverCommand(ElementsStack elementsStack){
+        super(elementsStack);
+    }
+
+    /**
+    * Esegue l'azione di over sullo stack.
     * @return   null
     */
     @Override
     public ComplexNumber perform(){
-        this.stackPrincipale.over();
+        this.elementsStack.over();
         return null;
     }
     
