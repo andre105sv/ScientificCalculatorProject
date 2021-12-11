@@ -568,10 +568,11 @@ public class FXMLDocumentController implements Initializable {
     private void saveVariables(ActionEvent event) {
         if(variables.getSize() > 0){
             pushVariables.perform(new Variables(variables.getVariablesMap()));
-        }
-        variables.deleteVariables();
-        restoreBtn.setDisable(false);
-        noticeLbl.setText("Last: All the variables have been saved.");
+            variables.deleteVariables();
+            this.showVariables();
+            restoreBtn.setDisable(false);
+            noticeLbl.setText("Last: All the variables have been saved.");
+        }       
         inputTxt.requestFocus();
     }
 
@@ -584,8 +585,8 @@ public class FXMLDocumentController implements Initializable {
         if(variablesStack.getSize() > 0){
             variables = pushVariables.undo(null);
             this.showVariables();
-        }
-        noticeLbl.setText("Last: All the variables have been restored.");
+            noticeLbl.setText("Last: All the variables have been restored.");
+        }  
         inputTxt.requestFocus();
     }
 
