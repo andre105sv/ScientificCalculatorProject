@@ -13,7 +13,8 @@ import exceptions.NotDefinedArgumentException;
  *
  * @author anton
  */
-public class Exponential implements TranscendentalOperations{
+public class Exponential implements Operation{
+
     private ComplexNumber operand;
     private double decimals;
     
@@ -40,4 +41,5 @@ public class Exponential implements TranscendentalOperations{
         result[0] = new ComplexNumber(realPart, immPart);
         return result;
     }
+
 }

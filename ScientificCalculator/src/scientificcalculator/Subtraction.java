@@ -10,7 +10,7 @@ package scientificcalculator;
  *
  * @author Andrea
  */
-public class Subtraction implements ArithmeticalOperations{
+public class Subtraction implements Operation{
 
     private ComplexNumber firstOp;
     private ComplexNumber secondOp;

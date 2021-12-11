@@ -11,19 +11,23 @@ package scientificcalculator;
  * @author anton
  */
 public abstract class StackPrincipaleCommand{
+
     protected StackPrincipale stackPrincipale;
-     /**
+
+    /**
     * Costruttore della classe astratta StackPrincipaleCommand.
-    * Setta l'attributo stackPrincipale 
-    * @param    stackPrincipale    l'istanza di stackPrincipale su cui il comando opera
+    * Imposta l'attributo stackPrincipale.
+    * @param    stackPrincipale     l'istanza di stackPrincipale su cui il 
+    *                               comando opera
     */
     public StackPrincipaleCommand(StackPrincipale stackPrincipale){
         this.stackPrincipale = stackPrincipale;
     }
     
     /**
-    * esegue una certa azione sullo stack
+    * Esegue una certa azione sullo stack.
     * @return   un ComplexNumber o null
     */
     public abstract ComplexNumber perform();
+
 }

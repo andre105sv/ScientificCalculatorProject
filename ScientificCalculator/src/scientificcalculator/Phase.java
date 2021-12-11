@@ -11,7 +11,7 @@ import exceptions.NotDefinedArgumentException;
  *
  * @author filso
  */
-public class Phase implements TranscendentalOperations{
+public class Phase implements Operation{
     
     private ComplexNumber operand;
     private double decimals; 

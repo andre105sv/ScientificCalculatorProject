@@ -69,7 +69,7 @@ public class FXMLDocumentController implements Initializable {
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
-    private OperationFactory factory;
+    private AbstractFactory arithmeticalFactory, transcendentalFactory;
     private CheckerComplexNumber checkerNumber;
     private CheckerOperation checkerOperation;
     @FXML
@@ -114,7 +114,7 @@ public class FXMLDocumentController implements Initializable {
                     if((selected.getRealPart() == 0) && (selected.getImmPart() == 0)){
                         stack.insertNumber(selected);
                     }
-                    ArithmeticalOperations squareRoot = factory.getArithmeticalOperations("SQUARE_ROOT", selected, DECIMAL_NUMBERS);
+                    Operation squareRoot = arithmeticalFactory.getOperation("SQUARE_ROOT", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = squareRoot.execute();
                     for(ComplexNumber c : result){
                         stack.insertNumber(c);
@@ -123,28 +123,28 @@ public class FXMLDocumentController implements Initializable {
                 }
                 else if(singleOp.equals("+-")){
                     ComplexNumber selected = stack.removeLastNumber();
-                    ArithmeticalOperations reverse = factory.getArithmeticalOperations("REVERSAL_SIGN", selected, DECIMAL_NUMBERS);
+                    Operation reverse = arithmeticalFactory.getOperation("REVERSAL_SIGN", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = reverse.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: REVERSAL_SIGN of " + selected.toString());
                 }
                 else if(singleOp.equals("mod")){
                     ComplexNumber selected = stack.removeLastNumber();
-                    TranscendentalOperations modulus = factory.getTranscendentalOperations("MODULUS", selected, DECIMAL_NUMBERS);
+                    Operation modulus = transcendentalFactory.getOperation("MODULUS", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = modulus.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: MODULUS of " + selected.toString());
                 }
                 else if(singleOp.equals("arg")){
                     ComplexNumber selected = stack.removeLastNumber();
-                    TranscendentalOperations phase = factory.getTranscendentalOperations("PHASE", selected, DECIMAL_NUMBERS);
+                    Operation phase = transcendentalFactory.getOperation("PHASE", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = phase.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: ARGUMENT / PHASE of " + selected.toString());
                 }
                 else if(singleOp.equals("exp")){
                     ComplexNumber selected = stack.removeLastNumber();
-                    TranscendentalOperations exp = factory.getTranscendentalOperations("EXPONENTIAL", selected, DECIMAL_NUMBERS);
+                    Operation exp = transcendentalFactory.getOperation("EXPONENTIAL", selected, DECIMAL_NUMBERS);
                     ComplexNumber[] result = exp.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: EXPONENTIAL of " + selected.toString());
@@ -154,7 +154,7 @@ public class FXMLDocumentController implements Initializable {
                 if(singleOp.equals("+")){
                     ComplexNumber op1 = stack.removeLastNumber();
                     ComplexNumber op2 = stack.removeLastNumber();
-                    ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", op1, op2, DECIMAL_NUMBERS);
+                    Operation addition = arithmeticalFactory.getOperation("ADDITION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = addition.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: ADDITION of " + op1.toString() + " and " + op2.toString());
@@ -162,7 +162,7 @@ public class FXMLDocumentController implements Initializable {
                 else if(singleOp.equals("-")){
                     ComplexNumber op1 = stack.removeLastNumber();
                     ComplexNumber op2 = stack.removeLastNumber();
-                    ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", op1, op2, DECIMAL_NUMBERS);
+                    Operation subtraction = arithmeticalFactory.getOperation("SUBTRACTION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = subtraction.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: SUBTRACTION of " + op2.toString() + " from " + op1.toString());
@@ -170,7 +170,7 @@ public class FXMLDocumentController implements Initializable {
                 else if(singleOp.equals("*")){
                     ComplexNumber op1 = stack.removeLastNumber();
                     ComplexNumber op2 = stack.removeLastNumber();
-                    ArithmeticalOperations multiplication = factory.getArithmeticalOperations("MULTIPLICATION", op1, op2, DECIMAL_NUMBERS);
+                    Operation multiplication = arithmeticalFactory.getOperation("MULTIPLICATION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = multiplication.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: MULTIPLICATION of " + op1.toString() + " and " + op2.toString());
@@ -182,7 +182,7 @@ public class FXMLDocumentController implements Initializable {
                         stack.insertNumber(op2);
                         stack.insertNumber(op1);
                     }
-                    ArithmeticalOperations division = factory.getArithmeticalOperations("DIVISION", op1, op2, DECIMAL_NUMBERS);
+                    Operation division = arithmeticalFactory.getOperation("DIVISION", op1, op2, DECIMAL_NUMBERS);
                     ComplexNumber[] result = division.execute();
                     stack.insertNumber(result[0]);
                     noticeLbl.setText("Last: DIVISION between " + op1.toString() + " and " + op2.toString());
@@ -257,13 +257,13 @@ public class FXMLDocumentController implements Initializable {
                 noticeLbl.setText("Last: pushed the value of the variable '" + command.charAt(1) + "' onto the stack.");
             }
             if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0) && (variables.getValueFromVariable(command.charAt(1)) != null)){
-                ArithmeticalOperations addition = factory.getArithmeticalOperations("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+                Operation addition = arithmeticalFactory.getOperation("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
                 ComplexNumber[] result = addition.execute();
                 stack.insertNumber(result[0]); 
                 noticeLbl.setText("Last: added the top of the stack to the value of the variable '" + command.charAt(1) + "'.");
             }
             if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0) && (variables.getValueFromVariable(command.charAt(1)) != null)){
-                ArithmeticalOperations subtraction = factory.getArithmeticalOperations("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
+                Operation subtraction = arithmeticalFactory.getOperation("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
                 ComplexNumber[] result = subtraction.execute();
                 stack.insertNumber(result[0]);
                 noticeLbl.setText("Last: subtracted the top of the stack from the value of the variable '" + command.charAt(1) + "'.");
@@ -367,10 +367,11 @@ public class FXMLDocumentController implements Initializable {
     * @param    text    la stringa che identifica il comando in input
     */
     private void saveVariables(String text){
-         if((text.equalsIgnoreCase("save")) && (variables.getSize() > 0)){
+        if((text.equalsIgnoreCase("save")) && (variables.getSize() > 0)){
             pushVariables.perform(new Variables(variables.getVariablesMap()));
+            variables.deleteVariables();
             noticeLbl.setText("Last: All the variables have been saved.");
-         }
+        }
     }
     
     /**
@@ -436,7 +437,8 @@ public class FXMLDocumentController implements Initializable {
         checkerNumber = new CheckerComplexNumber();
         checkerNumber.setDecimals(DECIMAL_NUMBERS);
         checkerOperation = new CheckerOperation();
-        factory = new OperationFactory();
+        arithmeticalFactory = FactoryProducer.getFactory(true);
+        transcendentalFactory = FactoryProducer.getFactory(false);
         inputTxt.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ENTER))
                 insertBtn.fire();
@@ -567,6 +569,7 @@ public class FXMLDocumentController implements Initializable {
         if(variables.getSize() > 0){
             pushVariables.perform(new Variables(variables.getVariablesMap()));
         }
+        variables.deleteVariables();
         restoreBtn.setDisable(false);
         noticeLbl.setText("Last: All the variables have been saved.");
         inputTxt.requestFocus();

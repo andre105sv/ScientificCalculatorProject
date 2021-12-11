@@ -12,7 +12,7 @@ import exceptions.DivisionByZeroException;
  *
  * @author Andrea
  */
-public class Division implements ArithmeticalOperations{
+public class Division implements Operation{
 
     private ComplexNumber firstOp;
     private ComplexNumber secondOp;

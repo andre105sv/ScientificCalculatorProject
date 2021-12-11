@@ -11,7 +11,7 @@ package scientificcalculator;
  */
 public class PushVariablesCommand extends VariablesStackCommand{
 
-     /**
+    /**
     * Crea un oggetto della classe PushVariablesCommand, che permette di effettuare le operazioni di inserimento e rimozione sullo stack che gli viene passato.
     * Setta l'attributo variablesStack
     * @param    variablesStack    l'istanza di VariablesStack su cui il comando opera
@@ -21,8 +21,8 @@ public class PushVariablesCommand extends VariablesStackCommand{
     }
     
     /**
-    * esegue l'operazione di push sullo stack
-    * @param variables un'istanza di Variables 
+    * Esegue l'operazione di push sullo stack.
+    * @param    variables       un'istanza di Variables 
     * @return   null
     */
     @Override
@@ -32,9 +32,9 @@ public class PushVariablesCommand extends VariablesStackCommand{
     }
 
     /**
-    * esegue l'operazione di pop (duale della push) sullo stack
-    * @param variables un'istanza di Variables 
-    * @return   lultima istana di Variables inserita 
+    * Esegue l'operazione di pop (duale della push) sullo stack.
+    * @param    variables       un'istanza di Variables 
+    * @return   l'ultima istanza di Variables inserita 
     */
     @Override
     public Variables undo(Variables variables) {

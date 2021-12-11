@@ -10,7 +10,8 @@ package scientificcalculator;
  *
  * @author anton
  */
-public abstract class VariablesStackCommand {
+public abstract class VariablesStackCommand{
+
     protected VariablesStack variablesStack;
     
     /**
@@ -23,19 +24,16 @@ public abstract class VariablesStackCommand {
     }
     
     /**
-    * esegue una certa azione sullo stack
-    * @param variables un'istanza di Variables 
-    * @return   un'istana di Variables o null
+    * Esegue una certa azione sullo stack.
+    * @param    variables       un'istanza di Variables 
+    * @return   un'istanza di Variables o null
     */
     public abstract Variables perform(Variables variables);
     
     /**
-    * esegue l'azione duale della perform() sullo stack
-    * @return   un'istana di Variables o null
+    * Esegue l'azione duale della perform() sullo stack.
+    * @return   un'istanza di Variables o null
     */
     public abstract Variables undo(Variables variables);
-    
-    
-
 
 }

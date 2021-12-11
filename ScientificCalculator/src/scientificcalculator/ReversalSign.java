@@ -10,7 +10,7 @@ package scientificcalculator;
  *
  * @author Andrea
  */
-public class ReversalSign implements ArithmeticalOperations{
+public class ReversalSign implements Operation{
 
     private ComplexNumber operand;
     private double decimals;

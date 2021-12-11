@@ -12,7 +12,7 @@ import exceptions.NotDefinedArgumentException;
  *
  * @author Andrea
  */
-public class SquareRoot implements ArithmeticalOperations{
+public class SquareRoot implements Operation{
 
     private ComplexNumber operand;
     private double decimals;

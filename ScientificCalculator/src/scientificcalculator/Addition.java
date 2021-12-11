@@ -10,7 +10,7 @@ package scientificcalculator;
  *
  * @author Andrea
  */
-public class Addition implements ArithmeticalOperations{
+public class Addition implements Operation{
 
     private ComplexNumber firstOp;
     private ComplexNumber secondOp;
