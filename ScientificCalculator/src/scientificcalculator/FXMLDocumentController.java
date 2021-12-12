@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -42,6 +43,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private Label noticeLbl;
+    @FXML
+    private Label nameOperationLbl;
+    @FXML
+    private Label descriptionOperationLbl;
     @FXML
     private TextField inputTxt;
     private final double DECIMAL_NUMBERS = 1000;
@@ -63,9 +68,14 @@ public class FXMLDocumentController implements Initializable {
     private ListView<String> variablesList;
     @FXML
     private ListView<String> operationsList;
+    @FXML
+    private ListView<String> helpList;
+    @FXML
+    private Pane helpPanel;
     private ObservableList<ComplexNumber> obList; 
     private ObservableList<String> obVariables;
     private ObservableList<String> obOperations;
+    private ObservableList<String> obHelpList;
     private DropCommand drop; //oggetto che esegue tutte le drop su ElementsStack
     private ClearCommand clear;// -- tutte le clear
     private DupCommand dup;// -- tutte le dup
@@ -75,6 +85,7 @@ public class FXMLDocumentController implements Initializable {
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
+    private StandardOperationsMap helpMap;
     private AbstractFactory arithmeticalFactory, transcendentalFactory;
     private CheckerComplexNumber checkerNumber;
     private CheckerOperation checkerOperation;
@@ -425,16 +436,55 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+    * Permette di visualizzare la lista dei comandi all'interno della 
+    * rispettiva Observable List.
+    */
+    private void showHelpList(){
+        String s = helpMap.toString();
+        String[] tmp = s.split("\n");
+        for(String x : tmp){
+            obHelpList.add(x);
+        }
+    }
+
+    /**
+    * Permette di visualizzare il pannello che contiene l'Help.
+    */
+    @FXML
+    private void showHelpPanel(){
+        if(helpPanel.isVisible()){
+            helpPanel.setVisible(false);
+        }
+        else{
+            helpPanel.setVisible(true);
+        }
+    }
+
+    @FXML
+    private void showDetailsOperation(){
+        ObservableList<String> obSelected = helpList.getSelectionModel().getSelectedItems();
+        String nameOperation = "";
+        for(String x : obSelected){
+            nameOperation += x + "\n";
+        }
+        nameOperation = nameOperation.trim();
+        nameOperationLbl.setText(nameOperation);
+        descriptionOperationLbl.setText(helpMap.getDescription(nameOperation));
+    }
+
 
     /**
      * Inizializza la controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        helpPanel.setVisible(false);
         stack = new ElementsStack();
         variables = new Variables();
         variablesStack = new VariablesStack();
         customizedOperations = new CustomizedOperationsMap();
+        helpMap = new StandardOperationsMap();
         checkerNumber = new CheckerComplexNumber(DECIMAL_NUMBERS);
         checkerOperation = new CheckerOperation(DECIMAL_NUMBERS);
         arithmeticalFactory = FactoryProducer.getFactory(true);
@@ -453,12 +503,18 @@ public class FXMLDocumentController implements Initializable {
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
         obOperations = FXCollections.observableArrayList();
+        obHelpList = FXCollections.observableArrayList();
         variablesList.setItems(obVariables);
         operationsList.setItems(obOperations);
         elementsList.setItems(obList);
+        helpList.setItems(obHelpList.sorted());
         saveBtn.setDisable(true);
         restoreBtn.setDisable(true);
         clearBtn.setDisable(true);
+        showHelpList();
+        descriptionOperationLbl.setWrapText(true);
+        helpList.getSelectionModel().select(0);
+        showDetailsOperation();
     }    
 
     /**
