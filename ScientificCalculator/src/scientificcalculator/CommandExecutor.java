@@ -20,12 +20,21 @@ public class CommandExecutor{
     public CommandExecutor(){
         stack = new LinkedList<>();
     }
-
+    
+    /**
+    * Aggiunge allo stack il comando da effettuare e lo esegue.
+    * @param command 
+    */
     public void perform(VariablesStackCommand command){
         this.stack.add(command);
         command.perform();
     }
-
+    
+    /**
+    * Esegue l'undo dell'ultimo comando effettuato restituendo la precedente 
+    * istanza di Variables.
+    * @return      l'ultima istanza di variables
+    */
     public Variables undoLast(){
         VariablesStackCommand last = this.stack.remove(this.stack.size() - 1);
         return last.undo();

@@ -6,7 +6,6 @@
 
 package scientificcalculator;
 
-import exceptions.NotDefinedOperationException;
 import exceptions.NotDefinedNameOperationException;
 import exceptions.NotDefinedValueOperationException;
 import exceptions.NumberAsNameOperationException;

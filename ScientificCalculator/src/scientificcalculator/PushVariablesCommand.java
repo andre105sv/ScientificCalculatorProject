@@ -19,8 +19,8 @@ public class PushVariablesCommand implements VariablesStackCommand{
     * effettuare le operazioni di inserimento e rimozione sullo stack che 
     * gli viene passato.
     * Imposta l'attributo variablesStack.
-    * @param    variablesStack  l'istanza di VariablesStack su cui il comando 
-    *                           opera
+    * @param    varStack    l'istanza di VariablesStack su cui il comando opera.
+    * @param    var         istanza di Variables.
     */
     public PushVariablesCommand(VariablesStack varStack, Variables var) {
         this.variablesStack = varStack;
@@ -28,8 +28,6 @@ public class PushVariablesCommand implements VariablesStackCommand{
     }
     /**
     * Esegue l'operazione di push sullo stack.
-    * @param    variables   un'istanza di Variables 
-    * @return   null
     */
     @Override
     public void perform(){
@@ -38,7 +36,6 @@ public class PushVariablesCommand implements VariablesStackCommand{
 
     /**
     * Esegue l'operazione di pop (duale della push) sullo stack.
-    * @param    variables   un'istanza di Variables 
     * @return   l'ultima istanza di Variables inserita 
     */
     @Override

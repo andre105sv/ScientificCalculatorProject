@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  *
  * @author filso
  */
-public class PhaseTest {
+public class PhaseTest{
     
     private double DECIMAL_NUMBERS = 1000;
     private double PRECISION = 0.0001;

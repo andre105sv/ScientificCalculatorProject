@@ -5,10 +5,7 @@
  */
 package scientificcalculator;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,33 +13,21 @@ import static org.junit.Assert.*;
  *
  * @author anton
  */
-public class DupCommandTest {
+public class DupCommandTest{
     DupCommand instance;
     ElementsStack stackOfTest;
     
-    public DupCommandTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
+    public DupCommandTest(){
     }
     
     @Before
-    public void setUp() {
+    public void setUp(){
         stackOfTest = new ElementsStack();
         instance = new DupCommand(stackOfTest);
     }
     
-    @After
-    public void tearDown() {
-    }
-
     @Test
-    public void testPerform() {
+    public void testPerform(){
         ComplexNumber z = new ComplexNumber(1, 2);
         stackOfTest.insertNumber(new ComplexNumber(1, 1));
         stackOfTest.insertNumber(new ComplexNumber(2, 1));

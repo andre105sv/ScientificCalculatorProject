@@ -6,7 +6,6 @@
 
 package scientificcalculator;
 
-import exceptions.NotDefinedOperationException;
 import exceptions.NotDefinedNameOperationException;
 import exceptions.NotDefinedValueOperationException;
 import exceptions.NumberAsNameOperationException;
@@ -30,7 +29,7 @@ public class CheckerOperationTest{
 
     @Before
     public void setUp(){
-        checkerOp = new CheckerOperation(1000);
+        checkerOp = new CheckerOperation(DECIMAL_NUMBERS);
     }
 
     /**

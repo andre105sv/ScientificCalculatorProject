@@ -6,7 +6,6 @@
 
 package scientificcalculator;
 
-import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,7 +14,7 @@ import static org.junit.Assert.*;
  *
  * @author Andrea
  */
-public class VariablesTest {
+public class VariablesTest{
 
     private Variables variablesMap;
     

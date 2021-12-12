@@ -30,13 +30,10 @@ public class Power implements Operation{
         this.exponent = expNumber;
     }
 
-    /**
-    * NOT IMPLEMENTED 
-    */
     @Override
-    public ComplexNumber[] execute(){
-        ComplexNumber[] result = new ComplexNumber[1];
-        result[0] = new ComplexNumber(0, 0);
-        return result;
+    public ComplexNumber[] execute() throws DivisionByZeroException, NotDefinedArgumentException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }

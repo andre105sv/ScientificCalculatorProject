@@ -6,7 +6,6 @@
 
 package scientificcalculator;
 
-import java.util.Arrays;
 
 /**
  *
@@ -14,11 +13,11 @@ import java.util.Arrays;
  */
 public class CheckerComplexNumber{
 
-    private String complex_number = "COMPLEX__NUMBER";
-    private String single_number = "SINGLENUMBER";
-    private String invalid_insert = "INVALID";
-    private String continue_checking = "CHECKING";
-    private double decimals = 1000;
+    private final String complex_number = "COMPLEX__NUMBER";
+    private final String single_number = "SINGLENUMBER";
+    private final String invalid_insert = "INVALID";
+    private final String continue_checking = "CHECKING";
+    private double decimals;
 
     public CheckerComplexNumber(double dec){
         this.decimals = dec;

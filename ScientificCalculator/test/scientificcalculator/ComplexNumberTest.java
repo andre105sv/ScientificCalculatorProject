@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  *
  * @author Andrea
  */
-public class ComplexNumberTest {
+public class ComplexNumberTest{
 
     /**
      * Test of toString method, of class ComplexNumber.
