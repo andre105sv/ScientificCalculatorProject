@@ -23,6 +23,15 @@ public class StandardOperationsMap{
     */
     public StandardOperationsMap(){
         this.stdOperationsMap = new HashMap<>();
+        this.insertStdOperation("+", "Calculates the sum of the last two elements of the stack.");
+        this.insertStdOperation("-", "Calculates the difference between the last number and the second last one.");
+        this.insertStdOperation("*", "Calculates the multiplication of the last two elements of the stack.");
+        this.insertStdOperation("/", "Calculates the division between the last number and the second last one.");
+        this.insertStdOperation("+-", "Calculates the inverse number of the last element of the stack.");
+        this.insertStdOperation(">x", "Sets the last element of the stack as value of the variable 'x' only if 'x' respect the syntax.\nRemoves the last element from the stack.\nAll the variables must be in lowercase.\n'x' is a generic letter from 'a' to 'z'.");
+        this.insertStdOperation("<x", "Inserts the value of 'x' onto the stack deleting the variables used.");
+        this.insertStdOperation("+x", "Calculates the sum between the last element of the stack and the value of the variable 'x'.\nRemoves the last element from the stack.\nSaves the result onto the stack.");
+        this.insertStdOperation("-x", "Calculates the difference between the last element of the stack and the value of the variable 'x'.\nRemoves the last element from the stack.\nSaves the result onto the stack.");
         this.insertStdOperation("ARG", "Calculates the argument (phase) of the last element onto the stack.");
         this.insertStdOperation("CLEAR", "Removes all the elements from the stack.");
         String createDescription = "Creates an user-defined operation specifying a name and a sequence of operations including the push of numbers.\n";
@@ -55,7 +64,7 @@ public class StandardOperationsMap{
         setDescription += "  es.    SET    OPNAME    dup + swap";
         this.insertStdOperation("SET", setDescription);
         this.insertStdOperation("SQRT", "Calculates the square root of the last element onto the stack and pushes the result onto it.");
-        this.insertStdOperation("SWAP", "Exchanges the last two elements added onto the stack.");
+        this.insertStdOperation("SWAP", "Exchanges the last two elements added onto the stack.");    
     }
 
     /**
@@ -69,7 +78,7 @@ public class StandardOperationsMap{
 
     /**
     * Restituisce la descrizione associata ad una certa operazione.
-    * @param    character   l'oggetto di tipo Character che indica la variabile
+    * @param    name   l'oggetto di tipo Character che indica la variabile
     * @return   il numero complesso associato alla variabile character in input
     */
     public String getDescription(String name){

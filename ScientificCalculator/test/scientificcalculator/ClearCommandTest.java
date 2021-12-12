@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class ClearCommandTest {
     ClearCommand instance;
-    StackPrincipale stackOfTest;
+    ElementsStack stackOfTest;
     
     public ClearCommandTest() {
     }
@@ -33,7 +33,7 @@ public class ClearCommandTest {
     
     @Before
     public void setUp() {
-        stackOfTest = new StackPrincipale();
+        stackOfTest = new ElementsStack();
         instance = new ClearCommand(stackOfTest);
     }
     

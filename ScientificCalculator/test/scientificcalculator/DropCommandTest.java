@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class DropCommandTest {
     DropCommand instance;
-    StackPrincipale stackOfTest;
+    ElementsStack stackOfTest;
     
     
     public DropCommandTest() {
@@ -34,7 +34,7 @@ public class DropCommandTest {
     
     @Before
     public void setUp() {
-        stackOfTest = new StackPrincipale();
+        stackOfTest = new ElementsStack();
         instance = new DropCommand(stackOfTest);
     }
     

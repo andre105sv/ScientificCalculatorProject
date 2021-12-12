@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class OverCommandTest {
     OverCommand instance;
-    StackPrincipale stackOfTest;
+    ElementsStack stackOfTest;
     
     public OverCommandTest() {
     }
@@ -33,7 +33,7 @@ public class OverCommandTest {
     
     @Before
     public void setUp() {
-        stackOfTest = new StackPrincipale();
+        stackOfTest = new ElementsStack();
         instance = new OverCommand(stackOfTest);
     }
     

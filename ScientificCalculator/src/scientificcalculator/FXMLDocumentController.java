@@ -46,10 +46,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private Label noticeLbl;
-    @FXML
-    private Label nameOperationLbl;
-    @FXML
-    private Label descriptionOperationLbl;
+    
     @FXML
     private TextField inputTxt;
     private final double DECIMAL_NUMBERS = 1000;
@@ -71,14 +68,12 @@ public class FXMLDocumentController implements Initializable {
     private ListView<String> variablesList;
     @FXML
     private ListView<String> operationsList;
-    @FXML
-    private ListView<String> helpList;
-    @FXML
-    private Pane helpPanel;
+    
+   
     private ObservableList<ComplexNumber> obList; 
     private ObservableList<String> obVariables;
     private ObservableList<String> obOperations;
-    private ObservableList<String> obHelpList;
+    
     private DropCommand drop; //oggetto che esegue tutte le drop su ElementsStack
     private ElementsStackCommand clear;// -- tutte le clear
     private ElementsStackCommand dup;// -- tutte le dup
@@ -88,7 +83,7 @@ public class FXMLDocumentController implements Initializable {
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
-    private StandardOperationsMap helpMap;
+   
     private AbstractFactory arithmeticalFactory, transcendentalFactory;
     private CheckerComplexNumber checkerNumber;
     private CheckerOperation checkerOperation;
@@ -439,39 +434,19 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    /**
-    * Permette di visualizzare la lista dei comandi all'interno della 
-    * rispettiva Observable List.
-    */
-    private void showHelpList(){
-        String s = helpMap.toString();
-        String[] tmp = s.split("\n");
-        for(String x : tmp){
-            obHelpList.add(x);
-        }
-    }
+    
 
     /**
     * Permette di visualizzare il pannello che contiene l'Help.
     */
     @FXML
-    private void showHelpPanel(ActionEvent event){
-        /*
+    private void showHelpWindow(ActionEvent event){
+        
         try{ 
-            FMXLLoader fxmlLoad = new FXMLLoader(getClass().getResource("FXMLHelpWindow.fxml"));
-            Parent root = (Parent)FXMLLoader.load();
-            Stage stage = new Stage();
-            stage.setHeight(500);
-            stage.setWidth(735);
-            stage.setResizable(false);
-            stage.setTitle("Guide");
-            stage.setScene(new Scene(root));
-            stage.show();
-            */
-            /*
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLHelpWindow.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("./CalculatorStyleSheet.css").toExternalForm());
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.setHeight(500);
             stage.setWidth(735);
@@ -482,33 +457,22 @@ public class FXMLDocumentController implements Initializable {
         catch(Exception ex){
             noticeLbl.setText("Error opening the guide.");
         }
-        */
+        
     }
 
-    @FXML
-    private void showDetailsOperation(){
-        ObservableList<String> obSelected = helpList.getSelectionModel().getSelectedItems();
-        String nameOperation = "";
-        for(String x : obSelected){
-            nameOperation += x + "\n";
-        }
-        nameOperation = nameOperation.trim();
-        nameOperationLbl.setText(nameOperation);
-        descriptionOperationLbl.setText(helpMap.getDescription(nameOperation));
-    }
-
+  
 
     /**
      * Inizializza la controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        helpPanel.setVisible(false);
+        
         stack = new ElementsStack();
         variables = new Variables();
         variablesStack = new VariablesStack();
         customizedOperations = new CustomizedOperationsMap();
-        helpMap = new StandardOperationsMap();
+        
         checkerNumber = new CheckerComplexNumber(DECIMAL_NUMBERS);
         checkerOperation = new CheckerOperation(DECIMAL_NUMBERS);
         arithmeticalFactory = FactoryProducer.getFactory(true);
@@ -527,18 +491,18 @@ public class FXMLDocumentController implements Initializable {
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
         obOperations = FXCollections.observableArrayList();
-        obHelpList = FXCollections.observableArrayList();
+        
         variablesList.setItems(obVariables);
         operationsList.setItems(obOperations);
         elementsList.setItems(obList);
-        helpList.setItems(obHelpList.sorted());
+        
         saveBtn.setDisable(true);
         restoreBtn.setDisable(true);
         clearBtn.setDisable(true);
-        showHelpList();
-        descriptionOperationLbl.setWrapText(true);
-        helpList.getSelectionModel().select(0);
-        showDetailsOperation();
+        
+        
+       
+        
     }    
 
     /**

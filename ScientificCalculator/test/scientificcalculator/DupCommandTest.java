@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class DupCommandTest {
     DupCommand instance;
-    StackPrincipale stackOfTest;
+    ElementsStack stackOfTest;
     
     public DupCommandTest() {
     }
@@ -33,7 +33,7 @@ public class DupCommandTest {
     
     @Before
     public void setUp() {
-        stackOfTest = new StackPrincipale();
+        stackOfTest = new ElementsStack();
         instance = new DupCommand(stackOfTest);
     }
     

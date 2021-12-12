@@ -7,10 +7,7 @@ package scientificcalculator;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,26 +15,14 @@ import static org.junit.Assert.*;
  *
  * @author anton
  */
-public class StackPrincipaleTest{
+public class ElementsStackTest{
 
-    StackPrincipale instance;
+    ElementsStack instance;
     private final int FIRST_NUMBERS = 2;
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
     @Before
     public void setUp(){
-        instance = new StackPrincipale();   
-    }
-
-    @After
-    public void tearDown() throws Exception {
+        instance = new ElementsStack();   
     }
 
     /**
@@ -108,7 +93,6 @@ public class StackPrincipaleTest{
     @Test
     public void testSwap() {
         System.out.println("Swap");
-        //StackPrincipale instance = new StackPrincipale();
         instance.insertNumber(new ComplexNumber(4,5));
         instance.insertNumber(new ComplexNumber(5,4));
         instance.swap();
@@ -117,7 +101,6 @@ public class StackPrincipaleTest{
         ComplexNumber second_last = instance.removeLastNumber();
         assertEquals(z.getRealPart(), second_last.getRealPart(),0.001);
         assertEquals(z.getImmPart(), second_last.getImmPart(),0.001);
-        
     }
 
     /**

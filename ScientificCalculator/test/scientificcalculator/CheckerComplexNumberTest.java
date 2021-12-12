@@ -22,7 +22,7 @@ public class CheckerComplexNumberTest{
     
     @Before
     public void setUp(){
-         checker = new CheckerComplexNumber();
+         checker = new CheckerComplexNumber(1000);
     }
 
     /**
@@ -73,11 +73,11 @@ public class CheckerComplexNumberTest{
         System.out.println("checkPossiblePartImaginary");
         String text = "+3j";
         boolean expResult = true;
-        boolean result = checker.checkPossibleImmaginaryPart(text);
+        boolean result = checker.checkPossibleImaginaryPart(text);
         assertEquals(expResult, result);
         text = "+3helloword";
         expResult = false;
-        result = checker.checkPossibleImmaginaryPart(text);
+        result = checker.checkPossibleImaginaryPart(text);
         assertEquals(expResult, result);
     }
 
