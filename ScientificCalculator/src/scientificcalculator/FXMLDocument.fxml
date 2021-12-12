@@ -34,11 +34,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open..." />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showHelpPanel" text="Show help window" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <Button fx:id="saveBtn" layoutX="273.0" layoutY="515.0" mnemonicParsing="false" onAction="#saveVariables" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: lightblue; -fx-background-radius: 16px; -fx-border-radius: 16px; -fx-cursor: hand; -fx-border-color: transparent;" text="Save" />
@@ -60,6 +60,5 @@
             <Line endX="662.0" layoutX="-9.0" layoutY="104.0" startX="253.5" stroke="#6b9aa8" />
          </children>
       </Pane>
-      <Button fx:id="helpBtn" layoutX="561.0" layoutY="49.0" mnemonicParsing="false" onAction="#showHelpPanel" text="Button" />
     </children>
 </AnchorPane>

@@ -23,7 +23,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -32,7 +35,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
-
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -77,10 +80,10 @@ public class FXMLDocumentController implements Initializable {
     private ObservableList<String> obOperations;
     private ObservableList<String> obHelpList;
     private DropCommand drop; //oggetto che esegue tutte le drop su ElementsStack
-    private ClearCommand clear;// -- tutte le clear
-    private DupCommand dup;// -- tutte le dup
-    private SwapCommand swap;// -- tutte le swap
-    private OverCommand over;// -- tutte le over
+    private ElementsStackCommand clear;// -- tutte le clear
+    private ElementsStackCommand dup;// -- tutte le dup
+    private ElementsStackCommand swap;// -- tutte le swap
+    private ElementsStackCommand over;// -- tutte le over
     private CommandExecutor executor;
     private Variables variables;
     private VariablesStack variablesStack;
@@ -452,13 +455,34 @@ public class FXMLDocumentController implements Initializable {
     * Permette di visualizzare il pannello che contiene l'Help.
     */
     @FXML
-    private void showHelpPanel(){
-        if(helpPanel.isVisible()){
-            helpPanel.setVisible(false);
+    private void showHelpPanel(ActionEvent event){
+        /*
+        try{ 
+            FMXLLoader fxmlLoad = new FXMLLoader(getClass().getResource("FXMLHelpWindow.fxml"));
+            Parent root = (Parent)FXMLLoader.load();
+            Stage stage = new Stage();
+            stage.setHeight(500);
+            stage.setWidth(735);
+            stage.setResizable(false);
+            stage.setTitle("Guide");
+            stage.setScene(new Scene(root));
+            stage.show();
+            */
+            /*
+            Parent root = FXMLLoader.load(getClass().getResource("FXMLHelpWindow.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("./CalculatorStyleSheet.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setHeight(500);
+            stage.setWidth(735);
+            stage.setResizable(false);
+            stage.setTitle("Guide");
+            stage.show();
         }
-        else{
-            helpPanel.setVisible(true);
+        catch(Exception ex){
+            noticeLbl.setText("Error opening the guide.");
         }
+        */
     }
 
     @FXML
@@ -577,7 +601,7 @@ public class FXMLDocumentController implements Initializable {
     * le operazioni personalizzate definite.
     */
     @FXML
-    private void saveFile(ActionEvent event) throws FileNotFoundException, IOException {
+    private void saveFile(ActionEvent event) throws FileNotFoundException, IOException{
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File ("../"));
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
