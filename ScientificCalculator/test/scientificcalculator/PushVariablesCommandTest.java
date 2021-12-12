@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  *
  * @author anton
  */
-public class PushVariablesCommandTest {
+public class PushVariablesCommandTest{
 
     private PushVariablesCommand instance;
     private VariablesStack variablesStack;
@@ -24,7 +24,7 @@ public class PushVariablesCommandTest {
     
     
     @Before
-    public void setUp() {
+    public void setUp(){
         variables = new Variables();
         variables.insertVariable('a', new ComplexNumber(2, 3));
         variablesStack = new VariablesStack();
@@ -35,7 +35,7 @@ public class PushVariablesCommandTest {
      * Test of perform method, of class PushVariablesCommand.
      */
     @Test
-    public void testPerform() {
+    public void testPerform(){
         System.out.println("perform");
         int prevSize = variablesStack.getSize();
         instance.perform();
@@ -47,7 +47,7 @@ public class PushVariablesCommandTest {
      * Test of undo method, of class PushVariablesCommand.
      */
     @Test
-    public void testUndo() {
+    public void testUndo(){
         System.out.println("undo");
         instance.perform();
         int prevSize = variablesStack.getSize();

@@ -6,7 +6,7 @@
 
 package scientificcalculator;
 
-import java.util.HashMap;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  *
  * @author Andrea
  */
-public class CustomizedOperationsMapTest {
+public class CustomizedOperationsMapTest{
 
     private CustomizedOperationsMap customizedOperations;
     
@@ -36,7 +36,7 @@ public class CustomizedOperationsMapTest {
         customizedOperations.insertCustomOperation(opName, opArray);
         assertEquals(prevSize + 1, customizedOperations.getSize());
         assertTrue(customizedOperations.getCustomizedOperationsMap().containsKey(opName));
-        assertEquals(opArray, customizedOperations.getCustomizedOperationsMap().get(opName));
+        Assert.assertArrayEquals(opArray, customizedOperations.getCustomizedOperationsMap().get(opName));
     }
 
     /**
@@ -54,7 +54,7 @@ public class CustomizedOperationsMapTest {
         assertEquals(prevSize, customizedOperations.getSize());
         assertTrue(customizedOperations.getCustomizedOperationsMap().containsKey(newName));
         assertFalse(customizedOperations.getCustomizedOperationsMap().containsKey(opName));
-        assertEquals(opArray, customizedOperations.getCustomizedOperationsMap().get(newName));
+        Assert.assertArrayEquals(opArray, customizedOperations.getCustomizedOperationsMap().get(newName));
     }
 
     /**

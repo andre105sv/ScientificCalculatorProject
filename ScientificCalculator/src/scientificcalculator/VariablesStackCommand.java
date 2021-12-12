@@ -14,8 +14,6 @@ public interface VariablesStackCommand{
 
     /**
     * Esegue una certa azione sullo stack.
-    * @param    variables   un'istanza di Variables 
-    * @return   un'istanza di Variables o null
     */
     public void perform();
     

@@ -6,19 +6,14 @@
 package scientificcalculator;
 
 import exceptions.*;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,7 +37,7 @@ import javafx.stage.Stage;
  *
  * @author group_6
  */
-public class FXMLDocumentController implements Initializable {
+public class FXMLDocumentController implements Initializable{
 
     @FXML
     private Label noticeLbl;
@@ -87,8 +82,6 @@ public class FXMLDocumentController implements Initializable {
     private AbstractFactory arithmeticalFactory, transcendentalFactory;
     private CheckerComplexNumber checkerNumber;
     private CheckerOperation checkerOperation;
-
-
 
     /**
     * Inserisce nello stack un numero indicato come reale o complesso.
@@ -433,9 +426,7 @@ public class FXMLDocumentController implements Initializable {
             obOperations.add(x);
         }
     }
-
     
-
     /**
     * Permette di visualizzare il pannello che contiene l'Help.
     */
@@ -578,11 +569,12 @@ public class FXMLDocumentController implements Initializable {
     }
     
     /**
-    * Permette di caricare le operazioni personalizzate salvate in un file di testo
-    * Effettua il conseguente aggiornamento della ListView che mostra le operazioni personalizzate.
+    * Permette di caricare le operazioni personalizzate salvate in un file di 
+    * testo. Effettua il conseguente aggiornamento della ListView che mostra le
+    * operazioni personalizzate.
     */
     @FXML
-    private void openFile(ActionEvent event) throws FileNotFoundException {
+    private void openFile(ActionEvent event) throws FileNotFoundException{
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File ("../"));
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));
@@ -609,7 +601,7 @@ public class FXMLDocumentController implements Initializable {
     * dell'applicazione).
     */
     @FXML
-    private void saveVariables(ActionEvent event) {
+    private void saveVariables(ActionEvent event){
         if(variables.getSize() > 0){
             VariablesStackCommand command = new PushVariablesCommand(variablesStack, new Variables(variables.getVariablesMap()));
             executor.perform(command);

@@ -6,8 +6,6 @@
 package scientificcalculator;
 
 import java.util.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  *

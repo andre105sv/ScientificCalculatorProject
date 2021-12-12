@@ -5,10 +5,7 @@
  */
 package scientificcalculator;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,26 +13,22 @@ import static org.junit.Assert.*;
  *
  * @author anton
  */
-public class VariablesStackTest {
+public class VariablesStackTest{
     
     private VariablesStack instance;
     private Variables variables;
     
-    
-    
     @Before
-    public void setUp() {
+    public void setUp(){
         instance = new VariablesStack();
         variables = new Variables();
     }
     
-    
-
     /**
      * Test of insertVariables method, of class VariablesStack.
      */
     @Test
-    public void testInsertVariables() {
+    public void testInsertVariables(){
         System.out.println("insertVariables");
         int prevSize = instance.getSize();
         variables.insertVariable('a', new ComplexNumber(2,3));
@@ -47,7 +40,7 @@ public class VariablesStackTest {
      * Test of getSize method, of class VariablesStack.
      */
     @Test
-    public void testGetSize() {
+    public void testGetSize(){
         System.out.println("getSize");
         int expResult = 1;
         variables.insertVariable('a', new ComplexNumber(2,3));
@@ -60,7 +53,7 @@ public class VariablesStackTest {
      * Test of removeLast method, of class VariablesStack.
      */
     @Test
-    public void testRemoveLast() {
+    public void testRemoveLast(){
         System.out.println("removeLast");
         Variables expResult = variables;
         variables.insertVariable('a', new ComplexNumber(2,3));
@@ -72,6 +65,4 @@ public class VariablesStackTest {
         assertEquals(prevSize - 1, actualSize);
     }
 
-    
-    
 }

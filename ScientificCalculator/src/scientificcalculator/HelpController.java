@@ -20,7 +20,7 @@ import javafx.scene.control.ListView;
  *
  * @author filso
  */
-public class HelpController implements Initializable {
+public class HelpController implements Initializable{
 
     @FXML
     private Label nameOperationLbl;
@@ -31,8 +31,6 @@ public class HelpController implements Initializable {
     private ObservableList<String> obHelpList;
     private StandardOperationsMap helpMap;
     
-    
-
     /**
      * Initializes the controller class.
      */
@@ -44,11 +42,13 @@ public class HelpController implements Initializable {
         showHelpList();
         descriptionOperationLbl.setWrapText(true);
         helpList.getSelectionModel().select(0);
-        showDetailsOperation();
-        
+        showDetailsOperation();   
     }    
-
-      @FXML
+    
+    /**
+    * Mostra la destrizione dell'operazione scelta.
+    */
+    @FXML
     private void showDetailsOperation(){
         ObservableList<String> obSelected = helpList.getSelectionModel().getSelectedItems();
         String nameOperation = "";
@@ -59,6 +59,7 @@ public class HelpController implements Initializable {
         nameOperationLbl.setText(nameOperation);
         descriptionOperationLbl.setText(helpMap.getDescription(nameOperation));
     }
+    
     /**
     * Permette di visualizzare la lista dei comandi all'interno della 
     * rispettiva Observable List.

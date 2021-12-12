@@ -5,10 +5,7 @@
  */
 package scientificcalculator;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,34 +13,23 @@ import static org.junit.Assert.*;
  *
  * @author anton
  */
-public class DropCommandTest {
+public class DropCommandTest{
+    
     DropCommand instance;
     ElementsStack stackOfTest;
     
     
-    public DropCommandTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
+    public DropCommandTest(){
     }
     
     @Before
-    public void setUp() {
+    public void setUp(){
         stackOfTest = new ElementsStack();
         instance = new DropCommand(stackOfTest);
     }
     
-    @After
-    public void tearDown() {
-    }
-
     @Test
-    public void testPerform() {
+    public void testPerform(){
         stackOfTest.insertNumber(new ComplexNumber(2, 2));
         int stackSize = stackOfTest.getSize();
         instance.perform();
