@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author filso
  */
-public class ScientificCalculatorGui extends Application {
+public class ScientificCalculatorGui extends Application{
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -23,7 +23,10 @@ public class ScientificCalculatorGui extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("./CalculatorStyleSheet.css").toExternalForm());
         stage.setScene(scene);
+        stage.setHeight(600);
+        stage.setWidth(735);
         stage.setResizable(false);
+        stage.setTitle("Scientific Calculator");
         stage.show();
     }
 

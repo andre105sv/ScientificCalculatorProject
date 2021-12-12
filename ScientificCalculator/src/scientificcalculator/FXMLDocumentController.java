@@ -23,15 +23,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
-
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -42,6 +46,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private Label noticeLbl;
+    
     @FXML
     private TextField inputTxt;
     private final double DECIMAL_NUMBERS = 1000;
@@ -63,18 +68,22 @@ public class FXMLDocumentController implements Initializable {
     private ListView<String> variablesList;
     @FXML
     private ListView<String> operationsList;
+    
+   
     private ObservableList<ComplexNumber> obList; 
     private ObservableList<String> obVariables;
     private ObservableList<String> obOperations;
+    
     private DropCommand drop; //oggetto che esegue tutte le drop su ElementsStack
-    private ClearCommand clear;// -- tutte le clear
-    private DupCommand dup;// -- tutte le dup
-    private SwapCommand swap;// -- tutte le swap
-    private OverCommand over;// -- tutte le over
+    private ElementsStackCommand clear;// -- tutte le clear
+    private ElementsStackCommand dup;// -- tutte le dup
+    private ElementsStackCommand swap;// -- tutte le swap
+    private ElementsStackCommand over;// -- tutte le over
     private CommandExecutor executor;
     private Variables variables;
     private VariablesStack variablesStack;
     private CustomizedOperationsMap customizedOperations;
+   
     private AbstractFactory arithmeticalFactory, transcendentalFactory;
     private CheckerComplexNumber checkerNumber;
     private CheckerOperation checkerOperation;
@@ -425,16 +434,45 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    
+
+    /**
+    * Permette di visualizzare il pannello che contiene l'Help.
+    */
+    @FXML
+    private void showHelpWindow(ActionEvent event){
+        
+        try{ 
+            Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("./CalculatorStyleSheet.css").toExternalForm());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setHeight(500);
+            stage.setWidth(735);
+            stage.setResizable(false);
+            stage.setTitle("Guide");
+            stage.show();
+        }
+        catch(Exception ex){
+            noticeLbl.setText("Error opening the guide.");
+        }
+        
+    }
+
+  
 
     /**
      * Inizializza la controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        
         stack = new ElementsStack();
         variables = new Variables();
         variablesStack = new VariablesStack();
         customizedOperations = new CustomizedOperationsMap();
+        
         checkerNumber = new CheckerComplexNumber(DECIMAL_NUMBERS);
         checkerOperation = new CheckerOperation(DECIMAL_NUMBERS);
         arithmeticalFactory = FactoryProducer.getFactory(true);
@@ -453,12 +491,18 @@ public class FXMLDocumentController implements Initializable {
         obList = FXCollections.observableArrayList();
         obVariables = FXCollections.observableArrayList();
         obOperations = FXCollections.observableArrayList();
+        
         variablesList.setItems(obVariables);
         operationsList.setItems(obOperations);
         elementsList.setItems(obList);
+        
         saveBtn.setDisable(true);
         restoreBtn.setDisable(true);
         clearBtn.setDisable(true);
+        
+        
+       
+        
     }    
 
     /**
@@ -521,7 +565,7 @@ public class FXMLDocumentController implements Initializable {
     * le operazioni personalizzate definite.
     */
     @FXML
-    private void saveFile(ActionEvent event) throws FileNotFoundException, IOException {
+    private void saveFile(ActionEvent event) throws FileNotFoundException, IOException{
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File ("../"));
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT Files","*.txt"));

@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class SwapCommandTest {
     SwapCommand instance;
-    StackPrincipale stackOfTest;
+    ElementsStack stackOfTest;
     
     public SwapCommandTest() {
     }
@@ -33,7 +33,7 @@ public class SwapCommandTest {
     
     @Before
     public void setUp() {
-        stackOfTest = new StackPrincipale();
+        stackOfTest = new ElementsStack();
         instance = new SwapCommand(stackOfTest);
     }
     

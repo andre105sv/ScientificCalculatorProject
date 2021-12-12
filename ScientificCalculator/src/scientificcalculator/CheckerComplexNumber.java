@@ -60,7 +60,7 @@ public class CheckerComplexNumber{
     * @param   text    la stringa da verificare
     * @return  True    se è la parte immaginaria di un numero complesso
     */
-    public boolean checkPossibleImmaginaryPart(String text){
+    public boolean checkPossibleImaginaryPart(String text){
         if(text.equals("j")){
             return true;
         }
@@ -87,7 +87,7 @@ public class CheckerComplexNumber{
         if(this.checkPossibleRealPart(text)){
             return single_number;
         }
-        if(this.checkPossibleImmaginaryPart(text)){
+        if(this.checkPossibleImaginaryPart(text)){
             return single_number;
         }
         else{
@@ -111,14 +111,14 @@ public class CheckerComplexNumber{
                 return invalid_insert;
             }
             if(this.checkPossibleRealPart(scanner[0])){
-                if(this.checkPossibleImmaginaryPart(scanner[1])){
+                if(this.checkPossibleImaginaryPart(scanner[1])){
                     return complex_number;
                 }
                 else{
                     return invalid_insert;
                 }
             }
-            if(this.checkPossibleImmaginaryPart(scanner[0])){
+            if(this.checkPossibleImaginaryPart(scanner[0])){
                 if(this.checkPossibleRealPart(scanner[1])){
                     return complex_number;
                 }

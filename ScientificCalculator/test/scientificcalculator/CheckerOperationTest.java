@@ -30,7 +30,7 @@ public class CheckerOperationTest{
 
     @Before
     public void setUp(){
-        checkerOp = new CheckerOperation();
+        checkerOp = new CheckerOperation(1000);
     }
 
     /**
@@ -46,11 +46,11 @@ public class CheckerOperationTest{
         s = "create op1 swap /";
         expResult = new String[]{"op1", "swap", "/"};
         result = checkerOp.checkCreateOperation(customizedOperations, s);
-        assertEquals(expResult, result);
+        Assert.assertArrayEquals(expResult, result);
         s = "create op2 save >b >a <a <a * <b <b * + sqrt restore";
         expResult = new String[]{"op2", "save", ">b", ">a", "<a", "<a", "*", "<b", "<b", "*", "+", "sqrt", "restore"};
         result = checkerOp.checkCreateOperation(customizedOperations, s);
-        assertEquals(expResult, result);
+        Assert.assertArrayEquals(expResult, result);
     }
 
     /**
@@ -171,7 +171,7 @@ public class CheckerOperationTest{
         s = "rename op1 op2";
         expResult = new String[]{"op1", "op2"};
         result = checkerOp.checkRenameOperation(customizedOperations, s);
-        assertEquals(expResult, result);
+        Assert.assertArrayEquals(expResult, result);
     }
 
     /**
@@ -329,7 +329,7 @@ public class CheckerOperationTest{
         s = "set op1 dup + -";
         expResult = new String[]{"op1", "dup", "+", "-"};
         result = checkerOp.checkSetOperation(customizedOperations, s);
-        assertEquals(expResult, result);
+        Assert.assertArrayEquals(expResult, result);
     }
 
     /**

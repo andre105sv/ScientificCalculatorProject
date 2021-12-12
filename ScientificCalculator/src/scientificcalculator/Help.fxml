@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="434.0" prefWidth="732.0" style="-fx-background-color: ghostwhite;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scientificcalculator.HelpController">
+    <children>
+      <Label fx:id="nameOperationLbl" layoutX="272.0" layoutY="55.0" prefHeight="63.0" prefWidth="326.0" text="nameOperation">
+         <font>
+            <Font name="System Bold Italic" size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="descriptionOperationLbl" alignment="TOP_LEFT" layoutX="272.0" layoutY="159.0" prefHeight="248.0" prefWidth="412.0" style="-fx-font-style: italic;" text="descriptionOperation">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ListView fx:id="helpList" layoutX="44.0" layoutY="55.0" onMouseClicked="#showDetailsOperation" prefHeight="352.0" prefWidth="152.0" />
+      <Line endX="662.0" layoutX="19.0" layoutY="128.0" startX="253.5" stroke="#6b9aa8" />
+      <Label layoutX="65.0" layoutY="29.0" prefHeight="18.0" prefWidth="110.0" text="Standard operations" />
+    </children>
+</AnchorPane>
