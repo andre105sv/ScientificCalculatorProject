@@ -254,29 +254,9 @@ public class FXMLDocumentController implements Initializable {
     * @param    command     la stringa che identifica un comando che opera con
     *                       le variabili seguito dalla variabile
     */
-    private void runOperationOnVariables(String command){
-        try{
-            if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0)){
+    private void runOperationOnVariables(String command) throws Exception{
+        if((command.length() == 2) && (command.charAt(0) == '>') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && stack.getSize() > 0){
                 variables.insertVariable(command.charAt(1), stack.removeLastNumber());
-                noticeLbl.setText("Last: removed the top of the stack and saved into the variable '" + command.charAt(1) + "'.");
-            }
-            if((command.length() == 2) && (command.charAt(0) == '<') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (variables.getValueFromVariable(command.charAt(1)) != null)){
-                stack.insertNumber(variables.getValueFromVariable(command.charAt(1)));
-                variables.getVariablesMap().remove(command.charAt(1));
-                noticeLbl.setText("Last: pushed the value of the variable '" + command.charAt(1) + "' onto the stack.");
-            }
-            if((command.length() == 2) && (command.charAt(0) == '+') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0) && (variables.getValueFromVariable(command.charAt(1)) != null)){
-                Operation addition = arithmeticalFactory.getOperation("ADDITION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
-                ComplexNumber[] result = addition.execute();
-                stack.insertNumber(result[0]); 
-                noticeLbl.setText("Last: added the top of the stack to the value of the variable '" + command.charAt(1) + "'.");
-            }
-            if((command.length() == 2) && (command.charAt(0) == '-') && ((int)command.charAt(1) > 96) && ((int)command.charAt(1) < 123) && (stack.getSize() > 0) && (variables.getValueFromVariable(command.charAt(1)) != null)){
-                Operation subtraction = arithmeticalFactory.getOperation("SUBTRACTION", stack.removeLastNumber(), variables.getValueFromVariable(command.charAt(1)), DECIMAL_NUMBERS);
-                ComplexNumber[] result = subtraction.execute();
-                stack.insertNumber(result[0]);
-                noticeLbl.setText("Last: subtracted the top of the stack from the value of the variable '" + command.charAt(1) + "'.");
-            }
         }
         catch(ArithmeticalException ex){
             noticeLbl.setText("Errore nell'esecuzione dell'operazione aritmetica.");
